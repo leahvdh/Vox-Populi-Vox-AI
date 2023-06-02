@@ -11,13 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Set WD & get data
 ```{r}
-
-# if not in environment from re-creating:
-#setwd("/Users/leah/Desktop/LMU/ChatGPT Public Opinion")
-#load("GLES2017.Rdata")
-
-# Switch to GitHub WD! Don't store the data there!
 #setwd("/Users/leah/Documents/GitHub/GPT-for-Public-Opinion")
+# if not in environment from re-creating:
+#load("GLES2017.Rdata")
 ```
 
 
@@ -167,10 +163,8 @@ pre_match_df <- pre_match_df[-1, ]
 
 ```
 
-Save created datasets to local WD!
+Save created datasets
 ```{r}
-#setwd("/Users/leah/Desktop/LMU/ChatGPT Public Opinion")
-
 # Specify the objects to exclude from saving
 objects_to_exclude <- c("GLES2017", "GLES2017_original", "output", "sequence", "sequences", "row", "matched_sequences", "check_manually", "api_key")
 
