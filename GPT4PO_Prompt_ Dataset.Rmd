@@ -5,19 +5,15 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-Setup: Packages
+Setup: Packages, set WD
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+#knitr::opts_knit$set(root.dir = "/Users/leah/Desktop/LMU/ChatGPT Public Opinion")
+knitr::opts_knit$set(root.dir = "C:/Users/homeoffice/OneDrive/OneDrive - uni-mannheim.de/Dokumente/1 Research/1 In progress/Co-authored/ChatGPT public opinion/Data")
 library(haven)
 library(dplyr)
 ```
-
-Set WD
-```{r}
-#setwd("/Users/leah/Desktop/LMU/ChatGPT Public Opinion")
-```
-
 
 Load data
 
@@ -132,7 +128,7 @@ GLES2017 <- GLES2017_original %>%
     
     inequality = factor(inequality, levels = c(1, 2, 3),
                         labels = c("Maßnahmen ergreifen",
-                                   "neutral",
+                                   "habe keine Meinung dazu, ob die Regierung Maßnahmen ergreifen sollte",
                                    "keine Maßnahmen ergreifen")),
     immigration = factor(immigration, levels = c(1, 2, 3), 
                          labels = c("erleichtern",
@@ -181,7 +177,7 @@ GLES2017 <- GLES2017_original %>%
                     ". Ich lebe in ", east,
                     ". Ich finde, die Regierung sollte die Einwanderung ", immigration,
                     " und ", inequality, ", um die Einkommensunterschiede zu verringern.",
-                    " Habe ich bei der Bundestagswahl 2017 gewählt und wenn ja, welcher Partei habe ich meine Zweitstimme gegeben? Ich [INSERT]")
+                    " Habe ich bei der Bundestagswahl 2017 gewählt und wenn ja, welcher Partei habe ich meine Zweitstimme gegeben? Ich habe [INSERT]")
   )
 ```
 
