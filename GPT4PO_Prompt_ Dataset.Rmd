@@ -10,7 +10,7 @@ Setup: Packages, set WD
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 #knitr::opts_knit$set(root.dir = "/Users/leah/Desktop/LMU/ChatGPT Public Opinion")
-knitr::opts_knit$set(root.dir = "C:/Users/homeoffice/OneDrive/OneDrive - uni-mannheim.de/Dokumente/1 Research/1 In progress/Co-authored/ChatGPT public opinion/Data")
+#knitr::opts_knit$set(root.dir = "C:/Users/homeoffice/OneDrive/OneDrive - uni-mannheim.de/Dokumente/1 Research/1 In progress/Co-authored/ChatGPT public opinion/Data")
 library(haven)
 library(dplyr)
 ```
