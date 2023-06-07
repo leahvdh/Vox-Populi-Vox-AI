@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #knitr::opts_knit$set(root.dir = "C:/Users/homeoffice/OneDrive/OneDrive - uni-mannheim.de/Dokumente/1 Research/1 In progress/Co-authored/ChatGPT public opinion/Data")
 library(haven)
 library(dplyr)
+library(mice)
 ```
 
 Load data
@@ -30,8 +31,8 @@ Data manipulation
 
 ```{r}
 # Recode variables
-GLES2017 <- GLES2017_original %>%
-  filter(q2d == 1) %>% # restrict to eligible voters
+GLES2017_recoded <- GLES2017_original %>%
+  dplyr::filter(q2d == 1) %>% # restrict to eligible voters
   mutate(
     age = 2017 - q2c,
     female = ifelse(q1 == 2, 1,
@@ -125,7 +126,6 @@ GLES2017 <- GLES2017_original %>%
                                        "sehr schwach",
                                        "")),
     party = paste(partyid_degree, partyid),
-    
     inequality = factor(inequality, levels = c(1, 2, 3),
                         labels = c("Maßnahmen ergreifen",
                                    "habe keine Meinung dazu, ob die Regierung Maßnahmen ergreifen sollte",
@@ -161,10 +161,69 @@ GLES2017 <- GLES2017_original %>%
     inequality,
     immigration,
     vote
-  ) %>%
-  # keep only complete cases
+  )
+```
+
+Impute missing values
+
+```{r}
+# Split datasets with complete cases vs. cases with missing values
+
+# Complete cases: n=1,528
+GLES2017_complete <- GLES2017_recoded %>%
   na.omit() %>%
-  # create prompt
+  mutate(
+    imputed = 0
+  )
+
+# Cases with missing values: n=504
+GLES2017_incomplete <- GLES2017_recoded[!complete.cases(GLES2017_recoded), ]
+
+# Restrict cases with missing values to those with non-missing vote choice: n=377
+GLES2017_incomplete_covariates <- GLES2017_incomplete %>%
+  filter(is.na(vote) == FALSE) %>%
+  select(-party) %>%
+  mutate(
+    partyid_degree = ifelse(is.na(partyid) & partyid_degree == "", NA, partyid_degree),
+    partyid_degree = factor(partyid_degree, levels = c(1, 2, 3, 4, 5, 6),
+                            labels = c("sehr stark",
+                                       "ziemlich stark",
+                                       "mittig",
+                                       "ziemlich schwach",
+                                       "sehr schwach",
+                                       ""))
+  )
+
+# Impute missing values
+pred <- quickpred(
+  GLES2017_incomplete_covariates,
+  exclude = c("lfdn")
+)
+
+imputed <- mice::complete(
+  mice(
+    GLES2017_incomplete_covariates,
+    m = 1,
+    method = "pmm",
+    predictorMatrix = pred,
+    seed = 20230607
+    )
+) %>%
+  mutate(
+    party = paste(partyid_degree, partyid),
+    imputed = 1
+  )
+
+GLES2017_imputed <- bind_rows(
+  GLES2017_complete,
+  imputed
+)
+```
+
+Create prompt
+
+```{r}
+GLES2017 <- GLES2017_imputed %>%
   mutate(
     prompt = paste0("Ich bin ", age, 
                     " Jahre alt und ", female, 
@@ -178,7 +237,7 @@ GLES2017 <- GLES2017_original %>%
                     ". Ich finde, die Regierung sollte die Einwanderung ", immigration,
                     " und ", inequality, ", um die Einkommensunterschiede zu verringern.",
                     " Habe ich bei der Bundestagswahl 2017 gewählt und wenn ja, welcher Partei habe ich meine Zweitstimme gegeben? Ich habe [INSERT]")
-  )
+    )
 ```
 
 Save data
