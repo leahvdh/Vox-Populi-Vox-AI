@@ -69,10 +69,10 @@ Not clear from OpenAI documentation what model text-davinci-003 currently runs o
 
 ## Pilot:
 - Try out different max_tokens. 20 allows for space for the entire completion sequence, but it isn't always on point with temperature = 1
-- Try [MASK] vs. [INSERT]
-- Try with/without suffix "gewählt"
-- Try out different temperatures (1 = probabilistic, 0 = deterministic) and top_ps.
-- Try out penalties and prompt with/without party ID / ideology
+- Try [MASK] vs. [INSERT] --> choose one that's most stable
+- Try with/without suffix "gewählt" --> Bias, prompt design! Skip for now
+- Try out different temperatures (1 = probabilistic, 0 = deterministic) and top_ps. --> Stay with defaults from playground (0.9)? Argyle have defaults but temp = 0.7 (skip polisci inhaltliche Begründung)
+- Try out penalties and prompt with/without party ID / ideology --> leave at default, for now
 - Try best_of
 
 ## Decisions to make:
@@ -122,6 +122,8 @@ metadata_df <- output[[2]] # save metadata
 
 Create data frame for checking vote match.
 Check what parties the completions include. If the completion include hints for "Erststimme", not having voted or having voted irregularly, mark these cases so we can check manually. (Needs to be fixed to include "nicht" and "ungültig"!) Should also include "andere" and "linke"? What about "konservativ", "liberal", "kommunistisch"?
+
+STRINGR
 
 ```{r}
 # Specify the character sequences to search for
@@ -192,9 +194,9 @@ Matches (GLES | gpt3):
 CDU/CSU | CDU, CSU, CDU/CSU, Union
 SPD | SPD, Sozialdemokrat
 Bündnis 90/Die Grünen | Grüne, B90, Bündnis
-FDP | FDP, freie
+FDP | FDP, freie, Liberale
 Die Linke | Linke
-AfD | Afd, Alternative
+AfD | AfD, Alternative
 andere Partei, ungültig gewählt, nicht gewählt: need to double-check and determine accordingly
 
 ```{r}
