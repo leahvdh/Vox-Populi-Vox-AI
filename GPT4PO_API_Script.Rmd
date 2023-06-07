@@ -127,12 +127,12 @@ STRINGR
 
 ```{r}
 # Specify the character sequences to search for
-sequences <- c("SPD", "CDU", "CSU", "Union", "CDU/CSU", "FDP", "AfD", "Linke", "Grüne", "Bündnis", "B90", "sozialdemokrat", "christlich", "frei", "Alternative", "nicht", "ungültig", "Erststimme")
+sequences <- c("SPD", "CDU", "CSU", "Union", "CDU/CSU", "FDP", "AfD", "Linke", "Grüne", "Bündnis", "B90", "sozialdemokrat", "christlich", "frei", "liberal", "Links", "Alternative", "nicht", "ungültig", "Erststimme")
 
 # Create an empty data frame to store the extracted data
-pre_match_df <- data.frame(
-  source_column = character(),
-  extracted_characters = character(),
+match_completions_df <- data.frame(
+  completion = character(),
+  matched = character(),
   check_manually = integer()
 )
 
@@ -152,16 +152,16 @@ for (row in completions_df$gpt3) {
 
   # Check if any matches were found
   if (length(matched_sequences) > 0) {
-    # Check if the row contains "Erststimme", "nicht", or "ungültig" - doesn't work for "nicht" / "ungültig"
+    # NOT WORKING YET: Check if the row contains "Erststimme", "nicht", or "ungültig" - doesn't work for "nicht" / "ungültig"
     check_manually <- ifelse(grepl("Erststimme", row, ignore.case = TRUE, fixed = TRUE) | grepl("nicht", row, ignore.case = TRUE, fixed = TRUE) | grepl("ungültig", row, ignore.case = TRUE, fixed = TRUE), 1, 0)
 
-    # Append the extracted data to the pre_match_df
-    pre_match_df <- rbind(pre_match_df, data.frame(source_column = row, extracted_characters = paste(matched_sequences, collapse = ", "), check_manually = check_manually))
+    # ADD ID VARIABLE: Append the extracted data to the match_completions_df
+    match_completions_df <- rbind(match_completions_df, data.frame(completion = row, matched = paste(matched_sequences, collapse = ", "), check_manually = check_manually))
   }
 }
 
-# Remove the empty first row from the pre_match_df
-pre_match_df <- pre_match_df[-1, ]
+# Remove the empty first row from the match_completions_df
+match_completions_df <- match_completions_df[-1, ]
 
 ```
 
@@ -192,10 +192,10 @@ Next step: match completion and GLES2017$vote, record as 1 if matching, 0 otherw
 Matches (GLES | gpt3):
 
 CDU/CSU | CDU, CSU, CDU/CSU, Union
-SPD | SPD, Sozialdemokrat
+SPD | SPD, sozialdemokrat
 Bündnis 90/Die Grünen | Grüne, B90, Bündnis
-FDP | FDP, freie, Liberale
-Die Linke | Linke
+FDP | FDP, freie, liberal
+Die Linke | Linke, Links
 AfD | AfD, Alternative
 andere Partei, ungültig gewählt, nicht gewählt: need to double-check and determine accordingly
 
