@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Set WD & get data
 ```{r}
 #setwd("/Users/leah/Documents/GitHub/GPT-for-Public-Opinion")
-# if not in environment from re-creating:
+# if not in environment from re-creating from scratch:
 #load("GLES2017.Rdata")
 ```
 
@@ -23,66 +23,30 @@ Get API access
 # devtools::install_github("ben-aaron188/rgpt3") # Installieren
 library(rgpt3) # Laden
 gpt3_authenticate("access_key.txt") # Key in das txt (ohne Anführungszeichen, Name, etc. NUR der key, mit new line dahinter!) 
-gpt3_test_completion() # Test key
+# gpt3_test_completion() # Test key
 ```
-
-# TEST
-
-Using R instead of playground:
-
-```{r}
-gpt3_single_completion(output_type = "text",  # makes output easier
-                       max_tokens = 7,        # increases likelihood of usable content
-                       model = "text-davinci-003",
-prompt_input = "I am 30 years old and female. I have a university degree,
-a middle-class income, and I am employed. I am not religious.
-Ideologically, I am moderately left-leaning. I live in western Germany.
-In the 2017 parliamentary election, I voted for [insert]") # (edited) 
-```
-
-Prompt to say whether person voted and if so, whom
-
-```{r}
-gpt3_single_completion(output_type = "text",  # makes output easier
-                       max_tokens = 30,        # increases likelihood of usable content
-                       model = "text-davinci-003",
-prompt_input = "I am 30 years old and male. I have no degree,
-no income, and I am unemployed. I am not religious.
-Ideologically, I am left-leaning. I live in eastern Germany.
-In the 2017 parliamentary election, did I vote and if so which party did I vote for?
-Start with In the 2017 election, I [insert] ")
-```
-
 
 ## To Dos:
-- Find out how to store logprobs!
+- Find out how to store logprobs! --> Cannot be pulled :(
 
-- Confirm which language model Argyle et al. used
-
-- Confirm that this package really uses GPT-3 (and check whether there are options for using GPT-3.5/4)
-Not clear from OpenAI documentation what model text-davinci-003 currently runs on? And whether rgpt3 overwrites this with GPT-3? Seems to be GPT-3 in any case. Can sign up for 3.5/4-API but would have to build our own API wrapper/access. Might revert to Argyle Python code for this.
-
-- Check the set of tokens for which Argyle et al. recorded and cumulated the probabilities
-- Confirm which temperature / top_p Argyle et al. used
-- Check if Argyle et al. used penalties for party ID / ideology
-- Check if Argyle et. al used best of
+- Confirm which language model Argyle et al. used --> Davinci
+- Confirm which temperature / top_p Argyle et al. used --> temperature = 0.7, top_p = 1
+- Check if Argyle et al. used penalties for party ID / ideology --> No, but tested without
+- Check if Argyle et. al used best of --> No mention
 
 ## Pilot:
-- Try out different max_tokens. 20 allows for space for the entire completion sequence, but it isn't always on point with temperature = 1
+- Try out different max_tokens. 20 allows for space for the entire completion sequence in theory, but sometimes doesn't get to the point fast enough and isn't always on point with temperature = 1
 - Try [MASK] vs. [INSERT] --> choose one that's most stable
-- Try with/without suffix "gewählt" --> Bias, prompt design! Skip for now
-- Try out different temperatures (1 = probabilistic, 0 = deterministic) and top_ps. --> Stay with defaults from playground (0.9)? Argyle have defaults but temp = 0.7 (skip polisci inhaltliche Begründung)
-- Try out penalties and prompt with/without party ID / ideology --> leave at default, for now
+- Try out different temperatures (1 = probabilistic, 0 = deterministic) and top_ps.
 - Try best_of
 
 ## Decisions to make:
 - What's our final max_tokens?
 - Do we use [MASK] or [INSERT]?
-- Do we use the suffix "gewählt" (Ich habe [INSERT] gewählt") or not ("Ich habe [INSERT]")?
-- Do we choose temperature or top_p? Which size?
-- Do we penalize for party ID / ideology (cannot specify) or leave it out completely or leave it in?
-- Do we only want best_of?
-- How many completions per persona do we want? If we can record the probabilities, 1 is enough, otherwise, we should create a sampling distribution
+- Which size temperature? --> Stay with defaults, but which? Function: 0.9, Playground: 1? Argyle: 0.7
+- How many completions per persona do we want? We can't record the probabilities, so we should create a sampling distribution!
+- Alternatively: Should we use best_of and have GPT record the best of x completions based on logprobs (more obscure)?
+Anticipated cost per run: 12 USD (ca 2000 personas, 250+50 300 tokens per persona)
 
 # IMPLEMENTATION
 
@@ -93,7 +57,7 @@ prompts_df <- data.frame(
               prompt_id = GLES2017$lfdn,
               prompt = GLES2017$prompt)
 
-prompts_df <- prompts_df %>% head(3) # for testing
+prompts_df <- prompts_df %>% head(3) # for testing; remove for running on full dataset
 ```
 
 Feed prompts and store completions
@@ -103,16 +67,16 @@ output <- gpt3_completions(
                     prompt_var = prompts_df$prompt
                   , id_var = prompts_df$prompt_id
                   , param_model = 'text-davinci-003'
-                  , param_output_type = "complete" # also save metadata just to be safe
-                  , param_logprobs = 5 # numeric. Include the log probabilities on the logprobs most likely tokens, as well the chosen tokens. For example, if logprobs is 5, the API will return a list of the 5 most likely tokens. The API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response. The maximum value for logprobs is 5. THIS IS WHAT WE NEED! Where is it being stored? Did Argyle create a set of "accepted" tokens and added those probabilities?
+                  , param_output_type = "complete" # save both completion and metadata
+                  , param_logprobs = 5 # numeric. deprecated :(
                   , param_suffix = NULL #character. The suffix that comes after a completion of inserted text. Maybe use "gewählt"? So we can have "Ich habe [INSERT] gewählt" which supports "nicht" and "ungültig" as well as any party insert. Would ensure more on-point responses but might reduce likelihood of "nicht"?
-                  , param_max_tokens = 50 # 1 token is about 4 characters in English text. Test used between 10 and 50
-                  , param_n = 1 # number of completions. Expensive! Increase if we can't record probabilities?
-                  , param_temperature = 1 # specifying the sampling strategy of the possible completions. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 for ones with a well-defined answer. We generally recommend altering this or top_p but not both.
-                  , param_top_p = 1 # specifying sampling strategy as an alternative to the temperature sampling where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.)
-                  , param_presence_penalty = 0 # numeric (default: 0) between -2.00 and +2.00 to determine the penalisation of repetitiveness if a token already exists (from the official API documentation: Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.) Should we use this for ideology / party ID?
-                  , param_frequency_penalty = 0
-                  , param_best_of = 1 # numeric (default: 1) that determines the space of possibilities from which to select the completion with the highest probability (from the official API documentation: Generates best_of completions server-side and returns the "best" (the one with the highest log probability per token). Eats money! Should we use this?
+                  , param_max_tokens = 30 # 1 token is about 4 characters in English text. Test used between 10 and 50
+                  , param_n = 1 # number of completions. Expensive! Increase since we can't record probabilities?
+                  , param_temperature = 0.9 # specifying the sampling strategy of the possible completions. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 for ones with a well-defined answer. We generally recommend altering this or top_p but not both.
+                  , param_top_p = 1 # specifying sampling strategy as an alternative to the temperature sampling where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.
+                  , param_presence_penalty = 0 # numeric (default: 0) between -2.00 and +2.00 to determine the penalisation of repetitiveness if a token already exists. Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+                  , param_frequency_penalty = 0 # see presence_penalty
+                  , param_best_of = 1 # numeric (default: 1) that determines the space of possibilities from which to select the completion with the highest probability. Generates best_of completions server-side and returns the "best" (the one with the highest log probability per token. Eats money! Should we use this in place of n?
                   )
 
 completions_df <- output[[1]] # save completions
@@ -121,68 +85,14 @@ metadata_df <- output[[2]] # save metadata
 ```
 
 Create data frame for checking vote match.
-Check what parties the completions include. If the completion include hints for "Erststimme", not having voted or having voted irregularly, mark these cases so we can check manually. (Needs to be fixed to include "nicht" and "ungültig"!) Should also include "andere" and "linke"? What about "konservativ", "liberal", "kommunistisch"?
+Check what parties the completions include. If the completion includes keywords for multiple parties, "Erststimme", not having voted or having voted irregularly, mark these cases so we can check manually.
 
-STRINGR
+Open questions:
+- Should the keywords also include "andere" and "linke"? What about "konservativ", "liberal", "kommunistisch"?
+- When & how to check & manipulate manual checks: before joining or before checking match? Do we manipulate the data (new column) according to what we read?
 
 ```{r}
-# Specify the character sequences to search for
-sequences <- c("SPD", "CDU", "CSU", "Union", "CDU/CSU", "FDP", "AfD", "Linke", "Grüne", "Bündnis", "B90", "sozialdemokrat", "christlich", "frei", "liberal", "Links", "Alternative", "nicht", "ungültig", "Erststimme")
-
-# Create an empty data frame to store the extracted data
-match_completions_df <- data.frame(
-  completion = character(),
-  matched = character(),
-  check_manually = integer()
-)
-
-# Iterate over rows in the completions_df$gpt3 column
-for (row in completions_df$gpt3) {
-  # Initialize an empty vector to store the matched sequences
-  matched_sequences <- character()
-
-  # Iterate over the specified character sequences
-  for (sequence in sequences) {
-    # Check if the row contains the current sequence
-    if (grepl(sequence, row, ignore.case = TRUE, fixed = TRUE)) {
-      # Append the matched sequence to the vector
-      matched_sequences <- c(matched_sequences, sequence)
-    }
-  }
-
-  # Check if any matches were found
-  if (length(matched_sequences) > 0) {
-    # NOT WORKING YET: Check if the row contains "Erststimme", "nicht", or "ungültig" - doesn't work for "nicht" / "ungültig"
-    check_manually <- ifelse(grepl("Erststimme", row, ignore.case = TRUE, fixed = TRUE) | grepl("nicht", row, ignore.case = TRUE, fixed = TRUE) | grepl("ungültig", row, ignore.case = TRUE, fixed = TRUE), 1, 0)
-
-    # ADD ID VARIABLE: Append the extracted data to the match_completions_df
-    match_completions_df <- rbind(match_completions_df, data.frame(completion = row, matched = paste(matched_sequences, collapse = ", "), check_manually = check_manually))
-  }
-}
-
-# Remove the empty first row from the match_completions_df
-match_completions_df <- match_completions_df[-1, ]
-
-```
-
-Save created datasets
-```{r}
-# Specify the objects to exclude from saving
-objects_to_exclude <- c("GLES2017", "GLES2017_original", "output", "sequence", "sequences", "row", "matched_sequences", "check_manually", "api_key")
-
-# Get a list of all objects in the global environment
-all_objects <- ls()
-
-# Determine the objects to save by excluding the specified objects
-objects_to_save <- setdiff(all_objects, objects_to_exclude)
-
-# Remove excluded objects list
-rm(objects_to_exclude)
-rm(all_objects)
-rm(objects_to_save)
-
-# Save the selected objects into an .RData file
-save(list = objects_to_save, file = "GPT_prompt_completion.RData")
+# insert Max' final code
 
 ```
 
@@ -193,13 +103,15 @@ Matches (GLES | gpt3):
 
 CDU/CSU | CDU, CSU, CDU/CSU, Union
 SPD | SPD, sozialdemokrat
-Bündnis 90/Die Grünen | Grüne, B90, Bündnis
+Bündnis 90/Die Grünen | Grüne (besser *grün* ? ), B90, Bündnis
 FDP | FDP, freie, liberal
-Die Linke | Linke, Links
+Die Linke | Linke, links (besser *link* ?)
 AfD | AfD, Alternative
 andere Partei, ungültig gewählt, nicht gewählt: need to double-check and determine accordingly
 
 ```{r}
+
+# insert Max' final code
 
 ```
 
