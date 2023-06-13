@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #knitr::opts_knit$set(root.dir = "C:/Users/homeoffice/OneDrive/OneDrive - uni-mannheim.de/Dokumente/1 Research/1 In progress/Co-authored/ChatGPT public opinion/Data")
 library(haven)
 library(dplyr)
+library(forcats)
 library(mice)
 ```
 
@@ -240,10 +241,51 @@ GLES2017 <- GLES2017_imputed %>%
     )
 ```
 
+Create prompt - robustness check (omitting predictors with missing values in the prompt rather than imputing missing values)
+
+```{r}
+GLES2017_A <- GLES2017_recoded %>%
+  filter(is.na(vote) == FALSE) %>%
+  mutate(
+    inequality_A = fct_recode(
+      inequality,  
+      "finde, die Regierung sollte Maßnahmen ergreifen" = "Maßnahmen ergreifen",
+      "finde, die Regierung sollte keine Maßnahmen ergreifen" = "keine Maßnahmen ergreifen"
+      )
+  ) %>%
+  mutate(
+    age_text = ifelse(is.na(age) == FALSE, paste0("Ich bin ", age, " Jahre alt. "), ""),
+    female_text = ifelse(is.na(female) == FALSE, paste0("Ich bin ", female, ". "), ""),
+    edu_text = ifelse(is.na(edu) == FALSE, paste0("Ich habe ", edu, ". "), ""),
+    hhincome_text = ifelse(is.na(hhincome) == FALSE, paste0("Ich habe ein ", hhincome, " monatliches Haushalts-Nettoeinkommen. "), ""),
+    emp_text = ifelse(is.na(emp) == FALSE, paste0("Ich bin ", emp, ". "), ""),
+    religious_text = ifelse(is.na(religious) == FALSE, paste0("Ich bin ", religious, ". "), ""),
+    leftright_text = ifelse(is.na(leftright) == FALSE, paste0("Politisch-ideologisch ordne ich mich ", leftright, " ein. "), ""),
+    party_text = ifelse(is.na(partyid_degree) == FALSE & is.na(partyid) == FALSE, paste0("Ich identifiziere mich ", partyid_degree, " ", partyid, ". "), ""),
+    east_text = ifelse(is.na(east) == FALSE, paste0("Ich lebe in ", east, ". "), ""),
+    immigration_text = ifelse(is.na(immigration) == FALSE, paste0("Ich finde, die Regierung sollte die Einwanderung ", immigration, ". "), ""),
+    inequality_text = ifelse(is.na(inequality_A) == FALSE, paste0("Ich ", inequality_A, ", um die Einkommensunterschiede zu verringern. "), ""),
+    prompt_A = paste0(
+      age_text, 
+      female_text,
+      edu_text,
+      hhincome_text,
+      emp_text,
+      religious_text,
+      leftright_text,
+      party_text,
+      east_text,
+      immigration_text,
+      inequality_text,
+      "Habe ich bei der Bundestagswahl 2017 gewählt und wenn ja, welcher Partei habe ich meine Zweitstimme gegeben? Ich habe [INSERT]")
+  )
+```
+
 Save data
 
 ```{r}
 # Save data
 save(GLES2017, file = "GLES2017.Rdata")
+save(GLES2017_A, file = "GLES2017_A.Rdata")
 ```
 
