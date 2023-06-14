@@ -20,33 +20,65 @@ Set WD & get data
 Get API access
 
 ```{r}
-# devtools::install_github("ben-aaron188/rgpt3") # Installieren
+#devtools::install_github("ben-aaron188/rgpt3") # Installieren
 library(rgpt3) # Laden
 gpt3_authenticate("access_key.txt") # Key in das txt (ohne Anführungszeichen, Name, etc. NUR der key, mit new line dahinter!) 
 # gpt3_test_completion() # Test key
 ```
 
-## To Dos:
-- Find out how to store logprobs! --> Cannot be pulled :(
+## Pilot
 
-- Confirm which language model Argyle et al. used --> Davinci
-- Confirm which temperature / top_p Argyle et al. used --> temperature = 0.7, top_p = 1
-- Check if Argyle et al. used penalties for party ID / ideology --> No, but tested without
-- Check if Argyle et. al used best of --> No mention
+### Max. Token
+(default values for everything else: temperature = 1, n=1)
+Test 1: maxtoken = 20: 1/3 didn't contain party; 20 tokens used each
+Test 2: maxtoken = 30: works fine, 1 "insert" but contains party; 10-25 tokens used
+Test 3: maxtoken = 40: one contradictory and one ambiguous case, but complete info; 20-30 tokens used
+Test 4: maxtoken = 50: complete info; 30-40 tokens used
 
-## Pilot:
-- Try out different max_tokens. 20 allows for space for the entire completion sequence in theory, but sometimes doesn't get to the point fast enough and isn't always on point with temperature = 1
-- Try [MASK] vs. [INSERT] --> choose one that's most stable
-- Try out different temperatures (1 = probabilistic, 0 = deterministic) and top_ps.
-- Try best_of
+DECISION ON TOKENS: 30
 
-## Decisions to make:
-- What's our final max_tokens?
-- Do we use [MASK] or [INSERT]?
-- Which size temperature? --> Stay with defaults, but which? Function: 0.9, Playground: 1? Argyle: 0.7
+### Temperature (maxtokens = 30, n=1)
+
+Temperature defaults: Playground: 1, Function: 0.9, Argyle: 0.7
+
+Test 5: temperature = 0.9 (package default): complete info, 1/3 incomplete sentence, 25-30 tokens used
+Test 6: temperature = 0.7 (Argyle): complete info, complete sentences, 25-30 tokens used. Differences in person with ambiguous predictors
+
+DECISION ON TEMPERATURE: 0.9
+
+### Multiple completions vs. Best of (maxtokens = 30, temperature = 0.9)
+
+Test 7: n = 5: Records 5 completions, only bills prompt tokens once
+Returns warning: To avoid an `invalid_request_error`, `best_of` was set to equal `n`
+
+Test 8: best_of = 5 Records only 1 completion, but bills several completion tokens
+
+DECISION ON N vs BEST OF: N = 5, best_of = 1, but will default to n anyways
+
+### [INSERT] vs. [MASK] (maxtokens = 30, temperature = 0.9, n = 5)
+
+[MASK] is recommended for completion mode which the package uses. [INSERT] However, ChatGPT gives contradictory advice on which to use.
+
+Test 9: [MASK] instead of [INSERT] (different random sample): Results of similar quality
+
+DECISION: Stick with [INSERT] --> Reference output: test7
+
 - How many completions per persona do we want? We can't record the probabilities, so we should create a sampling distribution!
+- How do we transform the various completions into probabilities? Count mention as binary vote for party and then aggregate across completions? I.e. separate probabilities for each party?
 - Alternatively: Should we use best_of and have GPT record the best of x completions based on logprobs (more obscure)?
-Anticipated cost per run: 12 USD (ca 2000 personas, 250+50 300 tokens per persona)
+
+# COST ANALYSIS
+- 0.02 USD per 1k tokens
+
+- Prompts: ca. 250 tokens, only billed once
+- Completions: max. 30 tokens, billed per n
+- Total: 280 tokens per n
+- 280 * 1905 = 533400
+- (533400/1000)*0.02 --> Anticipated cost for 1 run: 10 USD
+
+For 5 completions:
+- (250*1905) + (5*30*1905) = 762000
+- (762000/1000)*0.02 --> 15 USD
 
 # IMPLEMENTATION
 
@@ -57,7 +89,7 @@ prompts_df <- data.frame(
               prompt_id = GLES2017$lfdn,
               prompt = GLES2017$prompt)
 
-prompts_df <- prompts_df %>% head(3) # for testing; remove for running on full dataset
+prompts_df <- prompts_df[sample(nrow(prompts_df), 3),] # random sample for testing; remove for running on full dataset
 ```
 
 Feed prompts and store completions
@@ -69,26 +101,26 @@ output <- gpt3_completions(
                   , param_model = 'text-davinci-003'
                   , param_output_type = "complete" # save both completion and metadata
                   , param_logprobs = 5 # numeric. deprecated :(
-                  , param_suffix = NULL #character. The suffix that comes after a completion of inserted text. Maybe use "gewählt"? So we can have "Ich habe [INSERT] gewählt" which supports "nicht" and "ungültig" as well as any party insert. Would ensure more on-point responses but might reduce likelihood of "nicht"?
+                  , param_suffix = NULL #character. The suffix that comes after a completion of inserted text
                   , param_max_tokens = 30 # 1 token is about 4 characters in English text. Test used between 10 and 50
-                  , param_n = 1 # number of completions. Expensive! Increase since we can't record probabilities?
+                  , param_n = 5 # number of completions. Prompt tokens are only charged once.
                   , param_temperature = 0.9 # specifying the sampling strategy of the possible completions. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 for ones with a well-defined answer. We generally recommend altering this or top_p but not both.
                   , param_top_p = 1 # specifying sampling strategy as an alternative to the temperature sampling where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.
                   , param_presence_penalty = 0 # numeric (default: 0) between -2.00 and +2.00 to determine the penalisation of repetitiveness if a token already exists. Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
                   , param_frequency_penalty = 0 # see presence_penalty
-                  , param_best_of = 1 # numeric (default: 1) that determines the space of possibilities from which to select the completion with the highest probability. Generates best_of completions server-side and returns the "best" (the one with the highest log probability per token. Eats money! Should we use this in place of n?
+                  , param_best_of = 1 # numeric (default: 1) that determines the space of possibilities from which to select the completion with the highest probability. Generates best_of completions server-side and returns the "best" (the one with the highest log probability per token.
                   )
 
 completions_df <- output[[1]] # save completions
 
-metadata_df <- output[[2]] # save metadata
+metadata_df<- output[[2]] # save metadata
 ```
 
 Create data frame for checking vote match.
 Check what parties the completions include. If the completion includes keywords for multiple parties, "Erststimme", not having voted or having voted irregularly, mark these cases so we can check manually.
 
 Open questions:
-- Should the keywords also include "andere" and "linke"? What about "konservativ", "liberal", "kommunistisch"?
+- Final accepted keywords & how to deal with "link", andere Parteien
 - When & how to check & manipulate manual checks: before joining or before checking match? Do we manipulate the data (new column) according to what we read?
 
 ```{r}
