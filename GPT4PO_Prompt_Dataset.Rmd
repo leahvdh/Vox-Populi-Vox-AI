@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(haven)
 library(dplyr)
 library(forcats)
+library(stringr)
 library(mice)
 ```
 
@@ -126,7 +127,7 @@ GLES2017_recoded <- GLES2017_original %>%
                                        "ziemlich schwach",
                                        "sehr schwach",
                                        "")),
-    party = paste(partyid_degree, partyid),
+    party = paste0(partyid_degree, " ", partyid),
     inequality = factor(inequality, levels = c(1, 2, 3),
                         labels = c("Maßnahmen ergreifen",
                                    "habe keine Meinung dazu, ob die Regierung Maßnahmen ergreifen sollte",
@@ -211,7 +212,7 @@ imputed <- mice::complete(
     )
 ) %>%
   mutate(
-    party = paste(partyid_degree, partyid),
+    party = paste0(partyid_degree, " " , partyid),
     imputed = 1
   )
 
@@ -261,7 +262,9 @@ GLES2017_A <- GLES2017_recoded %>%
     emp_text = ifelse(is.na(emp) == FALSE, paste0("Ich bin ", emp, ". "), ""),
     religious_text = ifelse(is.na(religious) == FALSE, paste0("Ich bin ", religious, ". "), ""),
     leftright_text = ifelse(is.na(leftright) == FALSE, paste0("Politisch-ideologisch ordne ich mich ", leftright, " ein. "), ""),
-    party_text = ifelse(is.na(partyid_degree) == FALSE & is.na(partyid) == FALSE, paste0("Ich identifiziere mich ", partyid_degree, " ", partyid, ". "), ""),
+    party_text = ifelse(is.na(partyid_degree) == FALSE & is.na(partyid) == FALSE, paste0("Ich identifiziere mich ", partyid_degree, " ", partyid, "."), ""),
+    party_text = str_squish(party_text),
+    party_text = paste0(party_text, " "),
     east_text = ifelse(is.na(east) == FALSE, paste0("Ich lebe in ", east, ". "), ""),
     immigration_text = ifelse(is.na(immigration) == FALSE, paste0("Ich finde, die Regierung sollte die Einwanderung ", immigration, ". "), ""),
     inequality_text = ifelse(is.na(inequality_A) == FALSE, paste0("Ich ", inequality_A, ", um die Einkommensunterschiede zu verringern. "), ""),
