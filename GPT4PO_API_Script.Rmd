@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Set WD & get data
 ```{r}
 #setwd("/Users/leah/Documents/GitHub/GPT-for-Public-Opinion")
-# if not in environment from re-creating from scratch:
+# if not in environment from re-creating prompt dataset from scratch:
 #load("GLES2017.Rdata")
 ```
 
@@ -88,8 +88,6 @@ Create prompt dataset from GLES data
 prompts_df <- data.frame(
               prompt_id = GLES2017$lfdn,
               prompt = GLES2017$prompt)
-
-prompts_df <- prompts_df[sample(nrow(prompts_df), 3),] # random sample for testing; remove for running on full dataset
 ```
 
 Feed prompts and store completions
@@ -111,39 +109,13 @@ output <- gpt3_completions(
                   , param_best_of = 1 # numeric (default: 1) that determines the space of possibilities from which to select the completion with the highest probability. Generates best_of completions server-side and returns the "best" (the one with the highest log probability per token.
                   )
 
-completions_df <- output[[1]] # save completions
+completions_df <- output[[1]] # extract completions
 
-metadata_df<- output[[2]] # save metadata
+metadata_df<- output[[2]] # extract metadata
+
+rename(completions_df, iteration = n) # rename column to iterations to for splitting later
+
+save(GLES2017, prompts_df,completions_df, metadata_df, file = "GPT_prompt_completion.Rdata") # save input and output
 ```
 
-Create data frame for checking vote match.
-Check what parties the completions include. If the completion includes keywords for multiple parties, "Erststimme", not having voted or having voted irregularly, mark these cases so we can check manually.
-
-Open questions:
-- Final accepted keywords & how to deal with "link", andere Parteien
-- When & how to check & manipulate manual checks: before joining or before checking match? Do we manipulate the data (new column) according to what we read?
-
-```{r}
-# insert Max' final code
-
-```
-
-
-Next step: match completion and GLES2017$vote, record as 1 if matching, 0 otherwise.
-
-Matches (GLES | gpt3):
-
-CDU/CSU | CDU, CSU, CDU/CSU, Union
-SPD | SPD, sozialdemokrat
-Bündnis 90/Die Grünen | Grüne (besser *grün* ? ), B90, Bündnis
-FDP | FDP, freie, liberal
-Die Linke | Linke, links (besser *link* ?)
-AfD | AfD, Alternative
-andere Partei, ungültig gewählt, nicht gewählt: need to double-check and determine accordingly
-
-```{r}
-
-# insert Max' final code
-
-```
-
+Next script to run: GPT4PO_Matching_Script.Rmd (manual checks in between!)
