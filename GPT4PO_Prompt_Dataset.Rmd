@@ -121,13 +121,13 @@ GLES2017_recoded <- GLES2017_original %>%
                                 "mit einer Kleinpartei",
                                 "mit keiner Partei")),
     partyid_degree = factor(partyid_degree, levels = c(1, 2, 3, 4, 5, 6),
-                            labels = c("sehr stark",
-                                       "ziemlich stark",
-                                       "mittig",
-                                       "ziemlich schwach",
-                                       "sehr schwach",
+                            labels = c("sehr stark ",
+                                       "ziemlich stark ",
+                                       "mäßig ",
+                                       "ziemlich schwach ",
+                                       "sehr schwach ",
                                        "")),
-    party = paste0(partyid_degree, " ", partyid),
+    party = paste0(partyid_degree, partyid),
     inequality = factor(inequality, levels = c(1, 2, 3),
                         labels = c("Maßnahmen ergreifen",
                                    "habe keine Meinung dazu, ob die Regierung Maßnahmen ergreifen sollte",
@@ -188,11 +188,11 @@ GLES2017_incomplete_covariates <- GLES2017_incomplete %>%
   mutate(
     partyid_degree = ifelse(is.na(partyid) & partyid_degree == "", NA, partyid_degree),
     partyid_degree = factor(partyid_degree, levels = c(1, 2, 3, 4, 5, 6),
-                            labels = c("sehr stark",
-                                       "ziemlich stark",
-                                       "mittig",
-                                       "ziemlich schwach",
-                                       "sehr schwach",
+                            labels = c("sehr stark ",
+                                       "ziemlich stark ",
+                                       "mäßig ",
+                                       "ziemlich schwach ",
+                                       "sehr schwach ",
                                        ""))
   )
 
@@ -212,7 +212,7 @@ imputed <- mice::complete(
     )
 ) %>%
   mutate(
-    party = paste0(partyid_degree, " " , partyid),
+    party = paste0(partyid_degree, partyid),
     imputed = 1
   )
 
@@ -262,7 +262,7 @@ GLES2017_A <- GLES2017_recoded %>%
     emp_text = ifelse(is.na(emp) == FALSE, paste0("Ich bin ", emp, ". "), ""),
     religious_text = ifelse(is.na(religious) == FALSE, paste0("Ich bin ", religious, ". "), ""),
     leftright_text = ifelse(is.na(leftright) == FALSE, paste0("Politisch-ideologisch ordne ich mich ", leftright, " ein. "), ""),
-    party_text = ifelse(is.na(partyid_degree) == FALSE & is.na(partyid) == FALSE, paste0("Ich identifiziere mich ", partyid_degree, " ", partyid, "."), ""),
+    party_text = ifelse(is.na(partyid_degree) == FALSE & is.na(partyid) == FALSE, paste0("Ich identifiziere mich ", partyid_degree, partyid, "."), ""),
     party_text = str_squish(party_text),
     party_text = paste0(party_text, " "),
     east_text = ifelse(is.na(east) == FALSE, paste0("Ich lebe in ", east, ". "), ""),
