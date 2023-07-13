@@ -1,5 +1,5 @@
 ---
-title: "GPT Public Opinion"
+title: "GPT for Public Opinion: API Completion Dataset Creation"
 author: "Leah von der Heyde, Alex Wenz, Caro Haensch"
 date: "`r Sys.Date()`"
 output: html_document

@@ -1,5 +1,5 @@
 ---
-title: "GPT matching function"
+title: "GPT for Public Opinion: Matching Functions"
 author: "Leah von der Heyde, Max Lang"
 date: "`r Sys.Date()`"
 output: html_document
@@ -19,8 +19,6 @@ Load data
 ```
 
 # Create keywords to search for
-
-TO DO: confirm final accepted keywords
 
 ```{r}
 sequences <- c("SPD", "CDU/CSU","CDU", "CSU", "Union", "FDP", "AfD", "Linke", "Grüne", "Bündnis", "B90", "sozialdemokrat", "christ", "freie", "liberal", "Alternative", "links", "nicht", "ungültig", "Erststimme")
@@ -48,8 +46,6 @@ should both be recognized by " * sozialdemokrat * ")
 - stores all the matched strings per row in a new df and column: match_completions_df$matched; if there is no match, the column should remain empty but still store the respective row
 - marks those rows that contain "Erststimme" OR "nicht" OR "ungültig" OR naming multiple parties OR having no keyword match by creating a column "check_manually" that takes the value 1 if any of these conditions are met
 - also stores the following columns from the completions_df: "id" as "id" and "gpt3" as "completion"
-
-NEW: Also flag NA rows!
 
 ## Function get_matches_vector
 
@@ -174,6 +170,37 @@ create_match_completions_df <- function (df, keywords, check_keywords, ...) {
 match_completions <-  create_match_completions_df(completions_df, keywords = sequences, check_keywords = c("Erststimme", "ungültig", "nicht"))
 ```
 
+
+## Create mc_GLES2017
+
+```{r}
+# Joins matching and GLES datasets by ID to compare match with vote
+mc_GLES2017 <- left_join(match_completions, GLES2017, by = c("id" = "lfdn"))
+```
+
+!!! MANUAL CHECKS NEED TO HAPPEN AT THIS STEP !!!
+
+```{r}
+# Export for manual checks
+write.csv(mc_GLES2017, file = "GPT4PO_manualchecks.csv", col.names = T, row.names = F)
+```
+
+!!! RE-SAMPLING NAs NEEDS TO HAPPEN AT THIS STEP !!!
+
+--> Run script "GPT4PO_Resampling.Rmd", then return back here
+
+```{r}
+mc_GLES2017 <- read.csv("GPT4PO_manual_checked.csv") # read in manually checked data
+# mc_resample should be in environment from resampling script, otherwise saved as mc_resample.Rdata
+
+mc_GLES2017_final <- bind_rows(mc_GLES2017, mc_resample) # merge datasets
+
+sum(is.na(mc_GLES2017_final$sample_no)) # check whether we have sample_no for each row
+
+mc_GLES2017_final <- mc_GLES2017_final %>% mutate(id_sampleno = paste(id, sample_no, sep = "_")) # create unique identifier per sample for each ID
+```
+
+
 # Match 2: Party Keywords - GLES Vote
 
 Create a function that
@@ -189,40 +216,17 @@ Die Linke | "Linke" OR "links" (besser "link"?)
 AfD | "AfD" OR "Alternative"
 
 NEW
-Andere Partei | "Andere Partei"
-Ungültig gewählt | "ungültig gewählt"
-Nicht gewählt | "nicht gewählt"
+Andere Partei | "Andere"
+Ungültig gewählt | "ungültig"
+Nicht gewählt | "nicht"
 
-## Create mc_GLES2017
-```{r}
-# Joins matching and GLES datasets by ID to compare match with vote
-mc_GLES2017 <- left_join(match_completions, GLES2017, by = c("id" = "lfdn"))
-```
-
-!!! MANUAL CHECKS NEED TO HAPPEN AT THIS STEP !!!
-
-- Export dataset to csv.
-- In excel, check:
--- check_manually: completions containing "nicht" or "ungültig" --> confirm and manipulate if necessary: "ungültig gewählt", "nicht gewählt"
--- check_manually: completions containing "Erststimme" --> manipulate Zweitstimme manually (insert suitable keyword from above)
--- vote: rows that have "Andere Partei" AND "NA" on keyword match --> check if completion has small party and manipulate Zweitstimme column if necessary: "Andere Partei"
--- check_manually: extract rows that have NA on keywords except Erststimme, check if they have Zweitstimme, re-sample again
-
-!!! RE-SAMPLING LENGTHY COMPLETIONS NEEDS TO HAPPEN AT THIS STEP !!!
-
-- Identify ID & iteration of missings
-- Run API script again
-- Merge with original dataset: replace specific rows!
-
-# TO DO in code: add matches for "nicht", "ungültig" and "andere Partei" (andere Partei: might need to update matching script above too?)
-
-## check_match help functions
+## Help functions check_match
 ```{r}
 #' check_match_party (helper)
 #'
-#' This function checks for matches between the vote and matched column of the joined dataframe mc_GLES2017
+#' This function checks for matches between the vote and matched_new column of the joined dataframe mc_GLES2017_final
 #'
-#' @param mc_GLES2017 The left-joined (by id and lfdn) dataframe of matches_completions and GLES2017
+#' @param mc_GLES2017_final The left-joined (by id and lfdn) dataframes of (matches_completions and GLES2017) and (matches_completions_resample and resample)
 #'
 #' @return A logical list indicating if vote and matched column match
 #'
@@ -233,50 +237,80 @@ mc_GLES2017 <- left_join(match_completions, GLES2017, by = c("id" = "lfdn"))
 #' check_match_spd(df)
 
 # CDU/CSU 
-check_match_cdu_csu <- function (mc_GLES2017) {
+check_match_cdu_csu <- function (mc_GLES2017_final) {
   pattern_cdu_csu <- paste0(".*", paste(c("CDU/CSU","CDU", "CSU", "Union", "christ"), collapse = "|"), ".*")
-  lapply(mc_GLES2017$matched, grepl, pattern = pattern_cdu_csu, ignore.case = TRUE)
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_cdu_csu, ignore.case = TRUE)
 }
 # SPD
-check_match_spd <- function (mc_GLES2017) {
+check_match_spd <- function (mc_GLES2017_final) {
   pattern_spd <- paste0(".*", paste(c("SPD", "sozialdemokrat"), collapse = "|"), ".*")
-  lapply(mc_GLES2017$matched, grepl, pattern = pattern_spd, ignore.case = TRUE)
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_spd, ignore.case = TRUE)
 }
 # Grüne
-check_match_gruene <- function (mc_GLES2017) {
+check_match_gruene <- function (mc_GLES2017_final) {
   pattern_gruene <- paste0(".*", paste(c("Grüne", "B90", "Bündnis"), collapse = "|"), ".*")
-  lapply(mc_GLES2017$matched, grepl, pattern = pattern_gruene, ignore.case = TRUE)
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_gruene, ignore.case = TRUE)
 }
 # FDP 
-check_match_fdp <- function (mc_GLES2017) {
+check_match_fdp <- function (mc_GLES2017_final) {
   pattern_fdp <- paste0(".*", paste(c("FDP","freie", "liberal"), collapse = "|"), ".*")
-  lapply(mc_GLES2017$matched, grepl, pattern = pattern_fdp, ignore.case = TRUE)
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_fdp, ignore.case = TRUE)
 }
 # Die Linke
-check_match_linke <- function (mc_GLES2017) {
+check_match_linke <- function (mc_GLES2017_final) {
   pattern_linke <- paste0(".*", paste(c("Linke","links"), collapse = "|"), ".*")
-  lapply(mc_GLES2017$matched, grepl, pattern = pattern_linke, ignore.case = TRUE)
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_linke, ignore.case = TRUE)
 }
 # AFD
-check_match_afd <- function (mc_GLES2017) {
+check_match_afd <- function (mc_GLES2017_final) {
   pattern_afd <- paste0(".*", paste(c("AfD","Alternative"), collapse = "|"), ".*")
-  lapply(mc_GLES2017$matched, grepl, pattern = pattern_afd, ignore.case = TRUE)
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_afd, ignore.case = TRUE)
 }
+
+# Leah: add matches for "nicht", "ungültig" and "Andere" (Andere: might need to update matching script above too?)
+
+# Andere Partei
+check_match_andere <- function (mc_GLES2017_final) {
+  pattern_andere <- paste0(".*", paste("Andere", collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_andere, ignore.case = TRUE)
+}
+
+# Ungültig gewählt
+check_match_ung <- function (mc_GLES2017_final) {
+  pattern_ung <- paste0(".*", paste("ungültig", collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_ung, ignore.case = TRUE)
+}
+
+# Nicht gewählt
+check_match_nicht <- function (mc_GLES2017_final) {
+  pattern_nicht <- paste0(".*", paste("ungültig", collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_nicht, ignore.case = TRUE)
+}
+
 ```
 
 ## Create match_voted outcome
 ```{r}
 match_vote_outcome <-  case_when(
-    mc_GLES2017$vote %in% "CDU/CSU" ~ check_match_cdu_csu(mc_GLES2017),
-    mc_GLES2017$vote %in% "SPD" ~ check_match_spd(mc_GLES2017),
-    mc_GLES2017$vote %in% "Bündnis 90/Die Grünen" ~ check_match_gruene(mc_GLES2017),
-    mc_GLES2017$vote %in% "FDP" ~ check_match_fdp(mc_GLES2017),
-    mc_GLES2017$vote %in% "Die Linke" ~ check_match_linke(mc_GLES2017),
-    mc_GLES2017$vote %in% "AfD" ~ check_match_afd(mc_GLES2017)
+    mc_GLES2017_final$vote %in% "CDU/CSU" ~ check_match_cdu_csu(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "SPD" ~ check_match_spd(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "Bündnis 90/Die Grünen" ~ check_match_gruene(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "FDP" ~ check_match_fdp(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "Die Linke" ~ check_match_linke(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "AfD" ~ check_match_afd(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "Andere Partei" ~ check_match_andere(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "Ungültig gewählt" ~ check_match_ung(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "Nicht gewählt" ~ check_match_nicht(mc_GLES2017_final)
 )
 match_vote_outcome[which(unlist(lapply(match_vote_outcome, is.null)))] <- NA
 
-mc_GLES2017 %>% 
+mc_GLES2017_final <- mc_GLES2017_final %>% 
   mutate(match_vote_outcome = match_vote_outcome)
 
 ```
+
+# Save final dataset!
+```{r}
+save(mc_GLES2017_final, file = "GPT4PO_data_complete_2017.Rdata") # save final dataset
+```
+
