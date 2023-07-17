@@ -1,0 +1,216 @@
+---
+title: 'GPT for Public Opinion: Data Analysis'
+author: "Leah von der Heyde, Alexander Wenz, Carolina Haensch"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse) 
+```
+
+# Shares of correct and incorrect matches
+
+## Tables
+
+```{r}
+# Overall
+table_matches_overall_c <- table(mc_GLES2017_final$match_vote_outcome)
+table_matches_overall_s <- prop.table(table_matches_overall_c)
+
+# Per sample
+table_matches_counts <- table(mc_GLES2017_final$match_vote_outcome, mc_GLES2017_final$sample_no)
+table_matches_shares <- prop.table(table_matches_counts, 2)
+
+data_matches_shares <- as.data.frame(table_matches_shares)
+data_matches_overall_s <- as.data.frame(table_matches_overall_s)
+
+data_matches_overall_s <- data_matches_overall_s %>%
+                          mutate(sample = "Overall") %>%
+                          rename(match = Var1)
+
+data_matches_shares <- data_matches_shares %>%
+                       rename(sample = Var2) %>%
+                       rename(match = Var1)
+
+data_matches_shares_all <- bind_rows(data_matches_overall_s, data_matches_shares)
+data_matches_shares_all <- data_matches_shares_all %>% mutate(sample = factor(sample, 
+                                                                          levels = c("Overall",
+                                                                                     "1", "2", "3", "4", "5"),
+                                                                          labels = c("Overall",
+                                                                                     "1", "2", "3", "4", "5")))
+```
+
+## Plot
+```{r}
+plot_matches <- ggplot(data_matches_shares_all,
+                       aes(x = sample,
+                           y = Freq,
+                           fill = match)) +
+                      geom_bar(stat = "identity", position = "stack") +
+                      geom_text(aes(label = round(Freq, 3)), 
+                                position = position_fill(0.5), color = c(rep(c("white", "black"), 6))) +
+                      xlab("Sample") +
+                      ylab("") +
+                      scale_fill_manual(values = c("FALSE" = "#8F2809", "TRUE" = "#74aa9c"), 
+                                        labels = c("wrong", "correct"),
+                                        name = "GPT Prediction") +
+                      ggtitle("GPT's vote predictions are consistently wrong") +
+                      theme_minimal()
+plot_matches
+```
+
+# Shares of correct and incorrect matches by party vote
+
+## Tables
+
+```{r}
+
+# Across samples
+table_matches_parties_s <- prop.table(table(mc_GLES2017_final$vote, mc_GLES2017_final$match_vote_outcome), 1)
+
+# Sample 1
+table_matches_parties_s_1 <- prop.table(table(mc_GLES2017_final$vote[mc_GLES2017_final$sample_no == 1], mc_GLES2017_final$match_vote_outcome[mc_GLES2017_final$sample_no == 1]), 1)
+
+# Sample 2
+table_matches_parties_s_2 <- prop.table(table(mc_GLES2017_final$vote[mc_GLES2017_final$sample_no == 2], mc_GLES2017_final$match_vote_outcome[mc_GLES2017_final$sample_no == 2]), 1)
+
+# Sample 3
+table_matches_parties_s_3 <- prop.table(table(mc_GLES2017_final$vote[mc_GLES2017_final$sample_no == 3], mc_GLES2017_final$match_vote_outcome[mc_GLES2017_final$sample_no == 3]), 1)
+
+# Sample 4
+table_matches_parties_s_4 <- prop.table(table(mc_GLES2017_final$vote[mc_GLES2017_final$sample_no == 4], mc_GLES2017_final$match_vote_outcome[mc_GLES2017_final$sample_no == 4]), 1)
+
+# Sample 5
+table_matches_parties_s_5 <- prop.table(table(mc_GLES2017_final$vote[mc_GLES2017_final$sample_no == 5], mc_GLES2017_final$match_vote_outcome[mc_GLES2017_final$sample_no == 5]), 1)
+
+```
+
+# Distribution of vote shares GLES vs. GPT
+
+## Tables
+
+```{r}
+
+# GLES
+table_vote_overall_s <- prop.table(table(mc_GLES2017_final$vote, useNA = "always"))
+
+# GPT Overall
+table_votegpt_overall_s <- prop.table(table(mc_GLES2017_final$vote_gpt, useNA = "always"))
+
+# GPT Sample 1
+table_votegpt_s1 <- prop.table(table(mc_GLES2017_final$vote_gpt[mc_GLES2017_final$sample_no == 1], useNA = "always"))
+
+# GPT Sample 2
+table_votegpt_s1 <- prop.table(table(mc_GLES2017_final$vote_gpt[mc_GLES2017_final$sample_no == 2], useNA = "always"))
+
+# GPT Sample 3
+table_votegpt_s1 <- prop.table(table(mc_GLES2017_final$vote_gpt[mc_GLES2017_final$sample_no == 3], useNA = "always"))
+
+# GPT Sample 4
+table_votegpt_s1 <- prop.table(table(mc_GLES2017_final$vote_gpt[mc_GLES2017_final$sample_no == 4], useNA = "always"))
+
+# GPT Sample 5
+table_votegpt_s1 <- prop.table(table(mc_GLES2017_final$vote_gpt[mc_GLES2017_final$sample_no == 5], useNA = "always"))
+
+
+```
+
+
+## Plot
+
+```{r}
+
+#GLES
+
+## Filter the dataset for a specific sample_no
+data_vote_1 <- subset(mc_GLES2017_final, sample_no == 1)
+
+## Calculate the relative frequencies of each category
+table_vote_freq_1 <- prop.table(table(data_vote_1$vote))
+
+## Sort the categories based on their frequencies
+table_vote_freq_1_sorted <- as.data.frame(table_vote_freq_1[order(table_vote_freq_1, decreasing = TRUE)])
+
+table_vote_freq_1_sorted <- table_vote_freq_1_sorted %>% rename(party = Var1)
+
+## Create the bar chart
+ggplot(data = table_vote_freq_1_sorted, aes(x = party, y = Freq)) +
+  geom_bar(stat = "identity", fill = "#74aa9c") +
+  geom_text(aes(label = round(Freq, 3)), 
+                                position = position_fill(0.5), color = "black") +
+  xlab("Party") +
+  ylab("Vote Share") +
+  ggtitle("GPT is particularly wrong in predicting [PARTY]") +
+  theme_minimal()
+
+# Comparing across samples
+
+## Create a new data frame by merging "vote" and "vote_gpt", GLES vote = sample 0
+data_vote_long <- mc_GLES2017_final %>%
+  group_by(id) %>%
+  summarise(sample = c(sample_no, 0),
+            vote_new = c(vote_gpt, unique(vote)))
+
+
+## Create a count table of "vote" and "sample_no"
+table_votes_count <- table(data_vote_long$vote_new, data_vote_long$sample)
+
+## Convert the count table to a data frame
+data_votes_count <- as.data.frame(table_votes_count)
+
+## Rename the columns
+colnames(data_votes_count) <- c("vote", "sample_no", "count")
+
+## Calculate the relative frequencies
+data_votes_count$freq <- data_votes_count$count / tapply(data_votes_count$count, data_votes_count$sample_no, sum)[data_votes_count$sample_no]
+
+## Sort the data frame by descending frequency within each sample_no
+data_votes_count <- data_votes_count[order(data_votes_count$sample_no, -data_votes_count$freq), ] # doesn't work?
+
+gpt_hues_6 <- c("#FF6100", "#31524B", "#5F9F90", "#74AA9C","#ACCDC5","grey")
+
+## Create the grouped bar plot
+plot_shares <- ggplot(data_votes_count, aes(x = reorder(vote, -freq), y = freq, fill = as.factor(sample_no))) +
+                      geom_bar(stat = "identity", position = "dodge") +
+                      #geom_text(aes(label = round(freq, 3)), color = "black") +
+                      xlab("Party") +
+                      ylab("Vote Share") +
+                      scale_fill_manual(values = gpt_hues_6, name = "Sample",
+                                        labels = c("GLES", "Sample 1", "Sample 2", 
+                                        "Sample 3", "Sample 4", "Sample 5")) +
+                      ggtitle("GPT overestimates votes shares for the Green and Left parties, and underestimates those for the AfD, small parties and non-voters") +
+                      theme_minimal()
+
+
+
+```
+
+# Variance estimation
+
+```{r}
+  
+# Calculate proportions and its variance for each iteration
+sample_proportions <- mc_GLES2017_final %>%
+    group_by(sample_no, vote_gpt) %>%
+    summarise(n = n(), .groups = "keep") %>%
+    ungroup(vote_gpt) %>%
+    mutate(prop_estimate = n / sum(n)) %>%
+    mutate(prop_variance = prop_estimate * (1 - prop_estimate) / n)
+
+# Calculate the between-imputation (Leah: iteration?) variance and total variance
+mean_proportions <- sample_proportions %>%
+    group_by(vote_gpt) %>%
+    summarise(W = mean(prop_variance), # Within variance (mean)
+              mean_prop = mean(prop_estimate),
+              B = var(prop_estimate)) %>% #Between variance
+    mutate(m = 5,
+           T = W + (1 + 1/m) * B,
+           T_stderr= sqrt(T)) %>% # total variance (Rubin's rules) 
+    arrange(desc(mean_prop))
+
+mean_proportions 
+```
+
+statt mean in summarize: corr und dann Varianzschätzer

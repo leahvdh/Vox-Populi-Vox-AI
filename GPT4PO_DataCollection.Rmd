@@ -1,0 +1,791 @@
+---
+title: 'GPT for Public Opinion: Data Collection'
+author: "Leah von der Heyde, Alexander Wenz, Anna-Carolina Haensch, Max Lang"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#knitr::opts_knit$set(root.dir = "/Users/leah/Desktop/LMU/ChatGPT Public Opinion")
+#knitr::opts_knit$set(root.dir = "C:/Users/homeoffice/OneDrive/OneDrive - uni-mannheim.de/Dokumente/1 Research/1 In progress/Co-authored/ChatGPT public opinion/Data")
+library(haven)
+library(dplyr)
+library(forcats)
+library(stringr)
+library(mice)
+library(checkmate)
+library(rgpt3)
+```
+
+# Prompt Dataset Generation
+
+## Load GLES data
+
+```{r}
+# Load data 
+# GLES Nachwahl-Querschnitt 2017 stored in GESIS Data Archive for the Social Sciences: https://doi.org/10.4232/1.13235
+GLES2017_original <- read_dta("ZA6801_de_v4-0-1.dta")
+
+# GLES Nachwahl-Querschnitt 2021 stored in GESIS Data Archive for the Social Sciences: https://doi.org/10.4232/1.14074
+
+```
+
+## Manipulate data
+
+```{r}
+# Recode variables
+GLES2017_recoded <- GLES2017_original %>%
+  dplyr::filter(q2d == 1) %>% # restrict to eligible voters
+  mutate(
+    age = 2017 - q2c,
+    female = ifelse(q1 == 2, 1,
+                    ifelse(q1 == 1, 0, NA)),
+    edu = ifelse(q136m == 1 | q136l == 1 | q136k == 1 | q136j == 1, 5,
+                 ifelse(q135 == 4 | q135 == 5, 4,
+                        ifelse(q135 == 3 | q135 == 6, 3,
+                               ifelse(q135 == 2, 2,
+                                      ifelse(q135 == 1 | q135 == 9, 1, NA))))),
+    emp = ifelse(q137 == 1 | q137 == 2 | q137 == 8 | q137 == 11, 1,
+                 ifelse(q137 == 7 | q137 == 10 | q137 == 12, 2,
+                        ifelse(q137 == 3 | q137 == 4 | q137 == 5 | q137 == 6 | q137 == 9, 3, NA))),
+    hhincome = ifelse(q192 > 0, q192, NA),
+    hhincome = ifelse(hhincome <= 5, 1,
+                      ifelse(hhincome >= 6 & hhincome <= 10, 2,
+                             ifelse(hhincome >= 11, 3, NA))),
+    east = ifelse(ostwest2 == 0, 1,
+                  ifelse(ostwest2 == 1, 0, NA)),
+    religious = ifelse(q170 > 0, q170, NA),
+    leftright = ifelse(q32 == 1 | q32 == 2, 1,
+                       ifelse(q32 == 3 | q32 == 4, 2,
+                              ifelse(q32 == 5 | q32 == 6 | q32 == 7, 3,
+                                     ifelse(q32 == 8 | q32 == 9, 4,
+                                            ifelse(q32 == 10 | q32 == 11, 5, NA))))),
+    partyid = ifelse(q125a == 1 | q125a == 2 | q125a == 3, 1,
+                     ifelse(q125a == 4, 2,
+                            ifelse(q125a == 5, 3,
+                                   ifelse(q125a == 6, 4,
+                                          ifelse(q125a == 7, 5,
+                                                 ifelse(q125a == 322, 6,
+                                                        ifelse(q125a == 801, 7,
+                                                               ifelse(q125a == 808, 8, NA)))))))),
+    partyid_degree = ifelse(q126 == -97, 6,
+                            ifelse(q126 > 0, q126, NA)),
+    inequality = ifelse(q66d == 1 | q66d == 2, 1,
+                        ifelse(q66d == 3, 2,
+                               ifelse(q66d == 4 | q66d == 5, 3, NA))),
+    immigration = ifelse(q79 > 0, q79, NA),
+    immigration = ifelse(immigration <= 5, 1,
+                         ifelse(immigration == 6, 2,
+                                ifelse(immigration >= 7, 3, NA))),
+    vote = ifelse(q19ba == 1, 1,
+                  ifelse(q19ba == 4, 2,
+                         ifelse(q19ba == 6, 3,
+                                ifelse(q19ba == 5, 4,
+                                       ifelse(q19ba == 7, 5,
+                                              ifelse(q19ba == 322, 6,
+                                                     ifelse(q19ba == 801, 7,
+                                                            ifelse(q19ba == -83, 8,
+                                                                   ifelse(q17 == 2, 9, NA))))))))),
+    female = factor(female, levels = c(0, 1), labels = c("männlich", 
+                                                         "weiblich")),
+    edu = factor(edu, levels = c(1, 2, 3, 4, 5), 
+                 labels = c("keinen Schulabschluss",
+                            "einen Hauptschulabschluss",
+                            "einen Realschulabschluss",
+                            "Abitur",
+                            "einen Hochschulabschluss")),
+    emp = factor(emp, levels = c(1, 2, 3), labels = c("berufstätig",
+                                                      "nicht berufstätig",
+                                                      "in Ausbildung")),
+    hhincome = factor(hhincome, levels = c(1, 2, 3), 
+                      labels = c("niedriges", "mittleres", "hohes")),
+    east = factor(east, levels = c(0, 1), labels = c("Westdeutschland",
+                                                     "Ostdeutschland")),
+    religious = factor(religious, levels = c(1, 2, 3, 4), 
+                       labels = c("überhaupt nicht religiös",
+                                  "nicht sehr religiös",
+                                  "etwas religiös",
+                                  "sehr religiös")),
+    leftright = factor(leftright, levels = c(1, 2, 3, 4, 5),
+                       labels = c("stark links",
+                                  "mittig links",
+                                  "in der Mitte",
+                                  "mittig rechts",
+                                  "stark rechts")),
+    partyid = factor(partyid, levels = c(1, 2, 3, 4, 5, 6, 7, 8),
+                     labels = c("mit der Partei CDU/CSU",
+                                "mit der Partei SPD", 
+                                "mit der Partei FDP",
+                                "mit der Partei Bündnis 90/Die Grünen",
+                                "mit der Partei Die Linke",
+                                "mit der Partei AfD",
+                                "mit einer Kleinpartei",
+                                "mit keiner Partei")),
+    partyid_degree = factor(partyid_degree, levels = c(1, 2, 3, 4, 5, 6),
+                            labels = c("sehr stark ",
+                                       "ziemlich stark ",
+                                       "mäßig ",
+                                       "ziemlich schwach ",
+                                       "sehr schwach ",
+                                       "")),
+    party = paste0(partyid_degree, partyid),
+    inequality = factor(inequality, levels = c(1, 2, 3),
+                        labels = c("Maßnahmen ergreifen",
+                                   "habe keine Meinung dazu, ob die Regierung Maßnahmen ergreifen sollte",
+                                   "keine Maßnahmen ergreifen")),
+    immigration = factor(immigration, levels = c(1, 2, 3), 
+                         labels = c("erleichtern",
+                                    "weder erleichtern noch einschränken",
+                                    "einschränken")),
+    vote = factor(vote, levels = c(1, 2, 3, 4, 5, 6, 7, 8, 9),
+                  labels = c("CDU/CSU",
+                             "SPD",
+                             "Bündnis 90/Die Grünen",
+                             "FDP",
+                             "Die Linke",
+                             "AfD",
+                             "Andere Partei",
+                             "Ungültig gewählt",
+                             "Nicht gewählt"))
+  ) %>%
+  select(
+    lfdn,
+    age,
+    female,
+    edu,
+    emp,
+    hhincome,
+    east,
+    religious,
+    leftright,
+    partyid,
+    partyid_degree,
+    party,
+    inequality,
+    immigration,
+    vote
+  )
+```
+
+## Impute missing values
+
+```{r}
+# Split datasets with complete cases vs. cases with missing values
+
+# Complete cases: n=1,528
+GLES2017_complete <- GLES2017_recoded %>%
+  na.omit() %>%
+  mutate(
+    imputed = 0
+  )
+
+# Cases with missing values: n=504
+GLES2017_incomplete <- GLES2017_recoded[!complete.cases(GLES2017_recoded), ]
+
+# Restrict cases with missing values to those with non-missing vote choice: n=377
+GLES2017_incomplete_covariates <- GLES2017_incomplete %>%
+  filter(is.na(vote) == FALSE) %>%
+  select(-party) %>%
+  mutate(
+    partyid_degree = ifelse(is.na(partyid) & partyid_degree == "", NA, partyid_degree),
+    partyid_degree = factor(partyid_degree, levels = c(1, 2, 3, 4, 5, 6),
+                            labels = c("sehr stark ",
+                                       "ziemlich stark ",
+                                       "mäßig ",
+                                       "ziemlich schwach ",
+                                       "sehr schwach ",
+                                       ""))
+  )
+
+# Impute missing values
+pred <- quickpred(
+  GLES2017_incomplete_covariates,
+  exclude = c("lfdn")
+)
+
+imputed <- mice::complete(
+  mice(
+    GLES2017_incomplete_covariates,
+    m = 1,
+    method = "pmm",
+    predictorMatrix = pred,
+    seed = 20230607
+    )
+) %>%
+  mutate(
+    party = paste0(partyid_degree, partyid),
+    imputed = 1
+  )
+
+GLES2017_imputed <- bind_rows(
+  GLES2017_complete,
+  imputed
+)
+```
+
+## Create prompt
+
+```{r}
+GLES2017 <- GLES2017_imputed %>%
+  mutate(
+    prompt = paste0("Ich bin ", age, 
+                    " Jahre alt und ", female, 
+                    ". Ich habe ", edu, 
+                    ", ein ", hhincome, " monatliches Haushalts-Nettoeinkommen",
+                    " und ich bin ", emp,
+                    ". Ich bin ", religious,
+                    ". Politisch-ideologisch ordne ich mich ", leftright, " ein.",
+                    " Ich identifiziere mich ", party,
+                    ". Ich lebe in ", east,
+                    ". Ich finde, die Regierung sollte die Einwanderung ", immigration,
+                    " und ", inequality, ", um die Einkommensunterschiede zu verringern.",
+                    " Habe ich bei der Bundestagswahl 2017 gewählt und wenn ja, welcher Partei habe ich meine Zweitstimme gegeben? Ich habe [INSERT]")
+    )
+```
+
+## Create prompt - robustness check: Omitting predictors with missing values in the prompt rather than imputing missing values
+
+```{r}
+GLES2017_A <- GLES2017_recoded %>%
+  filter(is.na(vote) == FALSE) %>%
+  mutate(
+    inequality_A = fct_recode(
+      inequality,  
+      "finde, die Regierung sollte Maßnahmen ergreifen" = "Maßnahmen ergreifen",
+      "finde, die Regierung sollte keine Maßnahmen ergreifen" = "keine Maßnahmen ergreifen"
+      )
+  ) %>%
+  mutate(
+    age_text = ifelse(is.na(age) == FALSE, paste0("Ich bin ", age, " Jahre alt. "), ""),
+    female_text = ifelse(is.na(female) == FALSE, paste0("Ich bin ", female, ". "), ""),
+    edu_text = ifelse(is.na(edu) == FALSE, paste0("Ich habe ", edu, ". "), ""),
+    hhincome_text = ifelse(is.na(hhincome) == FALSE, paste0("Ich habe ein ", hhincome, " monatliches Haushalts-Nettoeinkommen. "), ""),
+    emp_text = ifelse(is.na(emp) == FALSE, paste0("Ich bin ", emp, ". "), ""),
+    religious_text = ifelse(is.na(religious) == FALSE, paste0("Ich bin ", religious, ". "), ""),
+    leftright_text = ifelse(is.na(leftright) == FALSE, paste0("Politisch-ideologisch ordne ich mich ", leftright, " ein. "), ""),
+    party_text = ifelse(is.na(partyid_degree) == FALSE & is.na(partyid) == FALSE, paste0("Ich identifiziere mich ", partyid_degree, partyid, "."), ""),
+    party_text = str_squish(party_text),
+    party_text = paste0(party_text, " "),
+    east_text = ifelse(is.na(east) == FALSE, paste0("Ich lebe in ", east, ". "), ""),
+    immigration_text = ifelse(is.na(immigration) == FALSE, paste0("Ich finde, die Regierung sollte die Einwanderung ", immigration, ". "), ""),
+    inequality_text = ifelse(is.na(inequality_A) == FALSE, paste0("Ich ", inequality_A, ", um die Einkommensunterschiede zu verringern. "), ""),
+    prompt_A = paste0(
+      age_text, 
+      female_text,
+      edu_text,
+      hhincome_text,
+      emp_text,
+      religious_text,
+      leftright_text,
+      party_text,
+      east_text,
+      immigration_text,
+      inequality_text,
+      "Habe ich bei der Bundestagswahl 2017 gewählt und wenn ja, welcher Partei habe ich meine Zweitstimme gegeben? Ich habe [INSERT]")
+  )
+```
+
+## Save data
+
+```{r}
+# Save data
+save(GLES2017, file = "GLES2017.Rdata")
+save(GLES2017_A, file = "GLES2017_A.Rdata")
+```
+
+# GPT Completion Collection
+
+## Get API access
+
+```{r}
+gpt3_authenticate("access_key.txt") # Key in das txt (ohne Anführungszeichen, Name, etc. NUR der key, mit new line dahinter!) 
+```
+
+## Create prompt dataset from GLES data
+
+```{r}
+prompts_df <- data.frame(
+              prompt_id = GLES2017$lfdn,
+              prompt = GLES2017$prompt)
+```
+
+## Feed prompts and store completions
+
+```{r}
+output <- gpt3_completions(
+                    prompt_var = prompts_df$prompt
+                  , id_var = prompts_df$prompt_id
+                  , param_model = 'text-davinci-003'
+                  , param_output_type = "complete" # save both completion and metadata
+                  , param_logprobs = 5 # numeric. deprecated :(
+                  , param_suffix = NULL #character. The suffix that comes after a completion of inserted text
+                  , param_max_tokens = 30 # 1 token is about 4 characters in English text. Test used between 10 and 50
+                  , param_n = 5 # number of completions. Prompt tokens are only charged once.
+                  , param_temperature = 0.9 # specifying the sampling strategy of the possible completions. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 for ones with a well-defined answer. We generally recommend altering this or top_p but not both.
+                  , param_top_p = 1 # specifying sampling strategy as an alternative to the temperature sampling where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.
+                  , param_presence_penalty = 0 # numeric (default: 0) between -2.00 and +2.00 to determine the penalisation of repetitiveness if a token already exists. Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+                  , param_frequency_penalty = 0 # see presence_penalty
+                  , param_best_of = 1 # numeric (default: 1) that determines the space of possibilities from which to select the completion with the highest probability. Generates best_of completions server-side and returns the "best" (the one with the highest log probability per token.
+                  )
+
+completions_df <- output[[1]] # extract completions
+
+metadata_df<- output[[2]] # extract metadata
+```
+
+## Save data
+
+```{r}
+save(GLES2017, prompts_df,completions_df, metadata_df, file = "GPT_prompt_completion.Rdata") # save input and output
+```
+
+# Keyword Matching
+
+## Create keywords to search for
+
+```{r}
+sequences <- c("SPD", "CDU/CSU","CDU", "CSU", "Union", "FDP", "AfD", "Linke", "Grüne", "Bündnis", "B90", "sozialdemokrat", "christ", "freie", "liberal", "Alternative", "links", "nicht", "ungültig", "Erststimme")
+check_sequences <- c("nicht", "ungültig", "Erststimme")
+
+# QUESTION: Change to "Die Linke" and "Linkspartei" and add "links/link" without those strings to flags?
+
+# This list defines the categories for the parties. If at least two words (one each) of two different categories are in one sentence, that sentence gets flagged for manual checking.
+sequences_list <- list(spd = c("SPD", "sozialdemokrat"),
+                       gruene = c("Grüne", "B90", "Bündnis"),
+                       union = c("CDU/CSU", "CDU", "CSU", "Union", "christ"),
+                       fdp = c("FDP", "freie", "liberal"),
+                       afd = c("AfD", "Alternative"),
+                       linke = c("Linke", "links"))
+```
+
+## Match 1: Completions - Party Keywords
+
+Create a function that
+- checks whether completions_df$gpt3 contains any of the following strings:
+c("SPD", "CDU", "CSU", "Union", "CDU/CSU", "FDP", "AfD", "Linke", "Grüne", "Bündnis", "B90", "sozialdemokrat", "christ", "freie", "liberal", "links", Alternative", "nicht", "ungültig", "Erststimme")
+(case-insensitive, also partial strings, e.g. "sozialdemokratisch" und "sozialdemokraten"
+should both be recognized by " * sozialdemokrat * ")
+
+- stores all the matched strings per row in a new df and column: match_completions_df$matched; if there is no match, the column should remain empty but still store the respective row
+- marks those rows that contain "Erststimme" OR "nicht" OR "ungültig" OR naming multiple parties OR having no keyword match by creating a column "check_manually" that takes the value 1 if any of these conditions are met
+- also stores the following columns from the completions_df: "id" as "id" and "gpt3" as "completion"
+
+### Function get_matches_vector
+
+```{r}
+#' get_matches_vector
+#'
+#' This function extracts matches from a column based on a set of keywords.
+#'
+#' @param keywords A character vector of keywords to search for.
+#' @param column A character vector representing the column to search in.
+#' @param delimiter A character string to use as a delimiter when collapsing the matches. Default is a space (" ").
+#' @param replace_zero_length Logical indicating whether to replace zero-length matches (character(0L)) with NA. Default is TRUE.
+#'
+#' @return A character vector containing the matches found, collapsed using the specified delimiter.
+#'
+#' @examples
+#' keywords <- c("keyword1", "keyword2", "keyword3")
+#' completions_df <- data.frame(gpt3 = c("This is keyword1", "No match here", "Another keyword2 match"))
+#' get_matches_vector(keywords, completions_df$gpt3)
+#'
+
+
+get_matches_vector <- function(keywords, column, delimiter = " ", replace_zero_length = TRUE) {
+  assert_character(keywords, min.len = 1)
+  assert_character(column)
+  assert_character(delimiter, any.missing = FALSE, len = 1,)
+  assert_logical(replace_zero_length, any.missing = FALSE, len = 1)
+  
+  keywords <- gsub("([.\\[\\{\\(\\*\\+\\?\\^\\$\\|\\\\])", "\\\\\\1", keywords, perl = TRUE)
+  pattern <- paste0("\\b\\w*(", paste(keywords, collapse = "|"), ")\\w*\\b")
+  matches <- str_extract_all(column, regex(pattern, ignore_case = TRUE))
+  
+  if (replace_zero_length) {
+    matches <- lapply(matches, function(x) if(identical(x, character(0))) NA_character_ else x)
+  }
+  matches <- sapply(matches, paste, collapse = delimiter)
+  return(matches)
+}
+
+get_matches_vector(keywords = sequences, column = completions_df$gpt3)
+
+```
+
+### Function get_check_value
+
+```{r}
+#' get_check_values
+#'
+#' This function checks if specific keywords are present in a set of matches.
+#'
+#' @param check_keywords A character vector of keywords to label for manual revision.
+#' @param matches_split A character vector returned from the fucntion `get_matches_vector`
+#' @param split_by A character string to use as a delimiter when splitting the matches. Default is a space (" ").
+#'
+#' @return A numeric vector indicating whether each keyword is present in each match. 1 indicates presence, 0 indicates absence.
+#'
+#' @examples
+#' check_keywords <- c("Erststimme", "ungültig", "nicht")
+#' matches <- get_matches_vector(keywords = sequences, column = completions_df$gpt3)
+#' get_check_values(check_keywords, matches)
+#'
+
+get_check_values <- function(check_keywords, matches, split_by = " ") {
+  assert_character(check_keywords, min.len = 1)
+  assert_character(matches)
+  assert_character(split_by, any.missing = FALSE, len = 1)
+
+  check_manual_pattern <- paste0("\\b(", paste0(check_keywords, collapse = "|"), ")\\b")
+  check_manual <- unlist(lapply(str_split(matches, split_by), function (x) {as.numeric(any(x %in% check_keywords))}))
+  
+  matches_split <- str_split(matches, pattern = " ")
+  
+  duplicated_party_vector <- unlist(lapply(lapply(lapply(lapply(matches_split, function(sentence) {
+  sapply(sequences_list, function(category) {
+    sum(str_count(tolower(sentence), regex(paste0("\\b\\w*(", paste(category, collapse = "|"), ")\\w*\\b"), ignore_case = TRUE)))
+  })}), function (x) {x  != 0}), sum), function (x) {x > 1}))
+  
+  check_label <- ifelse(duplicated_party_vector == 1 | check_manual == 1, 1, 0)
+  return(check_label)
+}
+
+get_check_values(c("Erststimme", "ungültig", "nicht"), get_matches_vector(keywords = sequences, column = completions_df$gpt3))
+```
+
+### Function create_match_completions_df
+
+```{r}
+#' create_match_completions_df
+#'
+#' This function creates a data frame with match completions based on given keywords and check keywords.
+#'
+#' @param df A data frame containing the original data.
+#' @param keywords A character vector of keywords to search for.
+#' @param check_keywords A character vector of keywords to mark words that trigger manual review.
+#' @param ... Additional arguments passed to the underlying functions.
+#'
+#' @return A data frame with columns for ID, completion, matched values, and check manually values.
+#'
+#' @examples
+#' keywords <- c("keyword1", "keyword2", "keyword3")
+#' check_keywords <- c("Erststimme", "ungültig", "nicht")
+#' completions_df <- data.frame(id = c(1, 2, 3), gpt3 = c("This is keyword1", "No match here", "Another keyword2 match"))
+#' create_match_completions_df(completions_df, keywords, check_keywords)
+#'
+
+create_match_completions_df <- function (df, keywords, check_keywords, ...) {
+  assert_data_frame(df, col.names = "named", types = c("numeric", "character", "character", "numeric") , ncols = 4)
+  assert_character(keywords, min.len = 1)
+  assert_character(check_keywords)
+  
+  matches <- get_matches_vector(keywords = sequences, column = df[["gpt3"]])
+  check_manual <- get_check_values(check_keywords, matches)
+  df <- data.frame(
+    id = df[["id"]],
+    completion = df[["gpt3"]],
+    matched = matches,
+    check_manually = check_manual
+  )
+  return(df)
+}
+
+match_completions <-  create_match_completions_df(completions_df, keywords = sequences, check_keywords = c("Erststimme", "ungültig", "nicht"))
+```
+
+### Create mc_GLES2017
+
+```{r}
+# Joins matching and GLES datasets by ID to compare match with vote
+mc_GLES2017 <- left_join(match_completions, GLES2017, by = c("id" = "lfdn"))
+```
+
+### Export for manual checks
+
+```{r}
+# Export for manual checks
+write.csv(mc_GLES2017, file = "GPT4PO_manualchecks.csv", col.names = T, row.names = F)
+```
+
+!!! Manual checks offline !!!
+
+## Resampling
+
+### Import data
+
+```{r}
+# Import data
+resample <- read.csv("GPT4PO_manual_resample.csv") # read in data for resampling
+resample <- resample %>% mutate(id_sampleno = paste(id, sample_no, sep = "_")) # should have been used as ID-variable in API, but will be used ot match later
+```
+
+### Feed prompts and store completions
+
+```{r}
+output_resample <- gpt3_completions(
+                    prompt_var = resample$prompt
+                  , id_var = resample$id # id_sampleno should have been used
+                  , param_model = 'text-davinci-003'
+                  , param_output_type = "complete"
+                  , param_logprobs = 5
+                  , param_suffix = NULL
+                  , param_max_tokens = 30
+                  , param_n = 1
+                  , param_temperature = 0.9
+                  , param_top_p = 1
+                  , param_presence_penalty = 0 
+                  , param_frequency_penalty = 0 
+                  , param_best_of = 1
+                  )
+
+completions_resample_df <- output_resample[[1]] # extract completions
+
+metadata_resample_df<- output_resample[[2]] # extract metadata
+
+save(resample, completions_resample_df, metadata_resample_df, file = "GPT_prompt_resample.Rdata") # save input and output
+```
+
+### Match 1: Completions - Party Keywords
+
+```{r}
+get_matches_vector(keywords = sequences, column = completions_resample_df$gpt3)
+
+get_check_values(c("Erststimme", "ungültig", "nicht"), get_matches_vector(keywords = sequences, column = completions_resample_df$gpt3))
+
+match_completions_resample <-  create_match_completions_df(completions_resample_df, keywords = sequences, check_keywords = c("Erststimme", "ungültig", "nicht"))
+```
+
+### Export for manual checks
+
+```{r}
+# Export for manual checks
+write.csv(match_completions_resample, file = "GPT4PO_manualchecks_resample.csv")
+```
+
+!!! Manual checks offline !!!
+
+### Import checked resampled data and build new identifier for merging
+
+```{r}
+match_completions_resample <- read.csv("GPT4PO_manual_resample_checked.csv") # read in checked data
+
+resample <- resample %>% arrange(id) # sort
+
+match_completions_resample <- match_completions_resample %>%
+  arrange(id) %>% # sort 
+  mutate(id_sampleno = paste(id, resample$sample_no, sep = "_")) # add new identifier
+```
+
+#### Check if identifier is working
+
+```{r}
+is_identifier <- function(column) {length(unique(column)) == length(column)}
+
+is_key_unique <- is_identifier(resample$id_sampleno) # check for resample
+if (is_key_unique) {
+  print("Key column is unique.")
+} else {
+  warning("Key column is not unique.")
+}
+```
+
+```{r}
+is_key_unique <- is_identifier(match_completions_resample$id_sampleno) # check for matching data
+if (is_key_unique) {
+  print("Key column is unique.")
+} else {
+  warning("Key column is not unique.")
+}
+```
+
+### Create mc_resample
+
+```{r}
+# Joins matching and GLES datasets by ID to compare match with vote
+mc_resample <- left_join(match_completions_resample, resample, by = c("id_sampleno" = "id_sampleno"))
+
+all(mc_resample$id.x == mc_resample$id.y) # Check if ID columns are the same: yes
+
+mc_resample <- mc_resample %>%
+               select(-id.y) %>% # remove duplicate ID
+               rename(id = id.x) %>% # rename ID variable
+               mutate(resampled = 1) # indicator for resampled observations for merging
+```
+
+### Save data
+
+```{r}
+save(mc_resample, file = "mc_resample.Rdata") # save as backup
+```
+
+## Merging original and re-sampled datasets
+
+```{r}
+mc_GLES2017 <- read.csv("GPT4PO_manual_checked.csv") # read in manually checked data
+# mc_resample should be in environment from resampling script, otherwise saved as mc_resample.Rdata
+
+mc_GLES2017_final <- bind_rows(mc_GLES2017, mc_resample) # merge datasets
+
+sum(is.na(mc_GLES2017_final$sample_no)) # check whether we have sample_no for each row
+
+mc_GLES2017_final <- mc_GLES2017_final %>% 
+  mutate(id_sampleno = paste(id, sample_no, sep = "_")) %>% # create unique identifier per sample for each ID
+  mutate(resampled = ifelse(is.na(resampled), 0, resampled))
+```
+
+# Vote Matching
+
+
+Create a function that
+- checks whether any of the strings in match_completions$matched match with GLES2017$vote (match rows via "id") and records this as 1 if matching, 0 otherwise.
+- again, case insensitive and counting partial strings
+- see below for what is considered a match (GLES2017$vote | match_completions$matched):
+
+CDU/CSU | "CDU" OR "CSU" OR "CDU/CSU" OR "Union" OR "christ"
+SPD | "SPD" OR "sozialdemokrat"
+Bündnis 90/Die Grünen | "Grüne" OR "B90" OR "Bündnis" (besser "grün"?)
+FDP | "FDP" OR "freie" OR "liberal"
+Die Linke | "Linke" OR "links" (besser "link"?)
+AfD | "AfD" OR "Alternative"
+
+NEW
+Andere Partei | "Andere"
+Ungültig gewählt | "ungültig"
+Nicht gewählt | "nicht"
+
+## Help functions check_match
+
+```{r}
+#' check_match_party (helper)
+#'
+#' This function checks for matches between the vote and matched_new column of the joined dataframe mc_GLES2017_final
+#'
+#' @param mc_GLES2017_final The left-joined (by id and lfdn) dataframes of (matches_completions and GLES2017) and (matches_completions_resample and resample)
+#'
+#' @return A logical list indicating if vote and matched column match
+#'
+#' @examples
+#' df <- data.frame(matched = c("This is CDU/CSU", "No match here", "Another SPD match"), vote = c("CDU/CSU", "FDP", "SPD"))
+#' check_match_cdu_csu(df)
+#' check_match_fdp(df)
+#' check_match_spd(df)
+
+# CDU/CSU 
+check_match_cdu_csu <- function (mc_GLES2017_final) {
+  pattern_cdu_csu <- paste0(".*", paste(c("CDU/CSU","CDU", "CSU", "Union", "christ"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_cdu_csu, ignore.case = TRUE)
+}
+# SPD
+check_match_spd <- function (mc_GLES2017_final) {
+  pattern_spd <- paste0(".*", paste(c("SPD", "sozialdemokrat"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_spd, ignore.case = TRUE)
+}
+# Grüne
+check_match_gruene <- function (mc_GLES2017_final) {
+  pattern_gruene <- paste0(".*", paste(c("Grüne", "B90", "Bündnis"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_gruene, ignore.case = TRUE)
+}
+# FDP 
+check_match_fdp <- function (mc_GLES2017_final) {
+  pattern_fdp <- paste0(".*", paste(c("FDP","freie", "liberal"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_fdp, ignore.case = TRUE)
+}
+# Die Linke
+check_match_linke <- function (mc_GLES2017_final) {
+  pattern_linke <- paste0(".*", paste(c("Linke","links"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_linke, ignore.case = TRUE)
+}
+# AFD
+check_match_afd <- function (mc_GLES2017_final) {
+  pattern_afd <- paste0(".*", paste(c("AfD","Alternative"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_afd, ignore.case = TRUE)
+}
+
+# Leah: add matches for "nicht", "ungültig" and "Andere"
+
+# Andere Partei
+check_match_andere <- function (mc_GLES2017_final) {
+  pattern_andere <- paste0(".*", paste("Andere", collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_andere, ignore.case = TRUE)
+}
+
+# Ungültig gewählt
+check_match_ung <- function (mc_GLES2017_final) {
+  pattern_ung <- paste0(".*", paste("ungültig", collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_ung, ignore.case = TRUE)
+}
+
+# Nicht gewählt
+check_match_nicht <- function (mc_GLES2017_final) {
+  pattern_nicht <- paste0(".*", paste("ungültig", collapse = "|"), ".*")
+  lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_nicht, ignore.case = TRUE)
+}
+
+```
+
+## Create match_voted outcome
+
+```{r}
+match_vote_outcome <-  case_when(
+    mc_GLES2017_final$vote %in% "CDU/CSU" ~ check_match_cdu_csu(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "SPD" ~ check_match_spd(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "Bündnis 90/Die Grünen" ~ check_match_gruene(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "FDP" ~ check_match_fdp(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "Die Linke" ~ check_match_linke(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "AfD" ~ check_match_afd(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "Andere Partei" ~ check_match_andere(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "Ungültig gewählt" ~ check_match_ung(mc_GLES2017_final),
+    mc_GLES2017_final$vote %in% "Nicht gewählt" ~ check_match_nicht(mc_GLES2017_final)
+)
+match_vote_outcome[which(unlist(lapply(match_vote_outcome, is.null)))] <- NA
+
+mc_GLES2017_final <- mc_GLES2017_final %>% 
+  mutate(match_vote_outcome = unlist(match_vote_outcome))
+
+```
+
+## Create vote_gpt variable
+
+```{r}
+
+#' Get GPT Votes
+#'
+#' This function assigns specified political party labels to each completion of ChatGPT based on the matched_new column.
+#' The function takes a dataframe \code{mc_GLES2017_final} as input and returns a 
+#' character vector \code{vote_gpt} with party labels for each vote.
+#' The function assumes that the input dataframe contains a column named \code{matched_new}.
+#'
+#' @param mc_GLES2017_final A dataframe containing voting data.
+#'
+#' @return A character vector \code{vote_gpt} with political party labels assigned to each vote.
+#'
+
+get_vote_gpt <- function(mc_GLES2017_final) {
+  assertDataFrame(mc_GLES2017_final)
+  assertCharacter(mc_GLES2017_final$matched_new)
+  vote_gpt <- character(length = length(mc_GLES2017_final$matched_new))
+  vote_gpt[which(unlist(check_match_cdu_csu(mc_GLES2017_final)))] <- "CDU/CSU"
+  vote_gpt[which(unlist(check_match_spd(mc_GLES2017_final)))] <- "SPD"
+  vote_gpt[which(unlist(check_match_gruene(mc_GLES2017_final)))] <- "Bündnis 90/Die Grünen"
+  vote_gpt[which(unlist(check_match_fdp(mc_GLES2017_final)))] <- "FDP"
+  vote_gpt[which(unlist(check_match_linke(mc_GLES2017_final)))] <- "Die Linke"
+  vote_gpt[which(unlist(check_match_afd(mc_GLES2017_final)))] <- "AfD"
+  vote_gpt[which(unlist(check_match_andere(mc_GLES2017_final)))] <- "Andere Partei"
+  vote_gpt[which(unlist(check_match_ung(mc_GLES2017_final)))] <- "Ungültig gewählt"
+  vote_gpt[which(unlist(check_match_nicht(mc_GLES2017_final)))] <- "Nicht gewählt"
+  return(vote_gpt)
+}
+
+mc_GLES2017_final <- mc_GLES2017_final %>% 
+  mutate(vote_gpt = get_vote_gpt(mc_GLES2017_final)) %>%
+  mutate(vote_gpt = ifelse(vote_gpt == "", NA, vote_gpt)) # replace empty strings with NA
+```
+
+
+# Save final dataset!
+
+```{r}
+save(mc_GLES2017_final, file = "GPT4PO_data_complete_2017.Rdata") # save final dataset
+```
+
