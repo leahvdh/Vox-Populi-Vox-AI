@@ -337,7 +337,7 @@ metadata_df<- output[[2]] # extract metadata
 ## Save data
 
 ```{r}
-save(GLES2017, prompts_df,completions_df, metadata_df, file = "GPT_prompt_completion.Rdata") # save input and output
+save(GLES2017, prompts_df, completions_df, metadata_df, file = "GPT_prompt_completion.Rdata") # save input and output
 ```
 
 # Keyword Matching
@@ -517,7 +517,7 @@ write.csv(mc_GLES2017, file = "GPT4PO_manualchecks.csv", col.names = T, row.name
 ```{r}
 # Import data
 resample <- read.csv("GPT4PO_manual_resample.csv") # read in data for resampling
-resample <- resample %>% mutate(id_sampleno = paste(id, sample_no, sep = "_")) # should have been used as ID-variable in API, but will be used ot match later
+resample <- resample %>% mutate(id_sampleno = paste(id, sample_no, sep = "_")) # should have been used as ID-variable in API, but will be used to match later
 ```
 
 ### Feed prompts and store completions
@@ -624,14 +624,12 @@ save(mc_resample, file = "mc_resample.Rdata") # save as backup
 ```{r}
 mc_GLES2017 <- read.csv("GPT4PO_manual_checked.csv") # read in manually checked data
 # mc_resample should be in environment from resampling script, otherwise saved as mc_resample.Rdata
+mc_GLES2017 <- mc_GLES2017 %>% 
+  mutate(id_sampleno = paste(id, sample_no, sep = "_")) %>% # create unique identifier per sample for each ID)
+  mutate(resampled = 1)
 
 mc_GLES2017_final <- bind_rows(mc_GLES2017, mc_resample) # merge datasets
 
-sum(is.na(mc_GLES2017_final$sample_no)) # check whether we have sample_no for each row
-
-mc_GLES2017_final <- mc_GLES2017_final %>% 
-  mutate(id_sampleno = paste(id, sample_no, sep = "_")) %>% # create unique identifier per sample for each ID
-  mutate(resampled = ifelse(is.na(resampled), 0, resampled))
 ```
 
 # Vote Matching
@@ -718,7 +716,7 @@ check_match_ung <- function (mc_GLES2017_final) {
 
 # Nicht gewählt
 check_match_nicht <- function (mc_GLES2017_final) {
-  pattern_nicht <- paste0(".*", paste("ungültig", collapse = "|"), ".*")
+  pattern_nicht <- paste0(".*", paste("nicht", collapse = "|"), ".*")
   lapply(mc_GLES2017_final$matched_new, grepl, pattern = pattern_nicht, ignore.case = TRUE)
 }
 
@@ -780,6 +778,8 @@ get_vote_gpt <- function(mc_GLES2017_final) {
 mc_GLES2017_final <- mc_GLES2017_final %>% 
   mutate(vote_gpt = get_vote_gpt(mc_GLES2017_final)) %>%
   mutate(vote_gpt = ifelse(vote_gpt == "", NA, vote_gpt)) # replace empty strings with NA
+
+
 ```
 
 
