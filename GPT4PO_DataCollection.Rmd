@@ -619,17 +619,108 @@ mc_resample <- mc_resample %>%
 save(mc_resample, file = "mc_resample.Rdata") # save as backup
 ```
 
+### Export merged data for second resample
+
+```{r}
+# for separation of NAs (second resampling)
+write.csv(mc_resample, file = "GPT4PO_manualchecks_resample_merged.csv")
+```
+
+## Resample second time
+
+### Import data
+
+```{r}
+# Import data
+resample_2 <- read.csv("GPT4PO_manual_resample_2.csv") # read in data for resampling
+```
+
+### Feed prompts and store completions
+
+```{r}
+output_resample_2 <- gpt3_completions(
+                    prompt_var = resample_2$prompt
+                  , id_var = resample_2$id_sampleno
+                  , param_model = 'text-davinci-003'
+                  , param_output_type = "complete"
+                  , param_logprobs = 5
+                  , param_suffix = NULL
+                  , param_max_tokens = 30
+                  , param_n = 1
+                  , param_temperature = 0.9
+                  , param_top_p = 1
+                  , param_presence_penalty = 0 
+                  , param_frequency_penalty = 0 
+                  , param_best_of = 1
+                  )
+
+completions_resample_2_df <- output_resample_2[[1]] # extract completions
+
+metadata_resample_2_df<- output_resample_2[[2]] # extract metadata
+
+save(resample_2, completions_resample_2_df, metadata_resample_2_df, file = "GPT_prompt_resample_2.Rdata") # save input and output
+```
+
+### Match 1: Completions - Party Keywords
+
+```{r}
+get_matches_vector(keywords = sequences, column = completions_resample_2_df$gpt3)
+
+get_check_values(c("Erststimme", "ungültig", "nicht"), get_matches_vector(keywords = sequences, column = completions_resample_2_df$gpt3))
+
+match_completions_resample_2 <- create_match_completions_df(completions_resample_2_df, keywords = sequences, check_keywords = c("Erststimme", "ungültig", "nicht"))
+```
+
+### Create mc_resample_2
+
+```{r}
+# Joins matching and GLES datasets by ID to compare match with vote
+mc_resample_2 <- left_join(match_completions_resample_2, resample_2, by = c("id" = "id_sampleno"))
+
+mc_resample_2 <- mc_resample_2 %>%
+               rename(id_sampleno = id) %>%
+               rename(id = id.y)
+```
+
+### Save data
+
+```{r}
+save(mc_resample_2, file = "mc_resample_2.Rdata") # save as backup
+```
+
+### Export for manual checks
+
+```{r}
+# Export for manual checks
+write.csv(mc_resample_2, file = "GPT4PO_manualchecks_resample_2.csv")
+```
+
+!!! Manual checks offline !!!
+
+### Import checked resampled data
+
+```{r}
+mc_resample_2_checked <- read.csv("GPT4PO_manual_resample_2_checked.csv") # read in checked data
+```
+
 ## Merging original and re-sampled datasets
 
 ```{r}
+# First completion
 mc_GLES2017 <- read.csv("GPT4PO_manual_checked.csv") # read in manually checked data
 # mc_resample should be in environment from resampling script, otherwise saved as mc_resample.Rdata
 mc_GLES2017 <- mc_GLES2017 %>% 
   mutate(id_sampleno = paste(id, sample_no, sep = "_")) %>% # create unique identifier per sample for each ID)
-  mutate(resampled = 1)
+  mutate(completion_1 = NA, matched_1 = NA, check_manually_1 = NA, manipulated_1 = NA, matched_new_1 = NA, resampled_1 = NA, completion_2 = NA, matched_2 = NA, check_manually_2 = NA, manipulated_2 = NA, matched_new_2 = NA, resampled_2 = NA)
 
-mc_GLES2017_final <- bind_rows(mc_GLES2017, mc_resample) # merge datasets
+# Second completion
+mc_resample_1_checked <- read.csv("GPT4PO_manual_resample_merged_checked.csv")
+mc_resample_1_checked <- mc_resample_1_checked %>%
+  mutate(completion_2 = NA, matched_2 = NA, check_manually_2 = NA, manipulated_2 = NA, matched_new_2 = NA, resampled_2 = NA)
 
+# Third completion see above (mc_resample_2_checked)
+
+mc_GLES2017_final <- bind_rows(mc_GLES2017, mc_resample_1_checked, mc_resample_2_checked) # merge datasets
 ```
 
 # Vote Matching
@@ -778,10 +869,7 @@ get_vote_gpt <- function(mc_GLES2017_final) {
 mc_GLES2017_final <- mc_GLES2017_final %>% 
   mutate(vote_gpt = get_vote_gpt(mc_GLES2017_final)) %>%
   mutate(vote_gpt = ifelse(vote_gpt == "", NA, vote_gpt)) # replace empty strings with NA
-
-
 ```
-
 
 # Save final dataset!
 
