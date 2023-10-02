@@ -310,9 +310,9 @@ prompts_df <- data.frame(
               prompt = GLES2017$prompt)
 ```
 
-## Feed prompts and store completions
+## $$$ Feed prompts and store completions $$$
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 output <- gpt3_completions(
                     prompt_var = prompts_df$prompt
                   , id_var = prompts_df$prompt_id
@@ -347,8 +347,6 @@ save(GLES2017, prompts_df, completions_df, metadata_df, file = "GPT_prompt_compl
 ```{r}
 sequences <- c("SPD", "CDU/CSU","CDU", "CSU", "Union", "FDP", "AfD", "Linke", "Grüne", "Bündnis", "B90", "sozialdemokrat", "christ", "freie", "liberal", "Alternative", "links", "nicht", "ungültig", "Erststimme")
 check_sequences <- c("nicht", "ungültig", "Erststimme")
-
-# QUESTION: Change to "Die Linke" and "Linkspartei" and add "links/link" without those strings to flags?
 
 # This list defines the categories for the parties. If at least two words (one each) of two different categories are in one sentence, that sentence gets flagged for manual checking.
 sequences_list <- list(spd = c("SPD", "sozialdemokrat"),
@@ -877,3 +875,407 @@ mc_GLES2017_final <- mc_GLES2017_final %>%
 save(mc_GLES2017_final, file = "GPT4PO_data_complete_2017.Rdata") # save final dataset
 ```
 
+# ROBUSTNESS: GPT Completion Collection for non-imputed cases
+
+```{r}
+# Filter only previously imputed cases for re-prompting
+GLES2017_nonimputed <- GLES2017_A %>%
+                       filter(lfdn %in% GLES2017$lfdn, GLES2017$imputed == 1)
+
+# Split complete and imputed cases for comparison
+mc_GLES2017_complete <- mc_GLES2017_final %>%
+                        filter(imputed == 0)
+
+mc_GLES2017_imputed <- mc_GLES2017_final %>%
+                        filter(imputed == 1)
+
+```
+
+## Create prompt dataset from GLES data
+
+```{r}
+prompts_df_robustness <- data.frame(
+                         prompt_id = GLES2017_nonimputed$lfdn,
+                         prompt = GLES2017_nonimputed$prompt_A)
+```
+
+## $$$ Feed prompts and store completions $$$
+
+```{r eval=FALSE, include=FALSE}
+output_robustness <- gpt3_completions(
+                    prompt_var = prompts_df_robustness$prompt
+                  , id_var = prompts_df_robustness$prompt_id
+                  , param_model = 'text-davinci-003'
+                  , param_output_type = "complete" # save both completion and metadata
+                  , param_logprobs = 5 # numeric. deprecated :(
+                  , param_suffix = NULL #character. The suffix that comes after a completion of inserted text
+                  , param_max_tokens = 30 # 1 token is about 4 characters in English text. Test used between 10 and 50
+                  , param_n = 5 # number of completions. Prompt tokens are only charged once.
+                  , param_temperature = 0.9 # specifying the sampling strategy of the possible completions. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 for ones with a well-defined answer. We generally recommend altering this or top_p but not both.
+                  , param_top_p = 1 # specifying sampling strategy as an alternative to the temperature sampling where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. We generally recommend altering this or temperature but not both.
+                  , param_presence_penalty = 0 # numeric (default: 0) between -2.00 and +2.00 to determine the penalisation of repetitiveness if a token already exists. Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+                  , param_frequency_penalty = 0 # see presence_penalty
+                  , param_best_of = 1 # numeric (default: 1) that determines the space of possibilities from which to select the completion with the highest probability. Generates best_of completions server-side and returns the "best" (the one with the highest log probability per token.
+                  )
+
+completions_df_robustness <- output_robustness[[1]] # extract completions
+
+metadata_df_robustness <- output_robustness[[2]] # extract metadata
+```
+
+## Save data
+
+```{r}
+save(GLES2017_nonimputed, prompts_df_robustness, completions_df_robustness, metadata_df_robustness, file = "GPT_prompt_completion_robustness.Rdata") # save input and output
+```
+
+## Match 1: Completions - Party Keywords
+
+```{r}
+get_matches_vector(keywords = sequences, column = completions_df_robustness$gpt3)
+
+get_check_values(c("Erststimme", "ungültig", "nicht"), get_matches_vector(keywords = sequences, column = completions_df_robustness$gpt3))
+
+match_completions_robustness <- create_match_completions_df(completions_df_robustness, keywords = sequences, check_keywords = c("Erststimme", "ungültig", "nicht"))
+```
+
+## Create mc_GLES2017_nonimputed
+
+```{r}
+# Joins matching and GLES datasets by ID to compare match with vote
+mc_GLES2017_nonimputed <- left_join(match_completions_robustness, GLES2017_nonimputed, by = c("id" = "lfdn"))
+```
+
+## Export for manual checks
+
+```{r}
+# Export for manual checks
+write.csv(mc_GLES2017_nonimputed, file = "GPT4PO_manualchecks_robustness.csv", col.names = T, row.names = F)
+```
+
+!!! Manual checks offline !!!
+Create sample_no manually
+
+## Import data
+
+```{r}
+# Import data
+resample_robustness <- read.csv("GPT4PO_manual_robustness_resample.csv") # read in data for resampling
+resample_robustness <- resample_robustness %>% mutate(id_sampleno = paste(id, sample_no, sep = "_"))
+```
+
+## First resample
+
+### Feed prompts and store completions
+
+```{r}
+output_resample_robustness <- gpt3_completions(
+                    prompt_var = resample_robustness$prompt_A
+                  , id_var = resample_robustness$id_sampleno
+                  , param_model = 'text-davinci-003'
+                  , param_output_type = "complete"
+                  , param_logprobs = 5
+                  , param_suffix = NULL
+                  , param_max_tokens = 30
+                  , param_n = 1
+                  , param_temperature = 0.9
+                  , param_top_p = 1
+                  , param_presence_penalty = 0 
+                  , param_frequency_penalty = 0 
+                  , param_best_of = 1
+                  )
+
+completions_resample_df_robustness <- output_resample_robustness[[1]] # extract completions
+
+metadata_resample_df_robustness <- output_resample_robustness[[2]] # extract metadata
+
+save(resample_robustness, completions_resample_df_robustness, metadata_resample_df_robustness, file = "GPT_prompt_resample_robustness.Rdata") # save input and output
+```
+
+### Match 1: Completions - Party Keywords
+
+```{r}
+get_matches_vector(keywords = sequences, column = completions_resample_df_robustness$gpt3)
+
+get_check_values(c("Erststimme", "ungültig", "nicht"), get_matches_vector(keywords = sequences, column = completions_resample_df_robustness$gpt3))
+
+match_completions_resample_robustness <-  create_match_completions_df(completions_resample_df_robustness, keywords = sequences, check_keywords = c("Erststimme", "ungültig", "nicht"))
+```
+
+### Create mc_resample_nonimputed
+
+```{r}
+# Joins matching and GLES datasets by ID to compare match with vote
+match_completions_resample_robustness <- match_completions_resample_robustness %>%
+                                         rename(id_sampleno = id)
+
+resample_robustness <- resample_robustness %>%
+                       rename(completion_1 = completion,
+                              matched_1 = matched,
+                              check_manually_1 = check_manually,
+                              manipulated_1 = manipulated,
+                              matched_new_1 = matched_new)
+
+mc_resample_nonimputed <- left_join(match_completions_resample_robustness, resample_robustness, by = c("id_sampleno" = "id_sampleno"))
+
+mc_resample_nonimputed <- mc_resample_nonimputed %>%
+                          mutate(resampled = 1) # indicator for resampled observations for merging
+```
+
+### Save data
+
+```{r}
+save(mc_resample_nonimputed, file = "mc_resample_nonimputed.Rdata") # save as backup
+```
+
+### Export for manual checks
+
+```{r}
+# Export for manual checks
+write.csv(mc_resample_nonimputed, file = "GPT4PO_manualchecks_resample_robustness.csv")
+```
+
+!!! Manual checks offline !!!
+
+## Second resample
+
+### Import data
+
+```{r}
+# Import data
+resample_2_robustness <- read.csv("GPT4PO_manual_resample_2_robustness.csv") # read in data for resampling
+```
+
+### Feed prompts and store completions
+
+```{r}
+output_resample_2_robustness <- gpt3_completions(
+                    prompt_var = resample_2_robustness$prompt_A
+                  , id_var = resample_2_robustness$id_sampleno
+                  , param_model = 'text-davinci-003'
+                  , param_output_type = "complete"
+                  , param_logprobs = 5
+                  , param_suffix = NULL
+                  , param_max_tokens = 30
+                  , param_n = 1
+                  , param_temperature = 0.9
+                  , param_top_p = 1
+                  , param_presence_penalty = 0 
+                  , param_frequency_penalty = 0 
+                  , param_best_of = 1
+                  )
+
+completions_resample_2_df_robustness <- output_resample_2_robustness[[1]] # extract completions
+
+metadata_resample_2_df_robustness <- output_resample_2_robustness[[2]] # extract metadata
+
+save(resample_2_robustness, completions_resample_2_df_robustness, metadata_resample_2_df_robustness, file = "GPT_prompt_resample_2_robustness.Rdata") # save input and output
+```
+
+### Match 1: Completions - Party Keywords
+
+```{r}
+get_matches_vector(keywords = sequences, column = completions_resample_2_df_robustness$gpt3)
+
+get_check_values(c("Erststimme", "ungültig", "nicht"), get_matches_vector(keywords = sequences, column = completions_resample_2_df_robustness$gpt3))
+
+match_completions_resample_2_robustness <- create_match_completions_df(completions_resample_2_df_robustness, keywords = sequences, check_keywords = c("Erststimme", "ungültig", "nicht"))
+```
+
+### Create mc_resample_2_nonimputed
+
+```{r}
+# Joins matching and GLES datasets by ID to compare match with vote
+match_completions_resample_2_robustness <- match_completions_resample_2_robustness %>%
+                                           rename(id_sampleno = id)
+
+resample_2_robustness <- resample_2_robustness %>%
+                       rename(completion_2 = completion,
+                              matched_2 = matched,
+                              check_manually_2 = check_manually,
+                              manipulated_2 = manipulated,
+                              matched_new_2 = matched_new)
+
+mc_resample_2_nonimputed <- left_join(match_completions_resample_2_robustness, resample_2_robustness, by = c("id_sampleno" = "id_sampleno"))
+```
+
+### Save data
+
+```{r}
+save(mc_resample_2_nonimputed, file = "mc_resample_2_nonimputed.Rdata") # save as backup
+```
+
+### Export for manual checks
+
+```{r}
+# Export for manual checks
+write.csv(mc_resample_2_nonimputed, file = "GPT4PO_manualchecks_resample_2_robustness.csv")
+```
+
+!!! Manual checks offline !!!
+
+### Import checked resampled data
+
+```{r}
+mc_resample_2_checked_nonimputed <- read.csv("GPT4PO_manual_resample_2_checked_robustness.csv") # read in checked data
+
+mc_resample_2_checked_nonimputed <- mc_resample_2_checked_nonimputed %>%
+                                    mutate(resampled_2 = 1)
+```
+
+## Merging original and re-sampled datasets
+
+```{r}
+# First completion
+mc_GLES2017_nonimputed <- read.csv("GPT4PO_manual_robustness_checked.csv") # read in manually checked data
+# mc_resample_nonimputed should be in environment from resampling script, otherwise saved as mc_resample.Rdata
+mc_GLES2017_nonimputed <- mc_GLES2017_nonimputed %>% 
+  mutate(id_sampleno = paste(id, sample_no, sep = "_")) %>% # create unique identifier per sample for each ID)
+  mutate(completion_1 = NA, matched_1 = NA, check_manually_1 = NA, manipulated_1 = NA, matched_new_1 = NA, resampled_1 = NA, completion_2 = NA, matched_2 = NA, check_manually_2 = NA, manipulated_2 = NA, matched_new_2 = NA, resampled_2 = NA)
+
+# Second completion
+mc_resample_1_checked_nonimputed <- read.csv("GPT4PO_manual_resample_checked_robustness.csv")
+mc_resample_1_checked_nonimputed <- mc_resample_1_checked_nonimputed %>%
+  mutate(completion_2 = NA, matched_2 = NA, check_manually_2 = NA, manipulated_2 = NA, matched_new_2 = NA, resampled_2 = NA) %>%
+  rename(resampled_1 = resampled)
+
+# Third completion see above (mc_resample_2_checked_nonimputed)
+
+mc_GLES2017_final_nonimputed <- bind_rows(mc_GLES2017_nonimputed, mc_resample_1_checked_nonimputed, mc_resample_2_checked_nonimputed) # merge datasets
+```
+
+## Vote Matching
+
+### Help functions check_match
+
+```{r}
+#' check_match_party (helper)
+#'
+#' This function checks for matches between the vote and matched_new column of the joined dataframe mc_GLES2017_final_nonimputed
+#'
+#' @param mc_GLES2017_final The left-joined (by id and lfdn) dataframes of (matches_completions and GLES2017) and (matches_completions_resample and resample)
+#'
+#' @return A logical list indicating if vote and matched column match
+#'
+#' @examples
+#' df <- data.frame(matched = c("This is CDU/CSU", "No match here", "Another SPD match"), vote = c("CDU/CSU", "FDP", "SPD"))
+#' check_match_cdu_csu(df)
+#' check_match_fdp(df)
+#' check_match_spd(df)
+
+# CDU/CSU 
+check_match_cdu_csu <- function (mc_GLES2017_final_nonimputed) {
+  pattern_cdu_csu <- paste0(".*", paste(c("CDU/CSU","CDU", "CSU", "Union", "christ"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final_nonimputed$matched_new, grepl, pattern = pattern_cdu_csu, ignore.case = TRUE)
+}
+# SPD
+check_match_spd <- function (mc_GLES2017_final_nonimputed) {
+  pattern_spd <- paste0(".*", paste(c("SPD", "sozialdemokrat"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final_nonimputed$matched_new, grepl, pattern = pattern_spd, ignore.case = TRUE)
+}
+# Grüne
+check_match_gruene <- function (mc_GLES2017_final_nonimputed) {
+  pattern_gruene <- paste0(".*", paste(c("Grüne", "B90", "Bündnis"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final_nonimputed$matched_new, grepl, pattern = pattern_gruene, ignore.case = TRUE)
+}
+# FDP 
+check_match_fdp <- function (mc_GLES2017_final_nonimputed) {
+  pattern_fdp <- paste0(".*", paste(c("FDP","freie", "liberal"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final_nonimputed$matched_new, grepl, pattern = pattern_fdp, ignore.case = TRUE)
+}
+# Die Linke
+check_match_linke <- function (mc_GLES2017_final_nonimputed) {
+  pattern_linke <- paste0(".*", paste(c("Linke","links"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final_nonimputed$matched_new, grepl, pattern = pattern_linke, ignore.case = TRUE)
+}
+# AFD
+check_match_afd <- function (mc_GLES2017_final_nonimputed) {
+  pattern_afd <- paste0(".*", paste(c("AfD","Alternative"), collapse = "|"), ".*")
+  lapply(mc_GLES2017_final_nonimputed$matched_new, grepl, pattern = pattern_afd, ignore.case = TRUE)
+}
+
+# Leah: add matches for "nicht", "ungültig" and "Andere"
+
+# Andere Partei
+check_match_andere <- function (mc_GLES2017_final_nonimputed) {
+  pattern_andere <- paste0(".*", paste("Andere", collapse = "|"), ".*")
+  lapply(mc_GLES2017_final_nonimputed$matched_new, grepl, pattern = pattern_andere, ignore.case = TRUE)
+}
+
+# Ungültig gewählt
+check_match_ung <- function (mc_GLES2017_final_nonimputed) {
+  pattern_ung <- paste0(".*", paste("ungültig", collapse = "|"), ".*")
+  lapply(mc_GLES2017_final_nonimputed$matched_new, grepl, pattern = pattern_ung, ignore.case = TRUE)
+}
+
+# Nicht gewählt
+check_match_nicht <- function (mc_GLES2017_final_nonimputed) {
+  pattern_nicht <- paste0(".*", paste("nicht", collapse = "|"), ".*")
+  lapply(mc_GLES2017_final_nonimputed$matched_new, grepl, pattern = pattern_nicht, ignore.case = TRUE)
+}
+
+```
+
+## Create match_voted outcome
+
+```{r}
+match_vote_outcome_nonimputed <-  case_when(
+    mc_GLES2017_final_nonimputed$vote %in% "CDU/CSU" ~ check_match_cdu_csu(mc_GLES2017_final_nonimputed),
+    mc_GLES2017_final_nonimputed$vote %in% "SPD" ~ check_match_spd(mc_GLES2017_final_nonimputed),
+    mc_GLES2017_final_nonimputed$vote %in% "Bündnis 90/Die Grünen" ~ check_match_gruene(mc_GLES2017_final_nonimputed),
+    mc_GLES2017_final_nonimputed$vote %in% "FDP" ~ check_match_fdp(mc_GLES2017_final_nonimputed),
+    mc_GLES2017_final_nonimputed$vote %in% "Die Linke" ~ check_match_linke(mc_GLES2017_final_nonimputed),
+    mc_GLES2017_final_nonimputed$vote %in% "AfD" ~ check_match_afd(mc_GLES2017_final_nonimputed),
+    mc_GLES2017_final_nonimputed$vote %in% "Andere Partei" ~ check_match_andere(mc_GLES2017_final_nonimputed),
+    mc_GLES2017_final_nonimputed$vote %in% "Ungültig gewählt" ~ check_match_ung(mc_GLES2017_final_nonimputed),
+    mc_GLES2017_final_nonimputed$vote %in% "Nicht gewählt" ~ check_match_nicht(mc_GLES2017_final_nonimputed)
+)
+match_vote_outcome_nonimputed[which(unlist(lapply(match_vote_outcome_nonimputed, is.null)))] <- NA
+
+mc_GLES2017_final_nonimputed <- mc_GLES2017_final_nonimputed %>% 
+  mutate(match_vote_outcome = unlist(match_vote_outcome_nonimputed))
+
+```
+
+## Create vote_gpt variable
+
+```{r}
+
+#' Get GPT Votes
+#'
+#' This function assigns specified political party labels to each completion of ChatGPT based on the matched_new column.
+#' The function takes a dataframe \code{mc_GLES2017_final_nonimputed} as input and returns a 
+#' character vector \code{vote_gpt} with party labels for each vote.
+#' The function assumes that the input dataframe contains a column named \code{matched_new}.
+#'
+#' @param mc_GLES2017_final_nonimputed A dataframe containing voting data.
+#'
+#' @return A character vector \code{vote_gpt} with political party labels assigned to each vote.
+#'
+
+get_vote_gpt <- function(mc_GLES2017_final_nonimputed) {
+  assertDataFrame(mc_GLES2017_final_nonimputed)
+  assertCharacter(mc_GLES2017_final_nonimputed$matched_new)
+  vote_gpt <- character(length = length(mc_GLES2017_final_nonimputed$matched_new))
+  vote_gpt[which(unlist(check_match_cdu_csu(mc_GLES2017_final_nonimputed)))] <- "CDU/CSU"
+  vote_gpt[which(unlist(check_match_spd(mc_GLES2017_final_nonimputed)))] <- "SPD"
+  vote_gpt[which(unlist(check_match_gruene(mc_GLES2017_final_nonimputed)))] <- "Bündnis 90/Die Grünen"
+  vote_gpt[which(unlist(check_match_fdp(mc_GLES2017_final_nonimputed)))] <- "FDP"
+  vote_gpt[which(unlist(check_match_linke(mc_GLES2017_final_nonimputed)))] <- "Die Linke"
+  vote_gpt[which(unlist(check_match_afd(mc_GLES2017_final_nonimputed)))] <- "AfD"
+  vote_gpt[which(unlist(check_match_andere(mc_GLES2017_final_nonimputed)))] <- "Andere Partei"
+  vote_gpt[which(unlist(check_match_ung(mc_GLES2017_final_nonimputed)))] <- "Ungültig gewählt"
+  vote_gpt[which(unlist(check_match_nicht(mc_GLES2017_final_nonimputed)))] <- "Nicht gewählt"
+  return(vote_gpt)
+}
+
+mc_GLES2017_final_nonimputed <- mc_GLES2017_final_nonimputed %>% 
+  mutate(vote_gpt = get_vote_gpt(mc_GLES2017_final_nonimputed)) %>%
+  mutate(vote_gpt = ifelse(vote_gpt == "", NA, vote_gpt)) # replace empty strings with NA
+```
+
+# Save final dataset!
+
+```{r}
+save(mc_GLES2017_final_nonimputed, file = "GPT4PO_data_robustness_2017.Rdata") # save final dataset
+```
