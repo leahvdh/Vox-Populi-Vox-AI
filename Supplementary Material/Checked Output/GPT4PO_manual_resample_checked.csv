@@ -1,0 +1,1752 @@
+id,completion,matched,check_manually,manipulated,matched_new
+6, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+7, meine Stimme der SPD gegeben und meine Zweitstimme der Grünen Party.,SPD Grünen,1,1,Grünen
+15," gewählt.
+
+Ich habe 2017 für Die Linke gewählt.",Linke,0,0,Linke
+18," gewählt.
+
+Ich habe meine Zweitstimme der FDP gegeben.",FDP,0,0,FDP
+18, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+20, meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+22, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+22, nicht gewählt.,nicht,1,0,nicht
+23, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+24,2017 zur Bundestagswahl gewählt und meine Zweitstimme der Partei CDU/CSU ge,CDU/CSU,0,0,CDU/CSU
+29, nicht gewählt.,nicht,1,0,nicht
+30, mit meiner ersten Stimme gewählt und mit meiner zweiten Stimme die Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+30, 2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+30, 2017 nicht gewählt.,nicht,1,0,nicht
+36, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+36," gewählt.
+
+Ich habe 2017 meine Zweitstimme der Partei Bündnis 90/Die",Bündnis,0,0,Bündnis
+37, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+39, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+44, bei der Bundestagswahl 2017 meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+46, meine Stimme der SPD gegeben.,SPD,0,0,SPD
+47, nicht gewählt.,nicht,1,0,nicht
+50, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+51," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 die FDP gewählt und",FDP,0,0,FDP
+55, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+55, meine Stimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+56," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 gewählt und meine Z",NA,0,0,NA
+59, meine Stimme abgegeben. Meine Zweitstimme habe ich der Union (CDU/CSU) ge,Union CDU/CSU,0,0,Union CDU/CSU
+59, meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+64, bei der Bundestagswahl 2017 meine Erststimme der AfD und meine Zweitstimme der CDU ge,Erststimme AfD CDU,1,1,CDU
+65, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+68," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 für die SPD meine Erst-",SPD,0,0,SPD
+68, 2017 gewählt und meine Zweitstimme der Partei Die Grünen gegeben.,Grünen,0,0,Grünen
+69,2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei [INSERT]ge,NA,0,0,NA
+70, meine Erststimme der FDP und meine Zweitstimme der CDU gegeben.,Erststimme FDP CDU,1,1,CDU
+75, 2017 meine Erststimme der SPD und meine Zweitstimme der Grünen gegeben.,Erststimme SPD Grünen,1,1,Grünen
+79, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+80, meine Stimme der SPD gegeben.,SPD,0,0,SPD
+81, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+81, 2017 zur Bundestagswahl gewählt und meine Zweitstimme der Partei [INSERT] gege,NA,0,0,NA
+82, in der Bundestagswahl 2017 für Die Linke gestimmt.,Linke,0,0,Linke
+85," gewählt.
+
+Ich habe Bündnis 90/Die Grünen mit meiner Zweitstimme",Bündnis Grünen,0,0,Bündnis Grünen
+86," gewählt. 
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt und",NA,0,0,NA
+87, in der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben,Linke,0,0,Linke
+89, meine Stimme abgegeben.,NA,0,0,NA
+90, meine Stimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+91, meine Stimme gegeben.,NA,0,0,NA
+95, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+98," gewählt.
+
+Ich habe nicht gewählt.",nicht,1,0,nicht
+101, gewählt. Meine Zweitstimme galt der Partei Bündnis 90/Die Grünen.,Bündnis Grünen,0,0,Bündnis Grünen
+101, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+104, im Jahr 2017 gewählt und meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+104, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+104, meine Stimme abgegeben. Ich habe meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+106, nicht gewählt.,nicht,1,0,nicht
+106, 2017 gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+106, meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+106, nicht gewählt.,nicht,1,0,nicht
+107," nicht gewählt, weil ich unentschieden und unzufrieden war mit den Kandidaten der",nicht,1,0,nicht
+108," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 meine Stimme für die SPD und",SPD,0,0,SPD
+111, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+117, nicht gewählt.,nicht,1,0,nicht
+121, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+122," gewählt.
+
+Ich habe meine Zweitstimme der SPD gegeben.",SPD,0,0,SPD
+122, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+123, für die SPD gewählt.,SPD,0,0,SPD
+126, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+127, gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+130, 2017 gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grüne gegeben,Bündnis Grüne,0,0,Bündnis Grüne
+132," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 für die Sozialdemokrat",Sozialdemokrat,0,0,Sozialdemokrat
+132," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 gewählt und meine Z",NA,0,0,NA
+133, nicht gewählt.,nicht,1,0,nicht
+133, 2017 bei der Bundestagswahl nicht gewählt.,nicht,1,0,nicht
+134, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+134, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+135, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+140, bei der Bundestagswahl 2017 meine Stimme abgegeben und meine Zweitstimme der Partei Bü,NA,0,1,Bündnis
+142, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+144, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+150, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+151, meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+152, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+152,2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+153, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+156, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+156, meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+156, meine Stimme gegen die AfD und für die SPD abgegeben.,AfD SPD,1,1,SPD
+157, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+157, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme gegeben an die Grünen,Grünen,0,0,Grünen
+157, 2017 gewählt und meine Zweitstimme der Partei Die Grünen gegeben.,Grünen,0,0,Grünen
+160, meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+160, meine Stimme der AfD gegeben.,AfD,0,0,AfD
+165, 2017 nicht an der Bundestagswahl teilgenommen.,nicht,1,0,nicht
+172, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+174, für die SPD gestimmt.,SPD,0,0,SPD
+174," gewählt.
+
+Ich habe 2017 für die SPD gewählt. Meine Zweitstimme",SPD,0,0,SPD
+175, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+182, gewählt.,NA,0,0,NA
+182, 2017 bei der Bundestagswahl meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+186, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [INSERT] gegeben,NA,0,0,NA
+192," gewählt.
+
+Ich habe meine Erststimme der CDU/CSU und meine Zweit",Erststimme CDU/CSU,1,1,NA
+192, meine Erststimme der CDU/CSU gegeben und meine Zweitstimme der AfD.,Erststimme CDU/CSU AfD,1,1,AfD
+196, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+196, gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+197, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+201, gewählt. Ich habe meine Erststimme der Partei Bündnis 90/Die Grünen gege,Erststimme Bündnis Grünen,1,1,NA
+204, 2017 gewählt und meine Zweitstimme an die [INSERT] gegeben.,NA,0,0,NA
+204, nicht gewählt.,nicht,1,0,nicht
+205, 2017 bei der Bundestagswahl gewählt. Meine Erststimme habe ich der CDU/CS,Erststimme CDU,1,1,NA
+206, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+206, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+207," meine Erststimme der Kleinpartei gegeben, die ich unterstütze, und meine Zweit",Erststimme,1,1,NA
+212, bei der Bundestagswahl 2017 meine Stimme abgegeben. Ich habe meine Erststimme der Partei,Erststimme,1,1,NA
+213, bei Bundestagswahl 2017 gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+214, 2017 gewählt und meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+214, nicht gewählt.,nicht,1,0,nicht
+216, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+216, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+219, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+220, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+222," gewählt.
+
+Ich habe Die Linke gewählt.",Linke,0,0,Linke
+225, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+239, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+251, 2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+252, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei FDP gegeben,FDP,0,0,FDP
+252, gewählt. Ich habe meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+263, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+270, nicht gewählt.,nicht,1,0,nicht
+271, nicht gewählt.,nicht,1,0,nicht
+272, meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+272, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+279," bei der Bundestagswahl 2017 nicht gewählt, da ich zu dem Zeitpunkt nicht wahl",nicht nicht,1,0,nicht nicht
+280,2017[/INSERT] bei der Bundestagswahl gewählt und meine Zweitstimme der CDU ge,CDU,0,0,CDU
+283, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+283," mit meiner Stimme unterstützt.
+
+Ich habe 2017 mit meiner Stimme die Linke unterst",Linke,0,0,Linke
+286, nicht gewählt und habe meine Stimme nicht einer Partei gegeben.,nicht nicht,1,0,nicht nicht
+292, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Partei Bündnis,Bündnis,0,0,Bündnis
+292, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+295, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+295, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die FDP gegeben.,FDP,0,0,FDP
+297, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+300, 2017 für die SPD gestimmt.,SPD,0,0,SPD
+303, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der [INSERT] Partei ge,NA,0,0,NA
+304, 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+304, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+306, noch nicht an der Bundestagswahl 2017 teilgenommen.,nicht,1,0,nicht
+307," gewählt.
+
+Ich habe 2017 meine Erststimme der SPD und meine Zweitstimme der",Erststimme SPD,1,1,NA
+310, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+311, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme gegeben an die Partei Die,NA,0,0,NA
+311," gewählt.
+
+Ich habe 2017 keine Partei gewählt.",NA,0,1,nicht
+311, im Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+312, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+313, bei der Bundestagswahl 2017 meine Stimme abgegeben.,NA,0,0,NA
+313, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die CDU/CSU ge,CDU/CSU,0,0,CDU/CSU
+313, bei der Bundestagswahl 2017 meine Stimme abgegeben und meine Zweitstimme der [INSERT],NA,0,0,NA
+313," gewählt.
+
+Es lässt sich nicht genau beurteilen, welcher Partei Sie",nicht,1,1,NA
+313," gewählt.
+
+Ja, ich habe 2017 bei der Bundestagswahl gewählt. Ich",NA,0,0,NA
+315, 2017 nicht gewählt.,nicht,1,0,nicht
+316," bei der Bundestagswahl 2017 gewählt. Meine Hauptstimme ging an eine Partei, die",NA,0,0,NA
+320, der FDP meine Zweitstimme gegeben.,FDP,0,0,FDP
+320, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+322, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+322, meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+328, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+328," gewählt.
+
+Ich habe der CDU/CSU meine Zweitstimme gegeben.",CDU/CSU,0,0,CDU/CSU
+329, gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+329," gewählt.
+
+Ich habe meine Zweitstimme der SPD gegeben.",SPD,0,0,SPD
+332,"weder bei der Bundestagswahl 2017 gewählt, noch habe ich irgendeiner Partei me",NA,0,1,nicht
+332, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+332, bei der Bundestagswahl 2017 meine Zweitstimme der Partei Grüne gegeben.,Grüne,0,0,Grüne
+336," mit meiner Erststimme gewählt, aber meine Zweitstimme habe ich nicht abgege",Erststimme nicht,1,1,ungültig
+338," gewählt.
+
+Ich habe 2017 meine Zweitstimme der Grünen Party gegeben.",Grünen,0,0,Grünen
+338," gewählt.
+
+Ich habe der Partei Die Linke meine Zweitstimme gegeben.",Linke,0,0,Linke
+345, meine Stimme der SPD gegeben.,SPD,0,0,SPD
+345, mit meiner Zweitstimme unterstützt.,NA,0,0,NA
+347, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+349, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+350, meine Stimme der SPD gegeben.,SPD,0,0,SPD
+354,PARTEI] gewählt.,NA,0,0,NA
+355, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+358," Stimme gewählt.
+
+Ja, Sie haben bei der Bundestagswahl 2017 gewählt.",NA,0,0,NA
+369, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+375, gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+377, 2017 bei der Bundestagswahl nicht gewählt.,nicht,1,0,nicht
+379, meine Stimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+379, meine Stimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+384, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei AfD gegeben,AfD,0,0,AfD
+385, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei FDP gegeben,FDP,0,0,FDP
+386, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+386, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+389,2017 nicht bei der Bundestagswahl gewählt.,nicht,1,0,nicht
+395," gewählt.
+
+Ich habe 2017 für die SPD gewählt; die SPD erhielt meine",SPD SPD,0,0,SPD SPD
+395, tatsächlich gewählt und meine Zweitstimme der Grünen Partei gegeben.,Grünen,0,0,Grünen
+398, meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+399, 2017 bei der Bundestagswahl meine Stimme abgegeben und meine Zweitstimme der Partei SPD ge,SPD,0,0,SPD
+399, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+403," Jahre in Deutschland gelebt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewä",NA,0,0,NA
+404," gewählt.
+
+Ich habe CDU/CSU gewählt.",CDU/CSU,0,0,CDU/CSU
+404, meine Erststimme der CDU/CSU und meine Zweitstimme der AfD gegeben.,Erststimme CDU/CSU AfD,1,1,AfD
+405," gewählt. Ja, ich habe bei der Bundestagswahl 2017 gewählt und meine Z",NA,0,0,NA
+407, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+408, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+409, meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+412," meine Stimme nicht abgegeben, da ich nicht wählen durfte.",nicht nicht,1,0,nicht nicht
+415, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+419, im Jahr 2017 meine Stimme der Partei Bündnis90/Die Grünen gegeben.,Bündnis90 Grünen,0,0,Bündnis90 Grünen
+425, beide Stimmen für die SPD abgegeben.,SPD,0,0,SPD
+431, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+431,2017[INSERT] leider nicht gewählt. Allerdings hätte ich meiner Meinung n,nicht,1,0,nicht
+432, tatsächlich bei der Bundestagswahl 2017 gewählt. Meine Erststimme ging an die,Erststimme,1,1,NA
+433, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+434, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+435, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+440, im Jahr 2017 nicht bei der Bundestagswahl gewählt.,nicht,1,0,nicht
+441, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+442, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+442," Bundesland zur Wahlzeit gewählt.
+
+Ja, ich habe bei der Bundestagswahl",NA,0,0,NA
+443, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+444, nicht gewählt.,nicht,1,0,nicht
+444, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+447, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+448, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+450, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei DIE LINKE ge,LINKE,0,0,LINKE
+453," gewählt und meine Zweitstimme [INSERT].
+
+Ich habe 2017 bei der Bundestag",NA,0,0,NA
+454," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 sowohl meine Erst- als",NA,0,0,NA
+456, gewählt.,NA,0,0,NA
+458," nicht gewählt, da ich zu der Zeit noch nicht wahlberechtigt war.",nicht nicht,1,0,nicht nicht
+458," gewählt.
+
+Ich habe sowohl meine Erststimme als auch meine Zweitstim",Erststimme,1,1,NA
+458, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+463, bei der Bundestagswahl 2017 meine Stimme nicht abgegeben.,nicht,1,0,nicht
+463, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Parteienalternative Bü,Parteienalternative,0,0,Parteienalternative
+464, beide Stimmen der Partei Die Linke gegeben.,Linke,0,0,Linke
+465, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+465, bei der Bundestagswahl 2017 meine Zweitstimme der Partei [PARTEI NAME] gegeben.,NA,0,0,NA
+466, 2017 meine Stimme der SPD gegeben.,SPD,0,0,SPD
+469,"Stimme gewählt. 
+
+Ja, ich habe bei der Bundestagswahl 2017 gewä",NA,0,0,NA
+471, meine Stimmen für die Grünen gegeben.,Grünen,0,0,Grünen
+471, 2017 für die Partei Bündnis 90/Die Grünen gewählt.,Bündnis Grünen,0,0,Bündnis Grünen
+477, meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+482," gewählt.
+
+Ich habe für die SPD meine Zweitstimme gegeben.",SPD,0,0,SPD
+482, gewählt.,NA,0,0,NA
+489, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+492, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+493, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+494, 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+495," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt und me",NA,0,0,NA
+501, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+501, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+506,wahl 2017 gewählt und meine Zweitstimme an die [INSERT] Partei gegeben.,NA,0,0,NA
+506, tatsächlich gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+508, gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+508, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+509, 2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+510," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt. Me",NA,0,0,NA
+511, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+513, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+515, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+516, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+517, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+518, gewählt.,NA,0,0,NA
+518, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+521, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+521, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei AfD gegeben,AfD,0,0,AfD
+526, 2017 gewählt und meine Zweitstimme der Partei Die Grünen gegeben.,Grünen,0,0,Grünen
+526, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+529, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+530, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+537, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die SPD gegeben.,SPD,0,0,SPD
+540, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+541, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+544," gewählt.
+
+Ich habe meine Zweitstimme der Partei Bündnis 90/Die Gr",Bündnis,0,0,Bündnis
+544, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+545, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+546, meine Stimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+547, nicht gewählt.,nicht,1,0,nicht
+548, meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+548, bei der Wahl 2017 meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+548, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+551, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+551, gewählt.,NA,0,0,NA
+552, meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+553," gewählt.
+
+Ja, ich habe 2017 bei der Bundestagswahl gewählt. Ich",NA,0,0,NA
+555, bei der Bundestagswahl 2017 meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+556," bei der Bundestagswahl 2017 gewählt, und meine Zweitstimme habe ich der Partei",NA,0,0,NA
+557, gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+560," meine Stimme gegeben.
+
+Ich habe meine Stimme der Partei Die Linke gegeben.",Linke,0,0,Linke
+562, nicht gewählt.,nicht,1,0,nicht
+563, meine Stimme der SPD und meine Zweitstimme der AfD gegeben.,SPD AfD,1,1,AfD
+568, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+568, meine Stimme gegeben.,NA,0,0,NA
+569, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+571, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+572, 2017 gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben,Bündnis Grünen,0,0,Bündnis Grünen
+573, bei der Bundestagswahl 2017 gewählt und meine Stimme an die FDP gegeben.,FDP,0,0,FDP
+577, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+583, gewählt und meine zweite Stimme der SPD gegeben.,SPD,0,0,SPD
+584, für die Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+585, wählen 2017. Meine Zweitstimme ging an die Partei Die Linke.,Linke,0,0,Linke
+585, gewählt.,NA,0,0,NA
+586, meiner Stimme gegeben.,NA,0,0,NA
+587, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+587, nicht gewählt.,nicht,1,0,nicht
+589, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+589, nicht gewählt.,nicht,1,0,nicht
+592, bei der Bundestagswahl 2017 meine Stimme gegeben und meine Zweitstimme der FDP gegeben,FDP,0,0,FDP
+592, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+594, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+594, gewählt und meine Zweitstimme der [INSERT] gegeben.,NA,0,0,NA
+598, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei „Die Grü,NA,0,1,Grünen
+599, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+599, 2017 bei der Bundestagswahl meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+601, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+601, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+601, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+607," Jahre lang das politische System des Landes unterstützt.
+
+Ja, ich habe bei der Bund",NA,0,0,NA
+608, nicht gewählt.,nicht,1,0,nicht
+613, meine Zweitstimme der Grünen gegeben.,Grünen,0,0,Grünen
+614, bei der Bundestagswahl 2017 gewählt. Ich habe meiner Erststimme der CDU zugew,Erststimme CDU,1,1,NA
+614," gewählt.
+
+Ich habe 2017 für die CDU gewählt und meine Zweitstim",CDU,0,0,CDU
+615, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+617, 2017 nicht gewählt.,nicht,1,0,nicht
+617, nicht gewählt.,nicht,1,0,nicht
+617, meine Stimme 2017 für die CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+618, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Alternative für Deutschland (,Alternative,0,0,Alternative
+618, in 2017 gewählt und meine Zweitstimme der Partei CDU gegeben.,CDU,0,0,CDU
+621, nicht gewählt.,nicht,1,0,nicht
+621, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+627, meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+629, bei der Bundestagswahl 2017 gewählt und ich habe meine Zweitstimme der Partei CD,NA,0,1,CDU
+630, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+634,2017 [INSERT]gegenwärtig an der Bundestagswahl teilgenommen und meine Zweitstim,NA,0,0,NA
+634," gewählt.
+
+Ich habe die CDU/CSU gewählt.",CDU/CSU,0,0,CDU/CSU
+638, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+639, nicht gewählt.,nicht,1,0,nicht
+640,"
+
+Ich habe bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Part",NA,0,0,NA
+642, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+642, nicht gewählt.,nicht,1,0,nicht
+648," gewählt.
+
+Ich habe für die SPD gewählt.",SPD,0,0,SPD
+651, meine Stimme der CDU/ CSU gegeben.,CDU CSU,0,0,CDU CSU
+652, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+654, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+656, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+657, PARTEI] gewählt.,NA,0,0,NA
+660, meine Zweitstimme der Partei Bündnis90/Die Grünen gegeben.,Bündnis90 Grünen,0,0,Bündnis90 Grünen
+661, meine Zweitstimme FDP gegeben.,FDP,0,0,FDP
+663, in die Bundestagswahl 2017 gewählt und meine Zweitstimme an die SPD gegeben.,SPD,0,0,SPD
+663, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+667, 2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+671, gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+673, nicht gewählt.,nicht,1,0,nicht
+676, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+676, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+677, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+677, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+678," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt und me",NA,0,0,NA
+678, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+679, nicht gewählt.,nicht,1,0,nicht
+679, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+679, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+681, meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+682, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+683, 2017 gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+683, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Sozialdemokratisc,Sozialdemokratisc,0,0,Sozialdemokratisc
+683, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+684, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+684," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt. Me",NA,0,0,NA
+685, 2017 für die CDU/CSU und die FDP meine Stimme abgegeben.,CDU/CSU FDP,1,1,FDP
+688, gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+690, bei der Bundestagswahl 2017 meine Stimme der SPD gegeben.,SPD,0,0,SPD
+691, 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+692, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+692," geleistet.
+
+Ich habe meine erste Stimme am 24. September 2017 der CDU/CSU und me",CDU/CSU,0,0,CDU/CSU
+693, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+695, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Union (CDU/CSU,Union CDU/CSU,0,0,Union CDU/CSU
+700, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+703," meine Stimme abgegeben, aber keiner Partei meine Zweitstimme.",NA,0,1,ungültig
+705, gewählt. Ich habe meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+706, meine Stimme abgegeben.,NA,0,0,NA
+708, bei der Bundestagswahl 2017 meine Stimme abgegeben und meine Zweitstimme der SPD gegeben,SPD,0,0,SPD
+708,2017 die SPD mit meiner Zweitstimme gewählt.,SPD,0,0,SPD
+711, meine Zweitstimme der Partei BÜNDNIS 90/DIE GRÜNEN gegeben.,BÜNDNIS GRÜNEN,0,0,BÜNDNIS GRÜNEN
+725," gewählt. 
+
+Ich habe nicht gewählt.",nicht,1,0,nicht
+727," gewählt.
+
+Ich habe der SPD meine Zweitstimme gegeben.",SPD,0,0,SPD
+727, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+729, meine Stimme der Grünen Partei gegeben.,Grünen,0,0,Grünen
+729, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+730, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+731," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt. Me",NA,0,0,NA
+731, meine Stimme der Grünen Partei gegeben.,Grünen,0,0,Grünen
+732, für die SPD gestimmt.,SPD,0,0,SPD
+733, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+736, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [INSERT] Partei ge,NA,0,0,NA
+736, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+736, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die FDP gegeben.,FDP,0,0,FDP
+745, meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+748, meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+750, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+754, im Jahr 2017 meine Stimme abgegeben. Ich habe meine Stimme der Partei [INSERT] gegeben,NA,0,0,NA
+758," gewählt.
+
+Ich habe meine Zweitstimme der Partei Bündnis 90 / Die Gr",Bündnis,0,0,Bündnis
+759, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+759, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+759, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+772, nicht gewählt.,nicht,1,0,nicht
+772," gewählt.
+
+Ich habe meine Zweitstimme der FDP gegeben.",FDP,0,0,FDP
+774, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+779, bei der Bundestagswahl 2017 meine Stimme abgegeben und habe meine Zweitstimme der Partei,NA,0,0,NA
+779, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+785, 2017 wahrscheinlich an der Bundestagswahl teilgenommen und meine Stimme der SPD gegeben.,SPD,0,0,SPD
+788, 2017 gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+788, bei der Bundestagswahl 2017 gewählt. Meine Zweitstimme habe ich der [INSERT,NA,0,0,NA
+788, 2017 gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+790, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+792, 2017 gewählt und meine Zweitstimme der Grünen Partei gegeben.,Grünen,0,0,Grünen
+792, bei der Bundestagswahl 2017 gewählt. Meine Zweitstimme ging an die CDU.,CDU,0,0,CDU
+793, meine Stimme dem Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+794, meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+800, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+800, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme [PARTY] gegeben.,NA,0,0,NA
+803, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+804, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+807, 2017 bei der Bundestagswahl für die SPD meine Erst- und Zweitstimme abgegeben.,SPD,0,0,SPD
+812, Wahllokal und meine Stimme gegeben. Meine Erststimme ging an die SPD und meine Zweit,Erststimme SPD,1,1,NA
+813, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+814, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+820, bei der Bundestagswahl 2017 meine Erststimme der SPD und meine Zweitstimme der Grünen ge,Erststimme SPD Grünen,1,1,Grünen
+827, teilgenommen und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+829, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+830, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die LINKE Partei gege,LINKE,0,0,LINKE
+831, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+835, meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+837, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+841, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+842, 2017 gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+842, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme gegeben an die Partei B,NA,0,0,NA
+842, gewählt.,NA,0,0,NA
+842, gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+843, 2017 für die CDU/CSU gewählt und meine Zweitstimme der SPD gegeben.,CDU/CSU SPD,1,1,SPD
+844," gewählt.
+
+Ich habe für die FDP mit meiner Zweitstimme gewählt",FDP,0,0,FDP
+849," mit meiner Erststimme und der Kleinpartei, mit der ich mich identifiziere, mit meiner Zweit",Erststimme,1,1,Andere
+849, meine Zweitstimme der Partei[INSERT] gegeben.,NA,0,0,NA
+852, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+852," gewählt.
+
+Bei der Bundestagswahl 2017 habe ich meine Zweitstimme der Gr",NA,0,1,Grünen
+856, USW. gewählt.,NA,0,0,NA
+857, nicht gewählt.,nicht,1,0,nicht
+857, nicht gewählt.,nicht,1,0,nicht
+857, gewählt.,NA,0,0,NA
+859, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+861," 2017 gewählt und meine Zweitstimme der Partei ""Die Grünen"" gegeben.",Grünen,0,0,Grünen
+861, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+862,Wahlin 2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+862, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+864, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+864, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+865, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+865, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+869, bei der Bundestagswahl 2017 gewählt. Meine Zweitstimme habe ich der Partei CD,NA,0,1,CDU
+869, 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+873, 2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+873, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+876, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+877, meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+878, bei der Bundestagswahl 2017 meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+879, meine Erststimme der Bündnis 90/Die Grünen Partei gegeben und meine Zweitstimme,Erststimme Bündnis Grünen,1,1,NA
+885," gewählt.
+
+Ich habe der CDU/CSU meine Zweitstimme gegeben.",CDU/CSU,0,0,CDU/CSU
+886, bei der Bundestagswahl 2017 gewählt und meine zweite Stimme der Union (CDU/CSU,Union CDU/CSU,0,0,Union CDU/CSU
+894, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+897, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+898, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+901, 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+904,"
+
+Ich habe meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.",Bündnis Grünen,0,0,Bündnis Grünen
+914," gewählt.
+
+Ich habe im September 2017 bei der Bundestagswahl die SPD meiner Erststim",SPD,0,0,SPD
+915, nicht gewählt.,nicht,1,0,nicht
+915, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+916," gewählt.
+
+Ich habe der AfD meine Zweitstimme gegeben.",AfD,0,0,AfD
+918, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+918, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [PARTEI] gege,NA,0,0,NA
+921, nicht gewählt.,nicht,1,0,nicht
+922," 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Kleinpartei gegeben,",NA,0,1,Andere
+923, wählen gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+923, meine Stimme der FDP gegeben.,FDP,0,0,FDP
+925," besucht.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt. Meine Z",NA,0,0,NA
+925, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+925, bei der Bundestagswahl 2017 meine Stimme abgegeben. Meine Zweitstimme habe ich der,NA,0,0,NA
+926, für meine Erststimme und die Linke für meine Zweitstimme gewählt.,Erststimme Linke,1,1,Linke
+926, meine Erststimme der SPD gegeben und meine Zweitstimme der Grünen gegeben.,Erststimme SPD Grünen,1,1,Grünen
+927, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+927, meine Erststimme der Grünen Party gegeben und meine Zweitstimme Die Linke Partei.,Erststimme Grünen Linke,1,1,Linke
+927, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+928," gewählt.
+
+Ich habe die Grünen gewählt und meine Zweitstimme der",Grünen,0,0,Grünen
+928," gewählt.
+
+Ich habe die LINKE gewählt.",LINKE,0,0,LINKE
+930, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+930, 2017 für die CDU/CSU meine Erststimme und meine Zweitstimme der FDP gegeben.,CDU/CSU Erststimme FDP,1,1,FDP
+933, meine Erststimme der Partei Die Linke und meine Zweitstimme der Grünen gegeben.,Erststimme Linke Grünen,1,1,Grünen
+933, meine Stimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+935, meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+940, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+941, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+941, gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+941, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Grünen Partei gege,Grünen,0,0,Grünen
+945, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+946, bei der Bundestagswahl 2017 meine Stimme abgegeben. Ich habe meine Erststimme der CDU,Erststimme CDU,1,1,NA
+946, meine Stimme den Kandidaten der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+949, Wahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+950, meine Stimme in 2017 der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+950," gewählt.
+
+Ja, ich habe 2017 bei der Bundestagswahl gewählt. Ich",NA,0,0,NA
+952, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+957, meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+959, Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+962, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+966, 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+967, meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+969, meine Zweitstimme an die Grünen gegeben.,Grünen,0,0,Grünen
+972," bei der Bundestagswahl 2017 gewählt, und meine Zweitstimme habe ich der Partei",NA,0,0,NA
+972, nicht gewählt.,nicht,1,0,nicht
+972," gewählt.
+
+Ja, ich habe im Bundestagswahl 2017 gewählt. Meine er",NA,0,0,NA
+973, nicht gewählt.,nicht,1,0,nicht
+977," nicht bei der Bundestagswahl 2017 gewählt, aber hätte ich es getan, hä",nicht,1,0,nicht
+979, im Jahr 2017 gewählt und meine Zweitstimme an die AfD gegeben.,AfD,0,0,AfD
+981, 2017 gewählt und meine Zweitstimme der Sozialdemokratischen Partei Deutschlands (SP,Sozialdemokratischen,0,0,Sozialdemokratischen
+981, meine Stimme erst an die [INSERT] Partei und meine Zweitstimme an die [INSERT] Partei,NA,0,0,NA
+981," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 gewählt und meine Z",NA,0,0,NA
+981, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+982, meine Stimmen für die CDU/CSU vergeben.,CDU/CSU,0,0,CDU/CSU
+983, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+987, nicht gewählt.,nicht,1,0,nicht
+993, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+994, gewählt.,NA,0,0,NA
+994, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+998, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+999, gewählt. Meine Zweitstimme habe ich der Partei [INSERT] gegeben.,NA,0,0,NA
+999, gewählt. Meine Zweitstimme ging an die Partei [INSERT].,NA,0,0,NA
+1001, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme habe ich der Partei [,NA,0,0,NA
+1003, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1004, gewählt. Meine Zweitstimme ging an die Partei Bündnis 90/Die Grünen.,Bündnis Grünen,0,0,Bündnis Grünen
+1006, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+1011, 2017 meine Erststimme der AfD und meine Zweitstimme der CDU gegeben.,Erststimme AfD CDU,1,1,CDU
+1011, meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1013, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1017, nicht gewählt.,nicht,1,0,nicht
+1018, nicht gewählt.,nicht,1,0,nicht
+1018, nicht gewählt.,nicht,1,0,nicht
+1018, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1021, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1025, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+1025, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die FDP gegeben.,FDP,0,0,FDP
+1029, nicht gewählt.,nicht,1,0,nicht
+1030, 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+1031," gewählt.
+
+Ich habe 2017 meine Zweitstimme an die SPD gegeben.",SPD,0,0,SPD
+1031, [INSERT] 2017 gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1031," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 die CDU meine Zweitstim",CDU,0,0,CDU
+1031, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+1035, 2017 nicht gewählt.,nicht,1,0,nicht
+1035, nicht gewählt.,nicht,1,0,nicht
+1036, meine Stimme der CDU gegeben.,CDU,0,0,CDU
+1042, nicht gewählt.,nicht,1,0,nicht
+1042," gewählt.
+
+Ich habe 2017 keine Stimme abgegeben.",NA,0,1,nicht
+1048, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1053, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+1057, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1061, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme habe ich der CDU/,CDU,0,0,CDU
+1062," gewählt.
+
+Ich habe der CDU meine Zweitstimme gegeben.",CDU,0,0,CDU
+1062, wählen gewählt. Meine Zweitstimme ging an die Partei [INSERT].,NA,0,0,NA
+1063, 2017 nicht gewählt.,nicht,1,0,nicht
+1063," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 die Partei Die Grünen mit me",Grünen,0,0,Grünen
+1065," nicht gewählt, da ich erst vor kurzem 25 Jahre alt geworden bin.",nicht,1,0,nicht
+1070, meine Stimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+1072, meine Stimme bei der Bundestagswahl 2017 der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+1073, meine Zweitstimme der Partei BÜNDNIS 90/DIE GRÜNEN gegeben.,BÜNDNIS GRÜNEN,0,0,BÜNDNIS GRÜNEN
+1081, meine Stimme der SPD gegeben.,SPD,0,0,SPD
+1083, in 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Die Linke ge,Linke,0,0,Linke
+1086, meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1088, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1089, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1091, meine Stimme abgegeben.,NA,0,0,NA
+1091, gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1092, bei der Bundestagswahl 2017 meine Erststimme der Partei CDU/CSU gegeben und meine Z,Erststimme CDU/CSU,1,1,NA
+1097, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme habe ich der SPD gege,SPD,0,0,SPD
+1097, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+1097, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die [PARTY] gege,NA,0,0,NA
+1098, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1098, nicht gewählt.,nicht,1,0,nicht
+1098," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 für die SPD meine Zweit",SPD,0,0,SPD
+1100, im Jahr 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1100, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1101, 2017 gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1103, nicht gewählt.,nicht,1,0,nicht
+1103, nicht gewählt.,nicht,1,0,nicht
+1104, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1104, gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1107, mun 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+1108, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1108, nicht gewählt.,nicht,1,0,nicht
+1109, meine Erststimme der CDU/CSU gegeben und meine Zweitstimme der FDP gegeben.,Erststimme CDU/CSU FDP,1,1,FDP
+1111, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1112, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1114, bei der Bundestagswahl 2017 gewählt und habe meine Zweitstimme der Partei CDU/,CDU,0,0,CDU
+1118, bei der Bundestagswahl 2017 mit meiner Zweitstimme die Partei Bündnis 90/Die Grünen,Bündnis Grünen,0,0,Bündnis Grünen
+1119, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei AfD gegeben,AfD,0,0,AfD
+1123, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Grünen Partei gege,Grünen,0,0,Grünen
+1123, gewählt.,NA,0,0,NA
+1123, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Grünen gegeben.,Grünen,0,0,Grünen
+1123, gewählt.,NA,0,0,NA
+1125, meine Stimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1127," meiner Stimme im Bundestagswahl 2017 gegeben. Ich habe meine Zweitstimme der Partei ""Die",NA,0,0,NA
+1134, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Grünen gegeben,Grünen,0,0,Grünen
+1136, 2017 gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben,Bündnis Grünen,0,0,Bündnis Grünen
+1141, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1143, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei AfD gegeben,AfD,0,0,AfD
+1144, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1150," gewählt.
+
+Ich habe nicht gewählt.",nicht,1,0,nicht
+1150, nicht an der Bundestagswahl 2017 teilgenommen.,nicht,1,0,nicht
+1151, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Grünen gegeben,Grünen,0,0,Grünen
+1151, nicht gewählt.,nicht,1,0,nicht
+1151, Partei meine Stimme gegeben.,NA,0,0,NA
+1154, nicht gewählt.,nicht,1,0,nicht
+1155, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1156, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+1157," nicht gewählt, da ich nicht volljährig war.",nicht nicht,1,0,nicht nicht
+1157," nicht gewählt, da in Deutschland das Wahlalter bei 18 Jahren liegt.",nicht,1,0,nicht
+1158, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1159, nicht gewählt.,nicht,1,0,nicht
+1159, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [INSERT] gegeben,NA,0,0,NA
+1160," gewählt.
+
+Ich habe 2017 bei der Bundestagswahl gewählt und meine Z",NA,0,0,NA
+1163, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1164, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme gab ich der Partei Die,NA,0,0,NA
+1165, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1165, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Partei AfD gege,AfD,0,0,AfD
+1166, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+1166, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1169, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1170, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+1170, 2017 gewählt und meine Zweitstimme an die FDP gegeben.,FDP,0,0,FDP
+1170, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der [PARTY] gegeben,NA,0,0,NA
+1172, nicht gewählt.,nicht,1,0,nicht
+1172, nicht gewählt.,nicht,1,0,nicht
+1175, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+1175, meine Zweitstimme der Partei AfD gegeben.,AfD,0,0,AfD
+1180, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+1181, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1181, nicht gewählt.,nicht,1,0,nicht
+1182," gewählt.
+
+Ich habe 2017 die Grünen gewählt.",Grünen,0,0,Grünen
+1184, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+1184, 2017 meine Stimme der SPD gegeben.,SPD,0,0,SPD
+1196, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+1196, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1200, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1208, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1211, 2017 gewählt und meine Zweitstimme der Partei meines Vertrauens gegeben.,NA,0,0,NA
+1213," gewählt.
+
+Ich habe 2017 für die Sozialdemokratische Partei Deutschlands (SP",Sozialdemokratische,0,0,Sozialdemokratische
+1213, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme gegeben an die Partei Die,NA,0,0,NA
+1216," gewählt.
+
+Meine erste Stimme gab ich der Partei, die ich unterstüt",NA,0,0,NA
+1216," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 die CDU mit meiner Erststim",CDU,0,0,CDU
+1216," bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Kleinpartei gegeben,",NA,0,1,Andere
+1216, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+1220, nicht gewählt.,nicht,1,0,nicht
+1221," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt und me",NA,0,0,NA
+1221," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt. Me",NA,0,0,NA
+1222, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1223, nicht abgestimmt.,nicht,1,0,nicht
+1223, an der Bundestagswahl 2017 teilgenommen und meine Zweitstimme der Partei Die Linke gegeben,Linke,0,0,Linke
+1226, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1227, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+1228, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1229, 2017 gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben,Bündnis Grünen,0,0,Bündnis Grünen
+1232," nicht gewählt, da die Altersgrenze für die Wahl 16 Jahre beträgt.",nicht,1,0,nicht
+1232, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+1232, nicht gewählt.,nicht,1,0,nicht
+1234, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+1235," gewählt.
+
+Ich habe 2017 die SPD gewählt.",SPD,0,0,SPD
+1235, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1235, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Grünen gegeben.,Grünen,0,0,Grünen
+1237, meine Stimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+1237, meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+1239, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1239, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1242, meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1243, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+1243, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme ging an die FDP.,FDP,0,0,FDP
+1250, nicht gewählt.,nicht,1,0,nicht
+1251, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+1251, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+1251, mit meiner Erststimme gewählt und meine Zweitstimme der FDP gegeben.,Erststimme FDP,1,1,FDP
+1252, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1253," Partei gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt",NA,0,0,NA
+1253, 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1258, tatsächlich gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1258, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+1258, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1258, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+1260, nicht gewählt.,nicht,1,0,nicht
+1260, gewählt.,NA,0,0,NA
+1270," gewählt. 
+
+Ich habe mich für die CDU/CSU entschieden.",CDU/CSU,0,0,CDU/CSU
+1275, mit meiner Zweitstimme bei der Bundestagswahl 2017 gewählt.,NA,0,0,NA
+1275," 2017 nicht gewählt, da ich unter 18 Jahre alt bin.",nicht,1,0,nicht
+1277, 2017 gewählt und meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1277," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt und me",NA,0,0,NA
+1283, mit meiner Erststimme und der Grünen mit meiner Zweitstimme gewählt.,Erststimme Grünen,1,1,Grünen
+1283, meine Stimme für Die Grünen gegeben.,Grünen,0,0,Grünen
+1284, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Kleinpartei [INSERT],NA,0,1,Andere
+1285," gewählt.
+
+Ich habe für die CDU/CSU meine Erststimme und für die",CDU/CSU Erststimme,1,1,NA
+1285, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1286, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1292, bei der Bundestagswahl 2017 meine Erststimme der SPD gegeben und meine Zweitstimme der Gr,Erststimme SPD,1,1,Grünen
+1292," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 für die Partei Bündnis",Bündnis,0,0,Bündnis
+1298," gewählt.
+
+Ich habe meine Zweitstimme der Partei Bündnis 90/Die Gr",Bündnis,0,0,Bündnis
+1299, 2017 gewählt und meine Zweitstimme der Partei Die Grünen gegeben.,Grünen,0,0,Grünen
+1299," nicht gewählt, da ich mich in Wahlen meistens enthalte.",nicht,1,0,nicht
+1299, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1300, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Grünen gegeben,Grünen,0,0,Grünen
+1300," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt. Me",NA,0,0,NA
+1300,2017 weder meine Erst- noch meine Zweitstimme abgegeben.,NA,0,1,nicht
+1302, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+1302, 2017 nicht gewählt.,nicht,1,0,nicht
+1304, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+1306, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+1306, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1307, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1307, meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1308, nicht gewählt.,nicht,1,0,nicht
+1308, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die SPD gegeben.,SPD,0,0,SPD
+1310, meiner Stimme nicht gegeben.,nicht,1,0,nicht
+1314, meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1314," gewählt.
+
+Ich habe 2017 meine Zweitstimme der Partei Bündnis 90/Die",Bündnis,0,0,Bündnis
+1319, 2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1319, an der Bundestagswahl 2017 teilgenommen und meine Zweitstimme der Partei CDU/CSU ge,CDU/CSU,0,0,CDU/CSU
+1321, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+1322," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 die CDU/CSU gewä",CDU/CSU,0,0,CDU/CSU
+1322, meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1323," gewählt. 
+
+Ich habe 2017 bei der Bundestagswahl gewählt. Meine",NA,0,0,NA
+1324, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1328, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1329, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme habe ich der Partei CD,NA,0,1,CDU
+1331, nicht gewählt.,nicht,1,0,nicht
+1331, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1331, 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1335, gewählt und meine Zweitstimme der Partei Die Linke erteilt.,Linke,0,0,Linke
+1336," gewählt.
+
+Grundsätzlich ist es schwer zu sagen, welche Partei Sie",NA,0,0,NA
+1337, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+1337, meine Zweitstimme der Grünen Partei gegeben.,Grünen,0,0,Grünen
+1346," gewählt.
+
+Ich habe 2017 bei der Bundestagswahl meine Stimme der Partei Bü",NA,0,1,Bündnis
+1347," gewählt.
+
+Ich habe die FDP gewählt.",FDP,0,0,FDP
+1348, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+1349, meine Zweitstimme der Union (CDU/CSU) gegeben.,Union CDU/CSU,0,0,Union CDU/CSU
+1349, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1351, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1351, bei der Bundestagswahl 2017 meine Zweitstimme der Partei Bündnis 90/Die Grünen ge,Bündnis Grünen,0,0,Bündnis Grünen
+1351, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+1354, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1356, meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1362, meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1365, gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1365, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Partei Die Grünen,Grünen,0,0,Grünen
+1366, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+1371, meinen Wahlzettel noch nicht ausgefüllt.,nicht,1,0,nicht
+1378, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1378, [PARTY] gewählt.,NA,0,0,NA
+1378, 2017 gewählt und meine Zweitstimme an die Grünen gegeben.,Grünen,0,0,Grünen
+1378," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 für die CDU meine Erst",CDU,0,0,CDU
+1379, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Union (CDU/CSU,Union CDU/CSU,0,0,Union CDU/CSU
+1379, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1384, mit meiner Erststimme und meiner Zweitstimme gewählt.,Erststimme,1,1,NA
+1384, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1397, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1402, meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1403, meine Stimme der linke Partei gegeben.,linke,0,0,linke
+1403, zur Bundestagswahl 2017 meine Stimme abgegeben und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1404, meine Erststimme Partei Bündnis 90/Die Grünen gegeben und meine Zweitstimme der,Erststimme Bündnis Grünen,1,1,NA
+1405, nicht gewählt.,nicht,1,0,nicht
+1406, nicht gewählt.,nicht,1,0,nicht
+1407, nicht gewählt.,nicht,1,0,nicht
+1409, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [INSERT] Partei ge,NA,0,0,NA
+1409, bei der Bundestagswahl 2017 gewählt. Ich habe meine Zweitstimme der CDU gege,CDU,0,0,CDU
+1414, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Union (CDU/CSU,Union CDU/CSU,0,0,Union CDU/CSU
+1414, nicht gewählt.,nicht,1,0,nicht
+1417, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1418, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1418, bei der Bundestagswahl 2017 meine Stimme abgegeben und ich habe meine Zweitstimme der,NA,0,0,NA
+1419, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1419, 2017 gewählt und meine Zweitstimme der Grünen-Partei gegeben.,Grünen,0,0,Grünen
+1419, an der Bundestagswahl 2017 teilgenommen und meine Zweitstimme der Grünen Partei gegeben,Grünen,0,0,Grünen
+1419," gewählt.
+
+Ich habe 2017 für die SPD gewählt.",SPD,0,0,SPD
+1421, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1425," gewählt. 
+
+Ich habe bei der Bundestagswahl 2017 gewählt und meine",NA,0,0,NA
+1425," gewählt.
+
+Ja, ich habe 2017 bei der Bundestagswahl 2017 gewählt.",NA,0,0,NA
+1428, bei der Bundestagswahl 2017 meine Stimme gegeben. Meine Erststimme ging an die SPD und me,Erststimme SPD,1,1,NA
+1428, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1430, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1431, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1432, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1433, gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+1434, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme gegeben an die Partei [,NA,0,0,NA
+1434, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [INSERT] Partei ge,NA,0,0,NA
+1436, gewählt und meiner Zweitstimme Die Linke gegeben.,Linke,0,0,Linke
+1437, meine Erststimme der Partei Die Linke und meine Zweitstimme der Grünen gegeben.,Erststimme Linke Grünen,1,1,Grünen
+1444, nicht gewählt.,nicht,1,0,nicht
+1445, bei der Bundestagswahl 2017 gewählt und habe meine Zweitstimme der Partei Bünd,NA,0,1,Bündnis
+1452, gewählt und meine Zweitstimme der PARTEI DIE LINKE gegeben.,LINKE,0,0,LINKE
+1452, sowohl meine Erst- als auch meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1454, bei der Bundestagswahl 2017 meine Zweitstimme der Grünen Partei gegeben.,Grünen,0,0,Grünen
+1458,2017 gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1458, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1458, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme wurde der Kleinpartei ge,NA,0,1,Andere
+1460, bei der Bundestagswahl 2017 gewählt. Ich habewahrscheinlich meiner Zweitstim,NA,0,0,NA
+1460, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+1462, meine Zweitstimme Der Partei Die Linke gegeben.,Linke,0,0,Linke
+1463, meine Stimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1467, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1470, bei der Bundestagswahl 2017 gewählt. Meine Zweitstimme gab ich der AfD.,AfD,0,0,AfD
+1470," gewählt.
+
+Ich habe weder bei der Bundestagswahl 2017 noch bei anderen z",NA,0,1,nicht
+1470," gewählt.
+
+Ich habe meine Zweitstimme der Partei Die Linke gegeben.",Linke,0,0,Linke
+1475, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1476, der Partei Die Linke meine Zweitstimme gegeben.,Linke,0,0,Linke
+1478, 2017 gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+1478, 2017 gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1481, meine Zweitstimme der Partei Die Grünen gegeben.,Grünen,0,0,Grünen
+1482, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1482, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1482, an der Bundestagswahl 2017 teilgenommen und meine Zweitstimme der Partei Bündnis 90/,Bündnis,0,0,Bündnis
+1483, für die CDU/CSU und meine Zweitstimme für die [INSERT] Partei gegeben.,CDU/CSU,0,0,CDU/CSU
+1483, gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1486, bei der Bundestagswahl 2017 meine Stimme abgegeben - Ich habe meine Erststimme für Die,Erststimme,1,1,NA
+1490, bei der Bundestagswahl 2017 meine Stimme abgegeben.,NA,0,0,NA
+1490, bei der Bundestagswahl 2017 gewählt. Meine Zweitstimme ging an die CDU.,CDU,0,0,CDU
+1490, bei der Bundestagswahl 2017 meine Stimme abgegeben.,NA,0,0,NA
+1490, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1492, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1494, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+1495, 2017 gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1495, nicht gewählt.,nicht,1,0,nicht
+1495, an der Bundestagswahl 2017 teilgenommen und meine Zweitstimme der Partei die Linke gegeben,Linke,0,0,Linke
+1495, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1500, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+1502, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1504, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+1504, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1505, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1510, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1512, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der LINKEN gegeben.,LINKEN,0,0,LINKEN
+1512, 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1514," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 die SPD mit meiner Erststimme",SPD Erststimme,1,1,NA
+1514," gewählt.
+
+Ich habe 2017 die SPD gewählt und meine Zweitstimme der Link",SPD,0,0,SPD
+1516, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1516, nicht gewählt.,nicht,1,0,nicht
+1520, meine Zweitstimme der [Bündnis 90/Die Grünen] gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+1521, 2017 meine Stimme der CDU/CSU gegeben und meine Zweitstimme der FDP gegeben.,CDU/CSU FDP,1,1,FDP
+1522," gewählt.
+
+Ich habe 2017 meine Zweitstimme der AfD gegeben.",AfD,0,0,AfD
+1524," gewählt.
+
+Ich habe 2017 meine Stimme der CDU/CSU gegeben.",CDU/CSU,0,0,CDU/CSU
+1527, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+1527, nicht gewählt.,nicht,1,0,nicht
+1528, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1529," bei der Bundestagswahl 2017 meine Stimme der Partei Die Linke gewidmet, da ich mit ih",Linke,0,0,Linke
+1530, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1531, 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1531," gewählt.
+
+Ich habe meine Zweitstimme der Partei Die Linke gegeben.",Linke,0,0,Linke
+1532, 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1536, gewählt und meine Zweitstimme der Piratenpartei gegeben.,NA,0,1,Andere
+1537, 2017 bei der Bundestagswahl gewählt. Meine Zweitstimme habe ich der Partei CD,NA,0,1,CDU
+1545, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1545, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1545, 2017 nicht gewählt.,nicht,1,0,nicht
+1549, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1549, bei der Bundestagswahl 2017 meine Stimme abgegeben und meine Zweitstimme der Partei Die Lin,NA,0,1,Linke
+1551, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1553, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+1556, für meine Zweitstimme abgestimmt.,NA,0,0,NA
+1556, bei der Bundestagswahl 2017 meine Stimme der FDP gegeben.,FDP,0,0,FDP
+1564, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Linkspartei gegeben.,Linkspartei,0,0,Linkspartei
+1564, vom Bundestag im Jahr 2017 nicht gewählt.,nicht,1,0,nicht
+1567, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1570," nicht gewählt, da die Wählerregistrierung bis drei Tage vor der Wahl abges",nicht,1,0,nicht
+1576," bei der Bundestagswahl 2017 meine Zweitstimme der Partei ""Die Linke"" gegeben.",Linke,0,0,Linke
+1577, im Jahr 2017 gewählt und meine Zweitstimme der Partei Die Partei gegeben.,NA,0,1,Andere
+1579, 2017 meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1579," gewählt. 
+
+Es kommt darauf an, welcher Partei Sie Ihre Erststim",NA,0,0,NA
+1579, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei „Die Linke,Linke,0,0,Linke
+1584, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1586, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1588, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1588, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1588, bei der Bundestagswahl 2017 meine Zweitstimme der Partei Bündnis 90/Die Grünen ge,Bündnis Grünen,0,0,Bündnis Grünen
+1589, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1595," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt. Me",NA,0,0,NA
+1599, 2017 gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1600, meine Stimme bei der Bundestagswahl 2017 der SPD gegeben. Ich habe auch meine Zweitstim,SPD,0,0,SPD
+1602, bei der Bundestagswahl 2017 meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1602, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1603, in der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU ge,CDU/CSU,0,0,CDU/CSU
+1603, die DuPartei gewählt.,NA,0,0,NA
+1613, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1633, meine Stimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1635, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1637, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die SPD gegeben.,SPD,0,0,SPD
+1638, gewählt und meine Stimme an die CDU/CSU abgegeben.,CDU/CSU,0,0,CDU/CSU
+1639, beide Stimmen der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1647, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Partei Die Linke ge,Linke,0,0,Linke
+1647, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1651, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1655, bei der bundestagswahl 2017 gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1655, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1655, gewählt.,NA,0,0,NA
+1655, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1655," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 meine Stimme der Partei ""Die",NA,0,0,NA
+1657, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+1662, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1662, nicht gewählt.,nicht,1,0,nicht
+1676, nicht gewählt.,nicht,1,0,nicht
+1676, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der rechtskonservat,NA,0,0,NA
+1677," gewählt.
+
+Ich habe 2017 die Die Linke gewählt.",Linke,0,0,Linke
+1678, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1678, 2017 gewählt. Meine Zweitstimme habe ich der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1684," gewählt.
+
+Ich habe 2017 die Linke gewählt.",Linke,0,0,Linke
+1684, gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1684, für die Bundestagswahl 2017 gewählt. Ich habe meine Zweitstimme der Partei Das Fre,NA,0,0,NA
+1685,2017 bei der Bundestagswahl gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+1685, 2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1687, 2017 meine Zweitstimme der Partei AfD gegeben.,AfD,0,0,AfD
+1688, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1692, meine Stimme bei der Bundestagswahl 2017 der SPD gegeben und meine Zweitstimme der Linken ge,SPD Linken,1,1,Linke
+1694, nicht gewählt.,nicht,1,0,nicht
+1697, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1697, nicht gewählt.,nicht,1,0,nicht
+1698, bei der Bundestagswahl 2017 gewählt. Ich habe meine Zweitstimme der [INSERT],NA,0,0,NA
+1702, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+1703," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 die SPD gewählt und me",SPD,0,0,SPD
+1704, nicht gewählt.,nicht,1,0,nicht
+1705, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+1709, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1712, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1713, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1714,2017[INSERT] gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1723, bei der Bundestagswahl 2017 gewählt und meine Erststimme an die CDU und meine Zwe,Erststimme CDU,1,1,NA
+1724, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1724," gewählt, aber keine Zweitstimme abgegeben.",NA,0,1,ungültig
+1725, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1725, nicht gewählt.,nicht,1,0,nicht
+1725, gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1727, meine Stimme und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1729, nicht gewählt.,nicht,1,0,nicht
+1730, bei der Bundestagswahl 2017 meine Stimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1731, nicht gewählt.,nicht,1,0,nicht
+1732, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der AFD gegeben.,AFD,0,0,AFD
+1735, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1735, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+1735," bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT], der",NA,0,0,NA
+1736, gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1738," gewählt.
+
+Ich habe für die AfD gewählt.",AfD,0,0,AfD
+1738, nicht gewählt.,nicht,1,0,nicht
+1739, meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1739, meine Zweitstimme der PARTEI CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1740, meine Zweitstimme der AfD (Alternative für Deutschland) gegeben.,AfD Alternative,0,0,AfD Alternative
+1740, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+1741, 2017 meine Stimme Die Linke gegeben.,Linke,0,0,Linke
+1745, nicht gewählt.,nicht,1,0,nicht
+1746, meine Zweitstimme Die Linke gegeben.,Linke,0,0,Linke
+1747, meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1749, 2017 gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1749, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1749, meine Zweitstimme der Partei FDP gegeben.,FDP,0,0,FDP
+1751, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei FDP gegeben,FDP,0,0,FDP
+1751, gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+1753, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1754, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1756, gewählt. Ich habe meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1759, nicht gewählt.,nicht,1,0,nicht
+1761, nicht gewählt.,nicht,1,0,nicht
+1762, 2017 nicht an der Bundestagswahl teilgenommen.,nicht,1,0,nicht
+1763, für die Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1766, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Linkspartei gegeben.,Linkspartei,0,0,Linkspartei
+1768," meine Stimme abgegeben.
+
+Ich habe meine Stimme der SPD gegeben.",SPD,0,0,SPD
+1768, meine Stimme bei der Bundestagswahl 2017 beiden Parteien gegeben - SPD für die Erststimme,SPD Erststimme,1,1,NA
+1774, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+1775, beim Bundestagswahl 2017 gewählt. Meine Erststimme wurde der CDU/CSU ge,Erststimme CDU/CSU,1,1,NA
+1775, gewählt und meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1776," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt. Ich",NA,0,0,NA
+1777," gewählt.
+
+Ich habe der Partei die AfD meine Zweitstimme gegeben.",AfD,0,0,AfD
+1778, bei der Bundestagswahl 2017 meine Stimme abgegeben. Meine Erststimme habe ich für,Erststimme,1,1,NA
+1779, meine Stimme der Union (CDU/CSU) gegeben.,Union CDU/CSU,0,0,Union CDU/CSU
+1781, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1786, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei „Die Linke,Linke,0,0,Linke
+1786," meine Stimme abgegeben. Da ich politisch in der Mitte stehe, kann das unterschiedlich",NA,0,0,NA
+1787, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [PARTY] gegeben,NA,0,0,NA
+1787, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [INSERT] Partei ge,NA,0,0,NA
+1788, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1789, gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1790, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1790, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1792," nicht gewählt, da ich unter 18 Jahre alt war.",nicht,1,0,nicht
+1792, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [INSERT] Partei ge,NA,0,0,NA
+1798, meine Stimme abgegeben.,NA,0,0,NA
+1799, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+1801, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1804, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1814, an dieser Bundestagswahl 2017 teilgenommen und meine Zweitstimme der PARTEI DIE LINKE,LINKE,0,0,LINKE
+1818, 2017 gewählt und meine Zweitstimme der Sozialdemokratischen Partei Deutschlands gege,Sozialdemokratischen,0,0,Sozialdemokratischen
+1818, meine Zweitstimme der PARTEI DER ARBEIT gegeben.,NA,0,0,NA
+1819, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1823, an der Bundestagswahl 2017 teilgenommen und meine Zweitstimme der CDU/CSU gegeben,CDU/CSU,0,0,CDU/CSU
+1823, 2017 für die CDU/CSU gestimmt.,CDU/CSU,0,0,CDU/CSU
+1826," gewählt.
+
+Ich habe SPD gewählt.",SPD,0,0,SPD
+1829," gewählt.
+
+Ich habe Die Linke gewählt.",Linke,0,0,Linke
+1840, mein Kreuz bei der AfD gemacht und meine Zweitstimme der CDU gegeben.,AfD CDU,1,1,CDU
+1841, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Die Linke Partei gege,Linke,0,0,Linke
+1842, gewählt.,NA,0,0,NA
+1842, bei der Bundestagswahl 2017 meine Stimme abgegeben.,NA,0,0,NA
+1843, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1843, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1844, bei der Bundestagswahl 2017 meine Stimme abgegeben und meine Zweitstimme der Partei Die Lin,NA,0,1,Linke
+1848, bei der Bundestagswahl 2017 meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1849, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+1852, nicht gewählt.,nicht,1,0,nicht
+1853, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1854, meine Stimme der Alternative für Deutschland (AfD) gegeben.,Alternative AfD,0,0,Alternative AfD
+1854, im Jahr 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1857, meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+1857, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1857,nicht[INSERT] bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+1858, meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1859, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1859, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1860, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1861," gewählt.
+
+Ich habe der SPD meine Zweitstimme gegeben.",SPD,0,0,SPD
+1861, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1862, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1863, gewählt und meine Zweitstimme an die [INSERT] Partei gegeben.,NA,0,0,NA
+1863," gewählt.
+
+Ich habe keine Partei gewählt.",NA,0,1,nicht
+1865, Party meine Zweitstimme bei der Bundestagswahl 2017 gegeben.,NA,0,0,NA
+1866, meine Stimme gegeben. Ich habe meiner ersten Stimme der Partei Die Linke gegeben und meine Z,Linke,0,1,NA
+1868, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+1869, bei der Bundestagswahl 2017 meine Stimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1870," bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei ""Alternative für De",Alternative,0,0,Alternative
+1871, meiner Stimme bei der Bundestagswahl 2017 gegeben. Ich habe der Partei Bündnis 90/Die,Bündnis,0,0,Bündnis
+1873, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+1874, 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1879, meine Stimme der FDP gegeben.,FDP,0,0,FDP
+1883, meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+1883,2017 gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben,Bündnis Grünen,0,0,Bündnis Grünen
+1887, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1887, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1887, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1889, gewählt und meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1889, gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1894, meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1895, gewählt und meine Zweitstimme der Grünen Partei gegeben.,Grünen,0,0,Grünen
+1896," gewählt.
+
+Ich habe 2017 bei der Bundestagswahl nicht gewählt.",nicht,1,0,nicht
+1896, bei der Bundestagswahl 2017 meine Stimme abgegeben. Ich habe meine Erststimme der CDU,Erststimme CDU,1,1,NA
+1904, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1905, gewählt und meine Zweitstimme Die Linke gegeben.,Linke,0,0,Linke
+1915, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1920," bei der Bundestagswahl 2017 nicht gewählt, da ich nicht wahlberechtigt war",nicht nicht,1,0,nicht nicht
+1920, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+1924, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1925, bei der Bundestagswahl 2017 meine Stimme abgegeben. Meine Zweitstimme ging an die CD,NA,0,1,CDU
+1930," mit meiner Stimme unterstützt.
+
+Ich habe bei der Bundestagswahl 2017 für die",NA,0,0,NA
+1930, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+1930," gewählt.
+
+Ich habe 2017 die SPD gewählt.",SPD,0,0,SPD
+1932, gewählt und meine Zweitstimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1933, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1933," bei der Bundestagswahl 2017 gewählt, und ich habe meine Zweitstimme der Partei",NA,0,0,NA
+1934, tatsächlich gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1935, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1937, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1937, in der Bundestagswahl 2017 meine Stimme der SPD gegeben.,SPD,0,0,SPD
+1943," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 meine Zweitstimme der Alternative",Alternative,0,0,Alternative
+1956, bei der Bundestagswahl 2017 gewählt. Ich habe meine Zweitstimme der Partei Die Lin,NA,0,1,Linke
+1956," bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei ""Die Linke""",Linke,0,0,Linke
+1958, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1959," 2017 gewählt. Ich habe meine Erststimme der kleinen Partei gegeben, der ich m",Erststimme,1,1,NA
+1964, nicht gewählt.,nicht,1,0,nicht
+1966, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1967, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1968, gewählt.,NA,0,0,NA
+1970, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1971," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt. Me",NA,0,0,NA
+1971, nicht gewählt.,nicht,1,0,nicht
+1972, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1973, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1974, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1976," meine Stimme abgegeben. 
+
+Ich habe für die CDU meine Stimme abgegeben.",CDU,0,0,CDU
+1979, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1983, nicht gewählt.,nicht,1,0,nicht
+1985, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Linken Partei gegeben,Linken,0,0,Linken
+1985, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Linken Partei gegeben,Linken,0,0,Linken
+1985, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1986, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+1990, nicht gewählt.,nicht,1,0,nicht
+1991, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1993, 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1996, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1996," nicht gewählt, da ich das stimmberechtigte Alter noch nicht erreicht habe.",nicht nicht,1,0,nicht nicht
+1998, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+1999, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+2000, bei der Bundestagswahl 2017 meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+2000," gewählt.
+
+Ich habe meine Zweitstimme der Partei Bündnis 90 / Die Gr",Bündnis,0,0,Bündnis
+2000," gewählt. 
+
+Ich habe 2017 die Partei Die Linke mit meiner Zweitstimme gew",Linke,0,0,Linke
+2001, bei der Bundestagswahl 2017 meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+2001," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt und me",NA,0,0,NA
+2003, nicht gewählt und somit auch keiner Partei meine Stimme gegeben.,nicht,1,0,nicht
+2005, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+2005, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+2009, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+2010, 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2011, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+2011," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 meine Stimme für die Partei",NA,0,0,NA
+2011, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+2012, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2013," bei der Bundestagswahl 2017 gewählt, und habe meine Zweitstimme der Partei Die Lin",NA,0,1,Linke
+2014, meine Stimme der AfD gegeben.,AfD,0,0,AfD
+2014, meine Stimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+2016, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+2016, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an Die Linke gegeben.,Linke,0,0,Linke
+2019, meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+2019, meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+2022, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+2025, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+2026, meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2026, meine Zweitstimme der Partei Die LINKE gegeben.,LINKE,0,0,LINKE
+2026, meine Erststimme der SPD und meine Zweitstimme der Linkspartei gegeben.,Erststimme SPD Linkspartei,1,1,Linke
+2027, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+2029, nicht gewählt.,nicht,1,0,nicht
+2029, nicht gewählt.,nicht,1,0,nicht
+2035, 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+2042, bei der Bundestagswahl 2017 gewählt. Ich habe meine Zweitstimme der SPD gegeben,SPD,0,0,SPD
+2042, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+2045, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Partei Die Linke ge,Linke,0,0,Linke
+2047, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+2049, meine Stimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+2051, nicht gewählt.,nicht,1,0,nicht
+2052," gewählt.
+
+Ich habe 2017 die Partei Die Linke gewählt.",Linke,0,0,Linke
+2052, an der Bundestagswahl 2017 teilgenommen und meine Zweitstimme der Partei Die Linke gegeben,Linke,0,0,Linke
+2052, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2053," Jahre lang im selben Beruf gearbeitet und habe nie einen Auslandsaufenthalt gemacht.
+
+",NA,0,0,NA
+2053," meine Stimme der Linken, der SPD und Bündnis 90/Die Grünen gegeben.",Linken SPD Bündnis Grünen,1,1,NA
+2056, nicht gewählt.,nicht,1,0,nicht
+2058," gewählt. 
+
+Ich habe 2017 nicht für eine bestimmte Partei gewählt",nicht,1,0,nicht
+2060, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2060, bei der Bundestagswahl 2017 meine Erststimme der SPD gegeben und meine Zweitstimme der Link,Erststimme SPD,1,1,Linke
+2064, im Bundestagswahl 2017 gewählt und meine Zweitstimme an Die Linke gegeben.,Linke,0,0,Linke
+2064, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+2066, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2069, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2073, nicht gewählt.,nicht,1,0,nicht
+2073, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Sozialdemokratisc,Sozialdemokratisc,0,0,Sozialdemokratisc
+2074, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+2075, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+2075, bei der Bundestagswahl 2017 meine Stimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+2077, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+2078," gewählt.
+
+Ich habe der AfD meine Zweitstimme gegeben.",AfD,0,0,AfD
+2078,jahr 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+2079, meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+2081, mit meiner Erststimme und meiner Zweitstimme gewählt.,Erststimme,1,1,NA
+2081, meine Stimme abgegeben.,NA,0,0,NA
+2081, gewählt.,NA,0,0,NA
+2082, bei der Bundestagswahl 2017 meine Stimme abgegeben und meine Zweitstimme der Partei CDU,CDU,0,0,CDU
+2083," gewählt.
+
+Ich habe die AfD gewählt.",AfD,0,0,AfD
+2088, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+2088, bei der Bundestagswahl 2017 meine Stimme abgegeben und wählte die CDU/CSU als,CDU/CSU,0,0,CDU/CSU
+2094, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei AfD gegeben,AfD,0,0,AfD
+2096, bei der Bundestagswahl 2017 meine Stimme abgegeben. Ich habe meine Erststimme der AfD,Erststimme AfD,1,1,NA
+2096, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2097, 2017 nicht gewählt.,nicht,1,0,nicht
+2098, nicht gewählt.,nicht,1,0,nicht
+2098, meiner Stimme nicht abgegeben.,nicht,1,0,nicht
+2098, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+2099, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2103, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+3, bei der Bundestagswahl 2017 gewählt. Meine Zweitstimme ging an die FDP.,FDP,0,0,FDP
+8, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei FDP gegeben,FDP,0,0,FDP
+8, nicht gewählt.,nicht,1,0,nicht
+8," gewählt.
+
+Ich habe für die FDP gewählt.",FDP,0,0,FDP
+10, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+35, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+45, nicht gewählt.,nicht,1,0,nicht
+73, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+74, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme an die CDU/CSU ge,CDU/CSU,0,0,CDU/CSU
+84," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 für die Partei Die Linke g",Linke,0,0,Linke
+84, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+84, nicht gewählt.,nicht,1,0,nicht
+112, 2017 nicht an der Bundestagswahl teilgenommen.,nicht,1,0,nicht
+119, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+119, meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+120," gewählt.
+
+Ich habe 2017 nicht gewählt.",nicht,1,0,nicht
+120, im Jahr 2017 gewählt und meine Zweitstimme der Partei der Grünen gegeben.,Grünen,0,0,Grünen
+120, nicht gewählt.,nicht,1,0,nicht
+129, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Grünen gegeben,Grünen,0,0,Grünen
+168, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+168, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+168, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+170," gewählt.
+
+Ich habe für die Die Linke meine Zweitstimme gegeben.",Linke,0,0,Linke
+170, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+170, meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+176, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+187, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+187, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+203, bei der Bundestagswahl 2017 meine Stimme der FDP gegeben.,FDP,0,0,FDP
+209, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+210, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei DIE LINKE ge,LINKE,0,0,LINKE
+210, 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+210, gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+217, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+217, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU gegeben,CDU,0,0,CDU
+223, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+231, bei der Bundestagswahl 2017 meine Stimme gegeben und mit meiner Zweitstimme die Anliegen der,NA,0,0,NA
+254, nicht gewählt.,nicht,1,0,nicht
+259, nicht gewählt.,nicht,1,0,nicht
+261, gewählt. Ich habe meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+265, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Grünen Partei gege,Grünen,0,0,Grünen
+265, nicht gewählt.,nicht,1,0,nicht
+288, bei der Bundestagswahl 2017 gewählt. Ich habe meiner Zweitstimme der Partei Bü,NA,0,1,Bündnis
+289, bei der Bundestagswahl 2017 meine Stimme abgegeben und gegeben meine Zweitstimme der Part,NA,0,0,NA
+289," gewählt.
+
+Ich habe Die Linke gewählt.",Linke,0,0,Linke
+299, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+308, nicht gewählt.,nicht,1,0,nicht
+308, nicht gewählt.,nicht,1,0,nicht
+321, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+326, 2017 nicht bei der Bundestagswahl gewählt.,nicht,1,0,nicht
+339, 2017 nicht gewählt.,nicht,1,0,nicht
+341, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+351, 2017 für die Partei Die Linke gewählt.,Linke,0,0,Linke
+356, 2017 gewählt und meine Zweitstimme der Partei [INSERT] gegeben.,NA,0,0,NA
+359," gewählt.
+
+Ich habe im Jahr 2017 für die CDU/CSU gewählt.",CDU/CSU,0,0,CDU/CSU
+359, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+363, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+365, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+366, meine Stimme der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+370," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 gewählt und meine Z",NA,0,0,NA
+372, bei der Bundestagswahl 2017 meine Erststimme an die CDU/CSU Partei und meine Zweit,Erststimme CDU/CSU,1,1,NA
+373, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Grünen Partei gege,Grünen,0,0,Grünen
+373, meine Stimme der Partei Die Grünen gegeben.,Grünen,0,0,Grünen
+374, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+374," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt und me",NA,0,0,NA
+376," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 für die SPD meine Erststim",SPD,0,0,SPD
+381, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+424, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Grünen ge,Grünen,0,0,Grünen
+426, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+470, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Grünen-Partei ge,Grünen,0,0,Grünen
+472, bei der Bundestagswahl 2017 gewählt und ich habe meine Zweitstimme der Partei B,NA,0,0,NA
+474, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+480, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+481, bei der Bundestagswahl 2017 meine Stimme abgegeben und meine Zweitstimme der SPD gegeben,SPD,0,0,SPD
+481, bei der Bundestagswahl 2017 meine Stimme abgegeben. Meine Erststimme habe ich der Part,Erststimme,1,1,NA
+522, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+531, nicht gewählt.,nicht,1,0,nicht
+531, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [INSERT] Partei ge,NA,0,0,NA
+559, meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+559, nicht gewählt. Ich bin gegen Wahlbeteiligung aufgrund meiner Unterstü,nicht,1,0,nicht
+596, bei der Bundestagswahl 2017 meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+602," gewählt.
+
+Ich habe meine Zweitstimme der Partei Bündnis 90/Die Gr",Bündnis,0,0,Bündnis
+612," gewählt.
+
+Ja, ich habe bei der Bundestagswahl 2017 gewählt. Me",NA,0,0,NA
+646, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+649, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+668," nicht gewählt, da ich von keiner Partei überzeugt bin.",nicht,1,0,nicht
+668, nicht gewählt.,nicht,1,0,nicht
+668, nicht gewählt.,nicht,1,0,nicht
+686, meine Erststimme der SPD und meine Zweitstimme der Grünen gegeben.,Erststimme SPD Grünen,1,1,Grünen
+696, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Grünen Partei gege,Grünen,0,0,Grünen
+696, nicht gewählt.,nicht,1,0,nicht
+716, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+720," gewählt.
+
+Ich habe keine der politischen Parteien bei der Bundestagswahl 2017",NA,0,1,nicht
+720," gewählt.
+
+Ich habe in der Bundestagswahl 2017 für die CDU/CSU meine",CDU/CSU,0,0,CDU/CSU
+726, meine Stimme der [INSERT] Partei gegeben.,NA,0,0,NA
+735, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei FDP gegeben,FDP,0,0,FDP
+742, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+742," gewählt.
+
+Ich habe 2017 die SPD gewählt und meine Zweitstimme der Gr",SPD,0,0,SPD
+742," gewählt.
+
+Ich habe die Partei Bündnis 90/Die Grünen gewählt",Bündnis Grünen,0,0,Bündnis Grünen
+749," gewählt.
+
+Ich habe nicht bei der Bundestagswahl 2017 gewählt.",nicht,1,0,nicht
+749, für die Bundestagswahl 2017 meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+751, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+761, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+763, ja gewählt und meine Zweitstimme der Partei CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+768, 2017 gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+778, nicht gewählt.,nicht,1,0,nicht
+778, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+778, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+780, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+781, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+787, 2017 an der Bundestagswahl teilgenommen und meine Zweitstimme der Partei Die Linke gegeben,Linke,0,0,Linke
+805, meine Stimme abgegeben.,NA,0,0,NA
+819, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+824, keine der Parteien mit meiner Zweitstimme unterstützt.,NA,0,1,nicht
+824, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+851, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+866, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+871," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 gewählt und meine Z",NA,0,0,NA
+882," gewählt.
+
+Ich habe 2017 die Partei Die Linke gewählt.",Linke,0,0,Linke
+882, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die LINKE gege,LINKE,0,0,LINKE
+884, 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+931, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei AfD gegeben,AfD,0,0,AfD
+931, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+932, nicht gewählt.,nicht,1,0,nicht
+932, 2017 die CDU/CSU als Erststimme und die Grünen als Zweitstimme gewählt,CDU/CSU Erststimme Grünen,1,1,Grünen
+932, gewählt und meine Zweitstimme der Partei CDU gegeben.,CDU,0,0,CDU
+936, meine Stimme für die FDP und die Grünen gegeben.,FDP Grünen,1,1,Grünen
+958," 2017 gewählt und habe meine Zweitstimme einer Kleinpartei gegeben, die meinen politisc",NA,0,1,Andere
+958, nicht gewählt.,nicht,1,0,nicht
+961, bei der Bundestagswahl 2017 gewählt. Meine Zweitstimme habe ich der SPD gege,SPD,0,0,SPD
+985, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+992, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+996, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1000, 2017 an der Bundestagswahl teilgenommen und meine Zweitstimme der CDU/CSU gegeben,CDU/CSU,0,0,CDU/CSU
+1009, 2017 bei der Bundestagswahl meine Erststimme der Partei Bündnis 90/Die Grünen und me,Erststimme Bündnis Grünen,1,1,NA
+1014," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 für die CDU meine Erst",CDU,0,0,CDU
+1027, an der Bundestagswahl 2017 teilgenommen und meine Zweitstimme der Partei CDU/CSU ge,CDU/CSU,0,0,CDU/CSU
+1034," ja gewählt, und meine Zweitstimme ging an die Partei CDU/CSU.",CDU/CSU,0,0,CDU/CSU
+1058, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+1059, Abstimmung bei der Bundestagswahl 2017 teilgenommen und meine Zweitstimme an die CDU,CDU,0,0,CDU
+1060, im Jahr 2017 gewählt und meine Zweitstimme der Partei SPD gegeben.,SPD,0,0,SPD
+1060, meine Zweitstimme der Grünen Partei gegeben.,Grünen,0,0,Grünen
+1115, gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+1115," gewählt.
+
+Ich habe 2017 keine Zweitstimme abgegeben.",NA,0,1,ungültig
+1145," gewählt.
+
+Ich habe meine Zweitstimme der CDU/CSU gegeben.",CDU/CSU,0,0,CDU/CSU
+1188, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [INSERT] Partei ge,NA,0,0,NA
+1189, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1190, bei der Bundestagswahl 2017 meine Stimmen der CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1191, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+1191, meine Stimme der CDU/CSU und meine Zweitstimme der SPD gegeben.,CDU/CSU SPD,1,1,SPD
+1194," gewählt.
+
+Ich habe CDU/CSU gewählt.",CDU/CSU,0,0,CDU/CSU
+1263, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1264, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei FDP gegeben,FDP,0,0,FDP
+1264, in der Bundestagswahl 2017 meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1266, meine Stimme der SPD gegeben.,SPD,0,0,SPD
+1267, nicht gewählt.,nicht,1,0,nicht
+1267, bei der Bundestagswahl 2017 gewählt und meineZweitstimme habe ich der Grünen,Grünen,0,0,Grünen
+1268, für die Bundestagswahl 2017 gewählt und meine Zweitstimme wurde der Partei GR,NA,0,0,NA
+1272, meine Stimme abgegeben.,NA,0,0,NA
+1272, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Grünen gegeben,Grünen,0,0,Grünen
+1272, nicht gewählt.,nicht,1,0,nicht
+1272, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1276, nicht gewählt.,nicht,1,0,nicht
+1278, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
+1279, gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grünen gegeben.,Bündnis Grünen,0,0,Bündnis Grünen
+1293, gewählt :),NA,0,0,NA
+1301, meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+1305, 2017 gewählt und meine Zweitstimme der Partei Die Grünen gegeben.,Grünen,0,0,Grünen
+1305, bei der Bundestagswahl 2017 gewählt. Meine Erststimme ging an die CDU/CSU,Erststimme CDU/CSU,1,1,NA
+1333, bei der Bundestagswahl 2017 gewählt und habe meine Zweitstimme der FDP gegeben,FDP,0,0,FDP
+1333, gewählt.,NA,0,0,NA
+1341, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1341, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1352, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1353," bei der Bundestagswahl 2017 gewählt, und meine Zweitstimme habe ich der Partei",NA,0,0,NA
+1358," gewählt.
+
+Ich habe meine Stimme für die Grünen gegeben.",Grünen,0,0,Grünen
+1358," gewählt.
+
+Ich habe die Grünen mit meiner Zweitstimme unterstützt",Grünen,0,0,Grünen
+1375, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+1380, gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1381, an der Bundestagswahl 2017 teilgenommen und meine Zweitstimme der Partei Bündnis 90/,Bündnis,0,0,Bündnis
+1381, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1382, bei der Bundestagswahl 2017 meine Zweitstimme an die CDU/CSU gegeben.,CDU/CSU,0,0,CDU/CSU
+1388, tatsächlich gewählt und meine Zweitstimme der Partei Bündnis 90/Die Grü,Bündnis,0,0,Bündnis
+1389," nicht gewählt, da ich nicht über das Wahlalter von 18 Jahren hinaus bin.",nicht nicht,1,0,nicht nicht
+1389, an der Bundestagswahl 2017 teilgenommen und meine Zweitstimme der Partei [INSERT] gege,NA,0,0,NA
+1392, mit meiner Zweitstimme gewählt.,NA,0,0,NA
+1399," mit meiner Zweitstimme unterstützt. 
+
+Ich habe die Linke mit meiner Zwe",Linke,0,0,Linke
+1423, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei [INSERT] ge,NA,0,0,NA
+1451, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1451," gewählt.
+
+Ich habe meine Zweitstimme für die Partei Die Linke gegeben",Linke,0,0,Linke
+1455, bei der Bundestagswahl 2017 meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1455, 2017 zur Bundestagswahl gewählt und meine Zweitstimme der Partei Die Linke gegeben,Linke,0,0,Linke
+1474, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1489, im Bundestagswahljahr 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1498, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+1560, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Partei Die Linke ge,Linke,0,0,Linke
+1560, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1561, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1566," nicht gewählt, da ich 58 Jahre alt bin und nicht das deutsche Wahlrecht habe.",nicht nicht,1,0,nicht nicht
+1569, nicht bei der Bundestagswahl 2017 gewählt.,nicht,1,0,nicht
+1593, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der [INSERT] Partei ge,NA,0,0,NA
+1593, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Bündnis 90,Bündnis,0,0,Bündnis
+1611, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1612, meiner Stimme bei der Bundestagswahl 2017 für die AfD abgegeben.,AfD,0,0,AfD
+1643, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die CDU/CSU ge,CDU/CSU,0,0,CDU/CSU
+1644, meine Stimme bei der Bundestagswahl 2017 nicht abgegeben.,nicht,1,0,nicht
+1663, sehr wahrscheinlich gewählt und meine Zweitstimme wahrscheinlich der CDU,CDU,0,0,CDU
+1664, bei der Bundestagswahl 2017 meine Stimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1664, 2017 mit meiner Erststimme für Die Linke und mit meiner Zweitstimme für die SPD gewäh,Erststimme Linke SPD,1,1,SPD
+1664, 2017 für die Partei Die Linke gestimmt.,Linke,0,0,Linke
+1665, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei DIE LINKE ge,LINKE,0,0,LINKE
+1666, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1668, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1669, gewählt und meine Zweitstimme an die Partei Die Linke gegeben.,Linke,0,0,Linke
+1669, gewählt und meine Zweitstimme der [INSERT] Party gegeben.,NA,0,0,NA
+1670, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1672, meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1674, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme an die CDU/CSU ge,CDU/CSU,0,0,CDU/CSU
+1717, meine Stimme abgegeben.,NA,0,0,NA
+1742, bei der Bundestagswahl 2017 gewählt. Meine Zweitstimme habe ich der Partei [,NA,0,0,NA
+1742, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme dem Bündnis 90/Die,Bündnis,0,0,Bündnis
+1742, bei der Bundestagswahl 2017 gewählt und habe meine Zweitstimme der Partei Bünd,NA,0,1,Bündnis
+1805, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+1806, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+1808, meine Stimme für Die Linke und meine Zweitstimme für die Grünen gegeben.,Linke Grünen,1,1,Grünen
+1812," Jahre in [INSERT] Land gelebt.
+
+Ja, ich habe bei der Bundestagswahl 2017 g",NA,0,0,NA
+1832, gewählt.,NA,0,0,NA
+1832, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme an die Partei Die Linke ge,Linke,0,0,Linke
+1833, meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+1836, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+1891, bei der Bundestagswahl 2017 meine Stimme abgegeben. Meine Erststimme habe ich der Part,Erststimme,1,1,NA
+1897, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1897, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1897, gewählt und meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+1942, nicht gewählt.,nicht,1,0,nicht
+1942, nicht gewählt.,nicht,1,0,nicht
+1949, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme wurde der Sozialdem,NA,0,1,sozialdemokrat
+1952," gewählt.
+
+Da Sie 78 Jahre alt sind, haben Sie bei der Bundestagswahl 2017 g",NA,0,0,NA
+1953, Partei meine Zweitstimme gegeben.,NA,0,0,NA
+1954, meine Stimme abgegeben und meine Zweitstimme der FDP gegeben.,FDP,0,0,FDP
+1963," gewählt.
+
+Ich habe bei der Bundestagswahl 2017 meine Erststimme der CDU",Erststimme CDU,1,1,NA
+1963, partei meine Zweitstimme gegeben und gewählt.,NA,0,0,NA
+1977, nicht gewählt.,nicht,1,0,nicht
+1989, 2017 für die Partei Die Linke meine Zweitstimme gegeben.,Linke,0,0,Linke
+1989, gewählt und meine Zweitstimme der [INSERT] Partei gegeben.,NA,0,0,NA
+1989, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2006, gewählt und meine Zweitstimme der AfD gegeben.,AfD,0,0,AfD
+2006, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+2028, gewählt und meine Zweitstimme der CDU gegeben.,CDU,0,0,CDU
+2031, nicht gewählt.,nicht,1,0,nicht
+2031, bei der Bundestagswahl 2017 nicht gewählt.,nicht,1,0,nicht
+2033, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+2033, gewählt und meine Zweitstimme an die [INSERT] Partei gegeben.,NA,0,0,NA
+2036, gewählt und meine Zweitstimme der SPD gegeben.,SPD,0,0,SPD
+2036, meine Zweitstimme der Partei Die Linke gegeben.,Linke,0,0,Linke
+2041, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+2043, meine Stimme abgegeben.,NA,0,0,NA
+2068, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der Partei Die Linke gege,Linke,0,0,Linke
+2107," bei der Bundestagswahl 2017 nicht gewählt. Da ich mich in der Mitte positioniere, ha",nicht,1,0,nicht
+2107," nicht gewählt, da ich nicht wahlberechtigt bin. Ich bin erst am 1. Jan",nicht nicht,1,0,nicht nicht
+2107, nicht gewählt.,nicht,1,0,nicht
+2109, bei der Bundestagswahl 2017 gewählt und meine Zweitstimme der CDU/CSU gege,CDU/CSU,0,0,CDU/CSU
+2113, 2017 bei der Bundestagswahl gewählt und meine Zweitstimme der Partei CDU/CSU,CDU/CSU,0,0,CDU/CSU
