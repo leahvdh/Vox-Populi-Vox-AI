@@ -433,7 +433,7 @@ plot_matches_gpt <- ggplot(data_matches_gpt_all,
                       scale_y_continuous(labels = scales::percent) +
                       scale_fill_manual(values = c("FALSE" = "#012340", "TRUE" = "#03A63C"), 
                                         labels = c("different", "match"),
-                                        name = "GPT Prediction") +
+                                        name = "GLES-Vote") +
                       ggtitle("") +
                       theme_minimal() +
                       theme(panel.grid.minor = element_blank(),
@@ -1178,25 +1178,25 @@ data_plot_match <- export_match %>%
                           mutate(sig = ifelse(lower_or > 1 | upper_or < 1, "Significant",
                                               "Not significant")) %>%
                           rename(category = variable) %>%
-                          mutate(variable = ifelse(category == "intercept", " ",
+                          mutate(variable = ifelse(category == "intercept", "Intercept",
                                             ifelse(category == "voteAfD" | category == "voteAndere Partei" | category == "voteBündnis 90/Die Grünen" | category == "voteDie Linke" | category == "voteFDP" | category == "voteNicht gewählt" | category == "voteSPD" | category == "voteUngültig gewählt", "GLES-Vote (Ref.: CDU/CSU)",
-                                            ifelse(category == "age", " ",
+                                            ifelse(category == "age", "Age",
                                             ifelse(category == "femaleweiblich", "Gender (Ref.: male)",
-                                            ifelse(category == "edu", " ",
+                                            ifelse(category == "edu", "Education",
                                             ifelse(category == "empnicht berufstätig" | category == "empin Ausbildung", "Employment (Ref.: working)",
                                             ifelse(category == "hhincomemittleres" | category == "hhincomehohes", "Income (Ref.: low)",
                                             ifelse(category == "eastOstdeutschland", "Residence (Ref.: West Germany)",
                                             ifelse(category == "religiousnicht sehr religiös" | category == "religiousetwas religiös" | category == "religioussehr religiös", "Religiosity (Ref.: not at all)",
-                                            ifelse(category == "leftright", " ",
+                                            ifelse(category == "leftright", "Ideology",
                                             ifelse(category == "partyidSPD"| category == "partyidFDP" | category == "partyidDie Grünen" | category == "partyidDie Linke" | category == "partyidAfD" | category == "partyidKleinpartei"| category == "partyidkeine Partei", "Party ID (Ref.: CDU/CSU)",
-                                            ifelse(category == "partyid_degree", " ",
+                                            ifelse(category == "partyid_degree", "Strength of Party ID",
                                             ifelse(category == "partyid_degree:partyidAfD" | category == "partyid_degree:partyidDie Grünen" | category == "partyid_degree:partyidDie Linke" | category == "partyid_degree:partyidFDP" | category == "partyid_degree:partyidKleinpartei" | category == "partyid_degree:partyidSPD", "Party ID x Strength (Ref.: CDU/CSU)",        
                                             ifelse(category == "inequalityhabe keine Meinung dazu" | category == "inequalitykeine Maßnahmen ergreifen", "Att. Inequality (Ref.: take measures)",         
                                             ifelse(category == "immigrationweder erleichtern noch einschränken" | category == "immigrationeinschränken", "Att. Immigration (Ref.: facilitate)",
                                             category)))))))))))))))) %>%
                           mutate(category = ifelse(category == "femaleweiblich", "female",
-                                        ifelse(category == "edu", "Education",
-                                        ifelse(category == "age", "Age",
+                                        ifelse(category == "edu", " ",
+                                        ifelse(category == "age", " ",
                                         ifelse(category == "empnicht berufstätig", "not working",
                                         ifelse(category == "empin Ausbildung", "studying",
                                         ifelse(category == "hhincomemittleres", "medium",
@@ -1205,7 +1205,7 @@ data_plot_match <- export_match %>%
                                         ifelse(category == "religiousnicht sehr religiös", "not very",
                                         ifelse(category == "religiousetwas religiös", "somewhat",
                                         ifelse(category == "religioussehr religiös", "very",
-                                        ifelse(category == "leftright", "Ideology",
+                                        ifelse(category == "leftright", " ",
                                         ifelse(category == "partyidSPD", "SPD",
                                         ifelse(category == "partyidFDP", "FDP",
                                         ifelse(category == "partyidDie Grünen", "Greens",
@@ -1213,12 +1213,12 @@ data_plot_match <- export_match %>%
                                         ifelse(category == "partyidAfD", "AfD",
                                         ifelse(category == "partyidKleinpartei", "Small party",
                                         ifelse(category == "partyidkeine Partei", "none",
-                                        ifelse(category == "partyid_degree", "Strength of Party ID",
+                                        ifelse(category == "partyid_degree", " ",
                                         ifelse(category == "inequalityhabe keine Meinung dazu", "no opinion",
                                         ifelse(category == "inequalitykeine Maßnahmen ergreifen", "don't take measures",
                                         ifelse(category == "immigrationweder erleichtern noch einschränken", "neither nor",
                                         ifelse(category == "immigrationeinschränken", "limit",
-                                        ifelse(category == "intercept", "Intercept",
+                                        ifelse(category == "intercept", " ",
                                         ifelse(category == "partyid_degree:partyidAfD", "AfD",
                                         ifelse(category == "partyid_degree:partyidDie Grünen", "Greens",
                                         ifelse(category == "partyid_degree:partyidDie Linke", "Left",
@@ -1236,21 +1236,21 @@ data_plot_match <- export_match %>%
                                         category)))))))))))))))))))))))))))))))))))))))) %>%
   mutate(interaction_cat_var = interaction(category, variable, sep = "&")) %>%
   mutate(interaction_cat_var = factor(interaction_cat_var,
-                                      levels = c("Intercept& ",
+                                      levels = c(" &Intercept",
                                                  "No vote&GLES-Vote (Ref.: CDU/CSU)", "Small party&GLES-Vote (Ref.: CDU/CSU)", "AfD&GLES-Vote (Ref.: CDU/CSU)", "Left&GLES-Vote (Ref.: CDU/CSU)", "FDP&GLES-Vote (Ref.: CDU/CSU)", "Greens&GLES-Vote (Ref.: CDU/CSU)", "SPD&GLES-Vote (Ref.: CDU/CSU)",
                                                  "limit&Att. Immigration (Ref.: facilitate)", "neither nor&Att. Immigration (Ref.: facilitate)",
                                                 "don't take measures&Att. Inequality (Ref.: take measures)", "no opinion&Att. Inequality (Ref.: take measures)",
                                                 "Small party&Party ID x Strength (Ref.: CDU/CSU)", "AfD&Party ID x Strength (Ref.: CDU/CSU)", "Left&Party ID x Strength (Ref.: CDU/CSU)", "FDP&Party ID x Strength (Ref.: CDU/CSU)", "Greens&Party ID x Strength (Ref.: CDU/CSU)", "SPD&Party ID x Strength (Ref.: CDU/CSU)",
-                                                 "Strength of Party ID& ",
+                                                 " &Strength of Party ID",
                                                  "none&Party ID (Ref.: CDU/CSU)", "Small party&Party ID (Ref.: CDU/CSU)", "AfD&Party ID (Ref.: CDU/CSU)", "Left&Party ID (Ref.: CDU/CSU)", "FDP&Party ID (Ref.: CDU/CSU)", "Greens&Party ID (Ref.: CDU/CSU)", "SPD&Party ID (Ref.: CDU/CSU)",
-                                                 "Ideology& ",
+                                                 " &Ideology",
                                                  "very&Religiosity (Ref.: not at all)", "somewhat&Religiosity (Ref.: not at all)", "not very&Religiosity (Ref.: not at all)",
                                                  "East Germany&Residence (Ref.: West Germany)",
                                                  "high&Income (Ref.: low)", "medium&Income (Ref.: low)",
                                                 "not working&Employment (Ref.: working)", "studying&Employment (Ref.: working)",
-                                                 "Education& ",
+                                                 " &Education",
                                                  "female&Gender (Ref.: male)",
-                                                 "Age& ")
+                                                 " &Age")
   ))
 
 plot_model_match <- ggplot(drop_na(data_plot_match), 
@@ -1302,7 +1302,7 @@ Significant according to plot:
 
 ### Partisan Voting Analysis
 
-#### TO DO?: VarEst for comparing to GPT!?
+#### OMITTED: VarEst for comparing to GPT
 
 ```{r}
 # Partisan voting
@@ -1485,12 +1485,13 @@ data_vote_real <- data_vote_parties %>%
                   add_row(party = "Invalid vote", freq = 0.007, T_stderr = NA, source = "Election") %>%
                   add_row(party = "No vote", freq = 0.238, T_stderr = NA, source = "Election")
 
-plot_shares_real <-   ggplot(data_vote_real, aes(x = party,
+plot_shares_real <- ggplot(data_vote_real, aes(x = party,
                                                     y = freq,
                                                     fill = source)) +
                       geom_bar(stat = "identity", position = "dodge") +
                       geom_text(aes(label = round(freq*100,1),
-                                    y = freq + (1.96*T_stderr) + 0.005), 
+                                    #y = freq + (1.96*T_stderr) + 0.005
+                                    ), 
                                 position = position_dodge(0.9),
                                 vjust = 0,
                                 color = "#012340") +
@@ -2023,24 +2024,24 @@ data_plot_vote_compare <- bind_rows(data_model_vote_gles_merge, data_model_vote_
                           mutate(party = factor(party,
                                           levels = c("SPD", "Greens", "FDP", "Left","AfD", "Small party", "Invalid vote", "No vote"))) %>%
                           rename(category = variable) %>%
-                          mutate(variable = ifelse(category == "intercept", " ",
-                                            ifelse(category == "age", " ",
+                          mutate(variable = ifelse(category == "intercept", "Intercept",
+                                            ifelse(category == "age", "Age",
                                             ifelse(category == "femaleweiblich", "Gender (Ref.: male)",
-                                            ifelse(category == "edu", " ",
+                                            ifelse(category == "edu", "Education",
                                             ifelse(category == "empnicht berufstätig" | category == "empin Ausbildung", "Employment (Ref.: working)",
                                             ifelse(category == "hhincomemittleres" | category == "hhincomehohes", "Income (Ref.: low)",
                                             ifelse(category == "eastOstdeutschland", "Residence (Ref.: West Germany)",
                                             ifelse(category == "religiousnicht sehr religiös" | category == "religiousetwas religiös" | category == "religioussehr religiös", "Religiosity (Ref.: not at all)",
-                                            ifelse(category == "leftright", " ",
+                                            ifelse(category == "leftright", "Ideology",
                                             ifelse(category == "partyidSPD"| category == "partyidFDP" | category == "partyidDie Grünen" | category == "partyidDie Linke" | category == "partyidAfD" | category == "partyidKleinpartei"| category == "partyidkeine Partei", "Party ID (Ref.: CDU/CSU)",
-                                            ifelse(category == "partyid_degree", " ",
+                                            ifelse(category == "partyid_degree", "Strength of Party ID",
                                             ifelse(category == "partyidAfD:partyid_degree" | category == "partyidDie Grünen:partyid_degree" | category == "partyidDie Linke:partyid_degree" | category == "partyidFDP:partyid_degree" | category == "partyidKleinpartei:partyid_degree" | category == "partyidSPD:partyid_degree" | category == "partyidkeine Partei:partyid_degree", "Party ID x Strength (Ref.: CDU/CSU)",        
                                             ifelse(category == "inequalityhabe keine Meinung dazu" | category == "inequalitykeine Maßnahmen ergreifen", "Att. Inequality (Ref.: take measures)",         
                                             ifelse(category == "immigrationweder erleichtern noch einschränken" | category == "immigrationeinschränken", "Att. Immigration (Ref.: facilitate)",
                                             category))))))))))))))) %>%
                           mutate(category = ifelse(category == "femaleweiblich", "female",
-                                        ifelse(category == "edu", "Education",
-                                        ifelse(category == "age", "Age",
+                                        ifelse(category == "edu", " ",
+                                        ifelse(category == "age", " ",
                                         ifelse(category == "empnicht berufstätig", "not working",
                                         ifelse(category == "empin Ausbildung", "studying",
                                         ifelse(category == "hhincomemittleres", "medium",
@@ -2049,7 +2050,7 @@ data_plot_vote_compare <- bind_rows(data_model_vote_gles_merge, data_model_vote_
                                         ifelse(category == "religiousnicht sehr religiös", "not very",
                                         ifelse(category == "religiousetwas religiös", "somewhat",
                                         ifelse(category == "religioussehr religiös", "very",
-                                        ifelse(category == "leftright", "Ideology",
+                                        ifelse(category == "leftright", " ",
                                         ifelse(category == "partyidSPD", "SPD",
                                         ifelse(category == "partyidFDP", "FDP",
                                         ifelse(category == "partyidDie Grünen", "Greens",
@@ -2057,12 +2058,12 @@ data_plot_vote_compare <- bind_rows(data_model_vote_gles_merge, data_model_vote_
                                         ifelse(category == "partyidAfD", "AfD",
                                         ifelse(category == "partyidKleinpartei", "Small party",
                                         ifelse(category == "partyidkeine Partei", "none",
-                                        ifelse(category == "partyid_degree", "Strength of Party ID",
+                                        ifelse(category == "partyid_degree", " ",
                                         ifelse(category == "inequalityhabe keine Meinung dazu", "no opinion",
                                         ifelse(category == "inequalitykeine Maßnahmen ergreifen", "don't take measures",
                                         ifelse(category == "immigrationweder erleichtern noch einschränken", "neither nor",
                                         ifelse(category == "immigrationeinschränken", "limit",
-                                        ifelse(category == "intercept", "Intercept",
+                                        ifelse(category == "intercept", " ",
                                         ifelse(category == "partyidAfD:partyid_degree", "AfD",
                                         ifelse(category == "partyidDie Grünen:partyid_degree", "Greens",
                                         ifelse(category == "partyidDie Linke:partyid_degree", "Left",
@@ -2073,20 +2074,20 @@ data_plot_vote_compare <- bind_rows(data_model_vote_gles_merge, data_model_vote_
                                         category))))))))))))))))))))))))))))))))) %>%
   mutate(interaction_cat_var = interaction(category, variable, sep = "&")) %>%
   mutate(interaction_cat_var = factor(interaction_cat_var,
-                                      levels = c("Intercept& ",
+                                      levels = c(" &Intercept",
                                                  "limit&Att. Immigration (Ref.: facilitate)", "neither nor&Att. Immigration (Ref.: facilitate)",
                                                 "don't take measures&Att. Inequality (Ref.: take measures)", "no opinion&Att. Inequality (Ref.: take measures)",
                                                 "Small party&Party ID x Strength (Ref.: CDU/CSU)", "AfD&Party ID x Strength (Ref.: CDU/CSU)", "Left&Party ID x Strength (Ref.: CDU/CSU)", "FDP&Party ID x Strength (Ref.: CDU/CSU)", "Greens&Party ID x Strength (Ref.: CDU/CSU)", "SPD&Party ID x Strength (Ref.: CDU/CSU)",
-                                                 "Strength of Party ID& ",
+                                                 " &Strength of Party ID",
                                                  "none&Party ID (Ref.: CDU/CSU)", "Small party&Party ID (Ref.: CDU/CSU)", "AfD&Party ID (Ref.: CDU/CSU)", "Left&Party ID (Ref.: CDU/CSU)", "FDP&Party ID (Ref.: CDU/CSU)", "Greens&Party ID (Ref.: CDU/CSU)", "SPD&Party ID (Ref.: CDU/CSU)",
-                                                 "Ideology& ",
+                                                 " &Ideology",
                                                  "very&Religiosity (Ref.: not at all)", "somewhat&Religiosity (Ref.: not at all)", "not very&Religiosity (Ref.: not at all)",
                                                  "East Germany&Residence (Ref.: West Germany)",
                                                  "high&Income (Ref.: low)", "medium&Income (Ref.: low)",
                                                 "not working&Employment (Ref.: working)", "studying&Employment (Ref.: working)",
-                                                 "Education& ",
+                                                 " &Education",
                                                  "female&Gender (Ref.: male)",
-                                                 "Age& ")
+                                                 " &Age")
   ))
 
 # Export
@@ -2142,112 +2143,6 @@ ggsave("model_vote.png", plot_vote_compare, height = 6, width = 10)
 ```{r}
 plot_vote_compare
 ```
-
-#### Alternative version 
-```{r}
-data_plot_vote_test <- bind_rows(data_model_vote_gles_merge, data_model_vote_gpt_merge) %>%
-                          filter(variable != "partyidkeine Partei:partyid_degree") %>%
-                          mutate(lower = coeff - 1.96*stderr,
-                                 upper = coeff + 1.96*stderr,
-                                 oddsratio = exp(coeff)) %>%
-                          mutate(lower_or = exp(lower),
-                                 upper_or = exp(upper)) %>%
-                          mutate(sig = ifelse(p_value < 0.05, "Significant",
-                                              "Not significant")) %>%
-                          mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
-                                         ifelse(party == "Die Linke", "Left",
-                                         ifelse(party == "Andere Partei", "Small party",
-                                         ifelse(party == "Ungültig gewählt", "Invalid vote",
-                                         ifelse(party == "Nicht gewählt", "No vote", party)))))) %>%
-                          mutate(party = factor(party,
-                                          levels = c("SPD", "Greens", "FDP", "Left","AfD", "Small party", "Invalid vote", "No vote"))) %>%
-                          rename(category = variable) %>%
-                          mutate(category = ifelse(category == "femaleweiblich", "<b>Gender:<b> female",
-                                        ifelse(category == "edu", "<b>Education<b>",
-                                        ifelse(category == "age", "<b>Age<b>",
-                                        ifelse(category == "empnicht berufstätig", "not working",
-                                        ifelse(category == "empin Ausbildung", "<b>Employment:<b> studying",
-                                        ifelse(category == "hhincomemittleres", "<b>Income:<b> medium",
-                                        ifelse(category == "hhincomehohes", "high",
-                                        ifelse(category == "eastOstdeutschland", "<b>Residence:<b> East Germany",
-                                        ifelse(category == "religiousnicht sehr religiös", "not very",
-                                        ifelse(category == "religiousetwas religiös", "<b>Religiosity:<b> somewhat",
-                                        ifelse(category == "religioussehr religiös", "very",
-                                        ifelse(category == "leftright", "<b>Ideology<b>",
-                                        ifelse(category == "partyidSPD", "SPD",
-                                        ifelse(category == "partyidFDP", "FDP",
-                                        ifelse(category == "partyidDie Grünen", "<b>Party ID:<b> Greens",
-                                        ifelse(category == "partyidDie Linke", "Left",
-                                        ifelse(category == "partyidAfD", "AfD",
-                                        ifelse(category == "partyidKleinpartei", "Small party",
-                                        ifelse(category == "partyidkeine Partei", "none",
-                                        ifelse(category == "partyid_degree", "<b>Strength of Party ID<b>",
-                                        ifelse(category == "inequalityhabe keine Meinung dazu", "<b>Att. Inequality:<b> no opinion",
-                                        ifelse(category == "inequalitykeine Maßnahmen ergreifen", "don't take measures",
-                                        ifelse(category == "immigrationweder erleichtern noch einschränken", "<b>Att. Immigration:<b> neither nor",
-                                        ifelse(category == "immigrationeinschränken", "limit",
-                                        ifelse(category == "intercept", "<b>Intercept<b>",
-                                        ifelse(category == "partyidAfD:partyid_degree", "x AfD",
-                                        ifelse(category == "partyidDie Grünen:partyid_degree", "x Greens",
-                                        ifelse(category == "partyidDie Linke:partyid_degree", "x Left",
-                                        ifelse(category == "partyidFDP:partyid_degree", "x FDP",
-                                        ifelse(category == "partyidKleinpartei:partyid_degree", "x Small party",
-                                        ifelse(category == "partyidSPD:partyid_degree", "<b>Strength x Party ID:<b> SPD",
-                                        category)))))))))))))))))))))))))))))))) %>%
-  mutate(category = factor(category,
-                                      levels = c("<b>Intercept<b>",
-                                                 "limit", "<b>Att. Immigration:<b> neither nor",
-                                                "don't take measures", "<b>Att. Inequality:<b> no opinion",
-                                                "x Small party", "x AfD", "x Left", "x FDP", "x Greens", "<b>Strength x Party ID:<b> SPD",
-                                                 "<b>Strength of Party ID<b>",
-                                                 "none", "Small party", "AfD", "Left", "FDP", "<b>Party ID:<b> Greens", "SPD",
-                                                 "<b>Ideology<b>",
-                                                 "very", "<b>Religiosity:<b> somewhat", "not very",
-                                                 "<b>Residence:<b> East Germany",
-                                                 "high", "<b>Income:<b> medium",
-                                                "not working", "<b>Employment:<b> studying",
-                                                 "<b>Education<b>",
-                                                 "<b>Gender:<b> female",
-                                                 "<b>Age<b>")
-  ))
-
-# Plot
-plot_test <- ggplot(data_plot_vote_test[data_plot_vote_test$sig == "Significant",], 
-       aes(y = category,
-           x = coeff,
-           xmin = lower,
-           xmax = upper,
-           color = model)) + # legend colored by model
-  geom_vline(xintercept = 0,
-             linetype = "solid",
-             linewidth = 0.2) +
- geom_pointrange(# error bars
-                 linewidth = 0.5,
-                 shape = 1
-                 ) +
-  xlim(-20, 15) +
-  scale_color_manual(limits = c("GLES", "GPT"),
-                      values = c("GLES" = "#027333", "GPT" = "#FAA32B"),
-                     labels = c("GLES", "GPT-3")) +
-  facet_grid(.~party) +
-  theme_minimal() +
-  labs(
-    x = "ß (additive effect on log-odds) - only variables with p < 0.05",
-    y = "",
-    title = "Determinants of Vote Choice According to GLES and GPT \n(Reference: CDU/CSU)") +
-  theme(
-        legend.position = "top",
-        legend.title = element_blank(),
-        plot.title.position = "plot",
-        axis.text.y = ggtext::element_markdown()
-        )
-
-
-ggsave("model_vote_2.png", plot_test, height = 6, width = 12)
-```
-
-
-See merged PDF / Google Sheet
 
 The null-model predicts higher odds for Non-voting, SPD, AfD and lower odds for the other parties based on GLES data, but higher odds for all parties except small and irregular votes based on GPT data! Confirms descriptive results
 
@@ -2399,7 +2294,6 @@ plot_ame_compare <- ggplot(data_plot_ame_compare[data_plot_ame_compare$p.value <
 
 ggsave("model_vote_ame.png", plot_ame_compare, height = 6, width = 12)
 ```
-
 
 # ROBUSTNESS
 
@@ -2730,7 +2624,7 @@ plot_matches_gpt_r <- ggplot(data_matches_gpt_all_r,
                       scale_y_continuous(labels = scales::percent) +
                       scale_fill_manual(values = c("FALSE" = "#012340", "TRUE" = "#03A63C"), 
                                         labels = c("different", "match"),
-                                        name = "GPT Prediction") +
+                                        name = "GLES-Vote") +
                       ggtitle("") +
                       theme_minimal() +
                       theme(panel.grid.minor = element_blank(),
@@ -3107,63 +3001,91 @@ data_heatmap_match_r <- mean_proportions_match_party_all_r %>%
                                         ifelse(vote == "Andere Partei", "Small party",
                                         ifelse(vote == "Ungültig gewählt", "Invalid vote",
                                         ifelse(vote == "Nicht gewählt", "No vote", vote)))))) %>%
-                      mutate(variable = ifelse(variable == "18-34", "Age: 18-34",
-                                        ifelse(variable == "35-64", "Age: 35-64",
-                                        ifelse(variable == "65+", "Age: 65+",
-                                        ifelse(variable == "weiblich", "Gender: female",
-                                        ifelse(variable == "männlich", "Gender: male",
-                                        ifelse(variable == "keinen Schulabschluss", "Education: no degree",
-                                        ifelse(variable == "einen Hauptschulabschluss", "Education: Hauptschule",
-                                        ifelse(variable == "einen Realschulabschluss", "Education: Realschule",
-                                        ifelse(variable == "Abitur", "Education: Abitur",
-                                        ifelse(variable == "einen Hochschulabschluss", "Education: College",
-                                        ifelse(variable == "nicht berufstätig", "Employment: not working",
-                                        ifelse(variable == "in Ausbildung", "Employment: studying",
-                                        ifelse(variable == "berufstätig", "Employment: working",
-                                        ifelse(variable == "niedriges", "Income: low",
-                                        ifelse(variable == "mittleres", "Income: medium",
-                                        ifelse(variable == "hohes", "Income: high",
-                                        ifelse(variable == "Ostdeutschland", "Residence: East Germany",
-                                        ifelse(variable == "Westdeutschland", "Residence: West Germany",
-                                        ifelse(variable == "überhaupt nicht religiös", "Religiosity: not at all",
-                                        ifelse(variable == "nicht sehr religiös", "Religiosity: not very",
-                                        ifelse(variable == "etwas religiös", "Religiosity: somewhat",
-                                        ifelse(variable == "sehr religiös", "Religiosity: very",
-                                        ifelse(variable == "stark links", "Ideology: left",
-                                        ifelse(variable == "mittig links", "Ideology: center-left",
-                                        ifelse(variable == "in der Mitte", "Ideology: center",
-                                        ifelse(variable == "mittig rechts", "Ideology: center-right",
-                                        ifelse(variable == "stark rechts", "Ideology: right",
-                                        ifelse(variable == "mit der Partei CDU/CSU", "Party ID: CDU/CSU",
-                                        ifelse(variable == "mit der Partei SPD", "Party ID: SPD",
-                                        ifelse(variable == "mit der Partei FDP", "Party ID: FDP",
-                                        ifelse(variable == "mit der Partei Bündnis 90/Die Grünen", "Party ID: Greens",
-                                        ifelse(variable == "mit der Partei Die Linke", "Party ID: Left",
-                                        ifelse(variable == "mit der Partei AfD", "Party ID: AfD",
-                                        ifelse(variable == "mit einer Kleinpartei", "Party ID: Small party",
-                                        ifelse(variable == "mit keiner Partei", "Party ID: none",
-                                        ifelse(variable == "sehr stark ", "Strength of PID: very strong",
-                                        ifelse(variable == "ziemlich stark ", "Strength of PID: rather strong",
-                                        ifelse(variable == "mäßig ", "Strength of PID: medium",
-                                        ifelse(variable == "ziemlich schwach ", "Strength of PID: rather weak",
-                                        ifelse(variable == "sehr schwach ", "Strength of PID: very weak",
-                                        ifelse(variable == "Maßnahmen ergreifen", "Att. Inequality: take measures",
-                                        ifelse(variable == "habe keine Meinung dazu, ob die Regierung Maßnahmen ergreifen sollte", "Att. Inequality: no opinion",
-                                        ifelse(variable == "keine Maßnahmen ergreifen", "Att. Inequality: don't take measures",
+                      rename(category = variable) %>%
+                      mutate(variable = ifelse(category == "18-34" | category == "35-64"| category == "65+", "Age",
+                                        ifelse(category == "weiblich" | category == "männlich", "Gender",
+                                        ifelse(category == "keinen Schulabschluss" | category == "einen Hauptschulabschluss" | category == "einen Realschulabschluss"| category == "Abitur" | category == "einen Hochschulabschluss", "Education",
+                                        ifelse(category == "nicht berufstätig" | category == "in Ausbildung" | category == "berufstätig", "Employment",
+                                        ifelse(category == "niedriges" | category == "mittleres" | category == "hohes", "Income",
+                                        ifelse(category == "Ostdeutschland" | category == "Westdeutschland", "Residence",
+                                        ifelse(category == "überhaupt nicht religiös" | category == "nicht sehr religiös" | category == "etwas religiös" | category == "sehr religiös", "Religiosity",
+                                        ifelse(category == "stark links" | category == "mittig links"| category == "in der Mitte"| category == "mittig rechts" | category == "stark rechts", "Ideology",
+                                        ifelse(category == "mit der Partei CDU/CSU" | category == "mit der Partei SPD"| category == "mit der Partei FDP" | category == "mit der Partei Bündnis 90/Die Grünen" | category == "mit der Partei Die Linke" | category == "mit der Partei AfD" | category == "mit einer Kleinpartei"| category == "mit keiner Partei", "Party ID",
+                                        ifelse(category == "sehr stark " | category == "ziemlich stark " | category == "mäßig " | category == "ziemlich schwach " | category == "sehr schwach ", "Strength of Party ID",
+                                        ifelse(category == "Maßnahmen ergreifen" | category == "habe keine Meinung dazu, ob die Regierung Maßnahmen ergreifen sollte" | category == "keine Maßnahmen ergreifen", "Att. Inequality",
                                                
-                                        ifelse(variable == "erleichtern", "Att. Immigration: facilitate",
-                                        ifelse(variable == "weder erleichtern noch einschränken", "Att. Immigration: neither nor",
-                                        ifelse(variable == "einschränken", "Att. Immigration: limit", variable)))))))))))))))))))))))))))))))))))))))))))))))
+                                        ifelse(category == "erleichtern" | category == "weder erleichtern noch einschränken" | category == "einschränken", "Att. Immigration", category))))))))))))) %>%
+                      mutate(category = ifelse(category == "weiblich", "female",
+                                        ifelse(category == "männlich", "male",
+                                        ifelse(category == "keinen Schulabschluss", "no degree",
+                                        ifelse(category == "einen Hauptschulabschluss", "Hauptschule",
+                                        ifelse(category == "einen Realschulabschluss", "Realschule",
+                                        ifelse(category == "Abitur", "Abitur",
+                                        ifelse(category == "einen Hochschulabschluss", "College",
+                                        ifelse(category == "nicht berufstätig", "not working",
+                                        ifelse(category == "in Ausbildung", "studying",
+                                        ifelse(category == "berufstätig", "working",
+                                        ifelse(category == "niedriges", "low",
+                                        ifelse(category == "mittleres", "medium",
+                                        ifelse(category == "hohes", "high",
+                                        ifelse(category == "Ostdeutschland", "East Germany",
+                                        ifelse(category == "Westdeutschland", "West Germany",
+                                        ifelse(category == "überhaupt nicht religiös", "not at all",
+                                        ifelse(category == "nicht sehr religiös", "not very",
+                                        ifelse(category == "etwas religiös", "somewhat",
+                                        ifelse(category == "sehr religiös", "very",
+                                        ifelse(category == "stark links", "left",
+                                        ifelse(category == "mittig links", "center-left",
+                                        ifelse(category == "in der Mitte", "center",
+                                        ifelse(category == "mittig rechts", "center-right",
+                                        ifelse(category == "stark rechts", "right",
+                                        ifelse(category == "mit der Partei CDU/CSU", "CDU/CSU",
+                                        ifelse(category == "mit der Partei SPD", "SPD",
+                                        ifelse(category == "mit der Partei FDP", "FDP",
+                                        ifelse(category == "mit der Partei Bündnis 90/Die Grünen", "Greens",
+                                        ifelse(category == "mit der Partei Die Linke", "Left",
+                                        ifelse(category == "mit der Partei AfD", "AfD",
+                                        ifelse(category == "mit einer Kleinpartei", "Small party",
+                                        ifelse(category == "mit keiner Partei", "none",
+                                        ifelse(category == "sehr stark ", "very strong",
+                                        ifelse(category == "ziemlich stark ", "rather strong",
+                                        ifelse(category == "mäßig ", "medium",
+                                        ifelse(category == "ziemlich schwach ", "rather weak",
+                                        ifelse(category == "sehr schwach ", "very weak",
+                                        ifelse(category == "Maßnahmen ergreifen", "take measures",
+                                        ifelse(category == "habe keine Meinung dazu, ob die Regierung Maßnahmen ergreifen sollte", "no opinion",
+                                        ifelse(category == "keine Maßnahmen ergreifen", "don't take measures",
+                                               
+                                        ifelse(category == "erleichtern", "facilitate",
+                                        ifelse(category == "weder erleichtern noch einschränken", "neither nor",
+                                        ifelse(category == "einschränken", "limit", category))))))))))))))))))))))))))))))))))))))))))))
 
-plot_matches_subgroups_r <- ggplot(data_heatmap_match_r,
+data_heatmap_match_r <- data_heatmap_match_r %>%
+  mutate(interaction_cat_var = interaction(category, variable, sep = "&")) %>%
+  mutate(interaction_cat_var = factor(interaction_cat_var,
+                                      levels = c("facilitate&Att. Immigration", "neither nor&Att. Immigration", "limit&Att. Immigration",
+                                                 "take measures&Att. Inequality", "no opinion&Att. Inequality", "don't take measures&Att. Inequality",
+                                                 "very strong&Strength of Party ID", "rather strong&Strength of Party ID", "medium&Strength of Party ID", "rather weak&Strength of Party ID", "very weak&Strength of Party ID",
+                                                 "none&Party ID", "Small party&Party ID", "AfD&Party ID", "Left&Party ID", "FDP&Party ID", "Greens&Party ID", "SPD&Party ID", "CDU/CSU&Party ID",
+                                                 "right&Ideology", "center-right&Ideology", "center&Ideology", "center-left&Ideology", "left&Ideology",
+                                                 "very&Religiosity", "somewhat&Religiosity", "not very&Religiosity", "not at all&Religiosity",
+                                                 "West Germany&Residence", "East Germany&Residence",
+                                                 "high&Income", "medium&Income", "low&Income",
+                                                 "working&Employment", "studying&Employment", "not working&Employment",
+                                                 "College&Education", "Abitur&Education", "Realschule&Education", "Hauptschule&Education", "no degree&Education",
+                                                 "male&Gender", "female&Gender",
+                                                 "65+&Age", "35-64&Age", "18-34&Age")
+  ))
+
+plot_matches_subgroups_r <- ggplot(data_heatmap_match_r[!is.na(data_heatmap_match_r$variable),],
                           aes(x = vote,
-                          y = variable,
+                          y = interaction_cat_var,
                           fill = mean_prop)) +
   geom_tile() +
   xlab("Vote Choice (GLES)") +
   ylab("") +
+  guides(y = guide_axis_nested(delim = "&")) + 
   scale_x_discrete(limits = c("CDU/CSU", "SPD", "Greens", "FDP", "Left","AfD", "Small party", "No vote")) +
-  scale_y_discrete(limits=c("Att. Immigration: facilitate", "Att. Immigration: neither nor", "Att. Immigration: limit","Att. Inequality: take measures",  "Att. Inequality: no opinion", "Att. Inequality: don't take measures",  "Strength of PID: very strong", "Strength of PID: rather strong", "Strength of PID: medium", "Strength of PID: rather weak", "Strength of PID: very weak",  "Party ID: none", "Party ID: Small party", "Party ID: AfD", "Party ID: Left", "Party ID: FDP", "Party ID: Greens", "Party ID: SPD", "Party ID: CDU/CSU", "Ideology: right", "Ideology: center-right", "Ideology: center", "Ideology: center-left", "Ideology: left", "Religiosity: very","Religiosity: somewhat", "Religiosity: not very", "Religiosity: not at all", "Residence: West Germany", "Residence: East Germany", "Income: high", "Income: medium", "Income: low", "Employment: working", "Employment: studying", "Employment: not working", "Education: College", "Education: Abitur", "Education: Realschule", "Education: Hauptschule", "Education: no degree", "Gender: male","Gender: female", "Age: 65+", "Age: 35-64", "Age: 18-34")) + # reversed order bc plot converts it...
   scale_fill_gradient(low="white", high="#03A63C",
                       limits = c(0, 1),
                       name = "% Match Vote Choice GPT - GLES",
@@ -3182,6 +3104,7 @@ ggsave("heatmap_matches_subgroups_r.png", plot_matches_subgroups_r, height = 9, 
 ```{r}
 plot_matches_subgroups_r
 ```
+
 
 - Largely the same patterns - No difference
 
@@ -4436,6 +4359,7 @@ data_NAs <- data_final_numeric %>%
 
 prop.table(table(data_NAs$female, data_NAs$missing),2) # 50/50 among NAs, slightly more females than among non-NAs
 prop.table(table(data_NAs$edu, data_NAs$missing),2) # Slightly more better-educated people than among non-NAs
+prop.table(table(data_NAs$emp, data_NAs$missing),2) # Much more working among NAs, less non-working 
 prop.table(table(data_NAs$hhincome, data_NAs$missing),2) # Much fewer people with low income, much more with medium among NAs!
 prop.table(table(data_NAs$east, data_NAs$missing),2) # Slightly more people from East Germany among NAs
 prop.table(table(data_NAs$religious, data_NAs$missing),2) # NAs less religious
@@ -4460,6 +4384,7 @@ data_NAs_r <- data_robustness_numeric %>%
 
 prop.table(table(data_NAs_r$female, data_NAs_r$missing),2) # 50/50 among NAs, more females than among non-NAs (more balanced!) - similar as main
 prop.table(table(data_NAs_r$edu, data_NAs_r$missing),2) # Rather similar between NAs and non-NAs
+prop.table(table(data_NAs_r$emp, data_NAs_r$missing),2) # Much more working among NAs, less non-working - similar as main
 prop.table(table(data_NAs_r$hhincome, data_NAs_r$missing),2) # Fewer people with low income, more with medium among NAs - similar as main
 prop.table(table(data_NAs_r$east, data_NAs_r$missing),2) # Less people from East Germany among NAs!
 prop.table(table(data_NAs_r$religious, data_NAs_r$missing),2) # Much fewer not at all / very religious people among NAs
@@ -4492,7 +4417,7 @@ data_final_numeric_exid <- data_final_numeric_noNA %>%
                            filter(!(id %in% exclude_ids)) # 3 already excluded due to missing completions before
 ```
 
-### TO DO: Analyses without those incorrectly considered ineligible
+### Analyses without those incorrectly considered ineligible
 
 ### Aggregate Distribution
 
@@ -4820,25 +4745,25 @@ data_plot_match_exid <- export_match_exid %>%
                           mutate(sig = ifelse(lower_or > 1 | upper_or < 1, "Significant",
                                               "Not significant")) %>%
                           rename(category = variable) %>%
-                          mutate(variable = ifelse(category == "intercept", " ",
+                          mutate(variable = ifelse(category == "intercept", "Intercept",
                                             ifelse(category == "voteAfD" | category == "voteAndere Partei" | category == "voteBündnis 90/Die Grünen" | category == "voteDie Linke" | category == "voteFDP" | category == "voteNicht gewählt" | category == "voteSPD" | category == "voteUngültig gewählt", "GLES-Vote (Ref.: CDU/CSU)",
-                                            ifelse(category == "age", " ",
+                                            ifelse(category == "age", "Age",
                                             ifelse(category == "femaleweiblich", "Gender (Ref.: male)",
-                                            ifelse(category == "edu", " ",
+                                            ifelse(category == "edu", "Education",
                                             ifelse(category == "empnicht berufstätig" | category == "empin Ausbildung", "Employment (Ref.: working)",
                                             ifelse(category == "hhincomemittleres" | category == "hhincomehohes", "Income (Ref.: low)",
                                             ifelse(category == "eastOstdeutschland", "Residence (Ref.: West Germany)",
                                             ifelse(category == "religiousnicht sehr religiös" | category == "religiousetwas religiös" | category == "religioussehr religiös", "Religiosity (Ref.: not at all)",
-                                            ifelse(category == "leftright", " ",
+                                            ifelse(category == "leftright", "Ideology",
                                             ifelse(category == "partyidSPD"| category == "partyidFDP" | category == "partyidDie Grünen" | category == "partyidDie Linke" | category == "partyidAfD" | category == "partyidKleinpartei"| category == "partyidkeine Partei", "Party ID (Ref.: CDU/CSU)",
-                                            ifelse(category == "partyid_degree", " ",
+                                            ifelse(category == "partyid_degree", "Strength of Party ID",
                                             ifelse(category == "partyid_degree:partyidAfD" | category == "partyid_degree:partyidDie Grünen" | category == "partyid_degree:partyidDie Linke" | category == "partyid_degree:partyidFDP" | category == "partyid_degree:partyidKleinpartei" | category == "partyid_degree:partyidSPD", "Party ID x Strength (Ref.: CDU/CSU)",        
                                             ifelse(category == "inequalityhabe keine Meinung dazu" | category == "inequalitykeine Maßnahmen ergreifen", "Att. Inequality (Ref.: take measures)",         
                                             ifelse(category == "immigrationweder erleichtern noch einschränken" | category == "immigrationeinschränken", "Att. Immigration (Ref.: facilitate)",
                                             category)))))))))))))))) %>%
                           mutate(category = ifelse(category == "femaleweiblich", "female",
-                                        ifelse(category == "edu", "Education",
-                                        ifelse(category == "age", "Age",
+                                        ifelse(category == "edu", " ",
+                                        ifelse(category == "age", " ",
                                         ifelse(category == "empnicht berufstätig", "not working",
                                         ifelse(category == "empin Ausbildung", "studying",
                                         ifelse(category == "hhincomemittleres", "medium",
@@ -4847,7 +4772,7 @@ data_plot_match_exid <- export_match_exid %>%
                                         ifelse(category == "religiousnicht sehr religiös", "not very",
                                         ifelse(category == "religiousetwas religiös", "somewhat",
                                         ifelse(category == "religioussehr religiös", "very",
-                                        ifelse(category == "leftright", "Ideology",
+                                        ifelse(category == "leftright", " ",
                                         ifelse(category == "partyidSPD", "SPD",
                                         ifelse(category == "partyidFDP", "FDP",
                                         ifelse(category == "partyidDie Grünen", "Greens",
@@ -4855,12 +4780,12 @@ data_plot_match_exid <- export_match_exid %>%
                                         ifelse(category == "partyidAfD", "AfD",
                                         ifelse(category == "partyidKleinpartei", "Small party",
                                         ifelse(category == "partyidkeine Partei", "none",
-                                        ifelse(category == "partyid_degree", "Strength of Party ID",
+                                        ifelse(category == "partyid_degree", " ",
                                         ifelse(category == "inequalityhabe keine Meinung dazu", "no opinion",
                                         ifelse(category == "inequalitykeine Maßnahmen ergreifen", "don't take measures",
                                         ifelse(category == "immigrationweder erleichtern noch einschränken", "neither nor",
                                         ifelse(category == "immigrationeinschränken", "limit",
-                                        ifelse(category == "intercept", "Intercept",
+                                        ifelse(category == "intercept", " ",
                                         ifelse(category == "partyid_degree:partyidAfD", "AfD",
                                         ifelse(category == "partyid_degree:partyidDie Grünen", "Greens",
                                         ifelse(category == "partyid_degree:partyidDie Linke", "Left",
@@ -4878,21 +4803,21 @@ data_plot_match_exid <- export_match_exid %>%
                                         category)))))))))))))))))))))))))))))))))))))))) %>%
   mutate(interaction_cat_var = interaction(category, variable, sep = "&")) %>%
   mutate(interaction_cat_var = factor(interaction_cat_var,
-                                      levels = c("Intercept& ",
+                                      levels = c(" &Intercept",
                                                  "No vote&GLES-Vote (Ref.: CDU/CSU)", "Small party&GLES-Vote (Ref.: CDU/CSU)", "AfD&GLES-Vote (Ref.: CDU/CSU)", "Left&GLES-Vote (Ref.: CDU/CSU)", "FDP&GLES-Vote (Ref.: CDU/CSU)", "Greens&GLES-Vote (Ref.: CDU/CSU)", "SPD&GLES-Vote (Ref.: CDU/CSU)",
                                                  "limit&Att. Immigration (Ref.: facilitate)", "neither nor&Att. Immigration (Ref.: facilitate)",
                                                 "don't take measures&Att. Inequality (Ref.: take measures)", "no opinion&Att. Inequality (Ref.: take measures)",
                                                 "Small party&Party ID x Strength (Ref.: CDU/CSU)", "AfD&Party ID x Strength (Ref.: CDU/CSU)", "Left&Party ID x Strength (Ref.: CDU/CSU)", "FDP&Party ID x Strength (Ref.: CDU/CSU)", "Greens&Party ID x Strength (Ref.: CDU/CSU)", "SPD&Party ID x Strength (Ref.: CDU/CSU)",
-                                                 "Strength of Party ID& ",
+                                                 " &Strength of Party ID",
                                                  "none&Party ID (Ref.: CDU/CSU)", "Small party&Party ID (Ref.: CDU/CSU)", "AfD&Party ID (Ref.: CDU/CSU)", "Left&Party ID (Ref.: CDU/CSU)", "FDP&Party ID (Ref.: CDU/CSU)", "Greens&Party ID (Ref.: CDU/CSU)", "SPD&Party ID (Ref.: CDU/CSU)",
-                                                 "Ideology& ",
+                                                 " &Ideology",
                                                  "very&Religiosity (Ref.: not at all)", "somewhat&Religiosity (Ref.: not at all)", "not very&Religiosity (Ref.: not at all)",
                                                  "East Germany&Residence (Ref.: West Germany)",
                                                  "high&Income (Ref.: low)", "medium&Income (Ref.: low)",
                                                 "not working&Employment (Ref.: working)", "studying&Employment (Ref.: working)",
-                                                 "Education& ",
+                                                 " &Education",
                                                  "female&Gender (Ref.: male)",
-                                                 "Age& ")
+                                                 " &Age")
   ))
 
 plot_model_match_exid <- ggplot(drop_na(data_plot_match_exid), 
@@ -4928,7 +4853,7 @@ ggsave("model_match_exid.png", plot_model_match_exid, height = 6, width = 8)
 
 ```
 
-### Vote Regression
+### OMITTED: Vote Regression
 
 ```{r}
 
@@ -5120,25 +5045,25 @@ data_plot_match_inv <- export_match_inv %>%
                           mutate(sig = ifelse(lower_or > 1 | upper_or < 1, "Significant",
                                               "Not significant")) %>%
                           rename(category = variable) %>%
-                          mutate(variable = ifelse(category == "intercept", " ",
+                          mutate(variable = ifelse(category == "intercept", "Incercept",
                                             ifelse(category == "voteAfD" | category == "voteAndere Partei" | category == "voteBündnis 90/Die Grünen" | category == "voteDie Linke" | category == "voteFDP" | category == "voteNicht gewählt" | category == "voteSPD", "GLES-Vote (Ref.: CDU/CSU)",
-                                            ifelse(category == "age", " ",
+                                            ifelse(category == "age", "Age",
                                             ifelse(category == "femaleweiblich", "Gender (Ref.: male)",
-                                            ifelse(category == "edu", " ",
+                                            ifelse(category == "edu", "Education",
                                             ifelse(category == "empnicht berufstätig" | category == "empin Ausbildung", "Employment (Ref.: working)",
                                             ifelse(category == "hhincomemittleres" | category == "hhincomehohes", "Income (Ref.: low)",
                                             ifelse(category == "eastOstdeutschland", "Residence (Ref.: West Germany)",
                                             ifelse(category == "religiousnicht sehr religiös" | category == "religiousetwas religiös" | category == "religioussehr religiös", "Religiosity (Ref.: not at all)",
-                                            ifelse(category == "leftright", " ",
+                                            ifelse(category == "leftright", "Ideology",
                                             ifelse(category == "partyidSPD"| category == "partyidFDP" | category == "partyidDie Grünen" | category == "partyidDie Linke" | category == "partyidAfD" | category == "partyidKleinpartei"| category == "partyidkeine Partei", "Party ID (Ref.: CDU/CSU)",
-                                            ifelse(category == "partyid_degree", " ",
+                                            ifelse(category == "partyid_degree", "Strength of Party ID",
                                             ifelse(category == "partyid_degree:partyidAfD" | category == "partyid_degree:partyidDie Grünen" | category == "partyid_degree:partyidDie Linke" | category == "partyid_degree:partyidFDP" | category == "partyid_degree:partyidKleinpartei" | category == "partyid_degree:partyidSPD", "Party ID x Strength (Ref.: CDU/CSU)",        
                                             ifelse(category == "inequalityhabe keine Meinung dazu" | category == "inequalitykeine Maßnahmen ergreifen", "Att. Inequality (Ref.: take measures)",         
                                             ifelse(category == "immigrationweder erleichtern noch einschränken" | category == "immigrationeinschränken", "Att. Immigration (Ref.: facilitate)",
                                             category)))))))))))))))) %>%
                           mutate(category = ifelse(category == "femaleweiblich", "female",
-                                        ifelse(category == "edu", "Education",
-                                        ifelse(category == "age", "Age",
+                                        ifelse(category == "edu", " ",
+                                        ifelse(category == "age", " ",
                                         ifelse(category == "empnicht berufstätig", "not working",
                                         ifelse(category == "empin Ausbildung", "studying",
                                         ifelse(category == "hhincomemittleres", "medium",
@@ -5147,7 +5072,7 @@ data_plot_match_inv <- export_match_inv %>%
                                         ifelse(category == "religiousnicht sehr religiös", "not very",
                                         ifelse(category == "religiousetwas religiös", "somewhat",
                                         ifelse(category == "religioussehr religiös", "very",
-                                        ifelse(category == "leftright", "Ideology",
+                                        ifelse(category == "leftright", " ",
                                         ifelse(category == "partyidSPD", "SPD",
                                         ifelse(category == "partyidFDP", "FDP",
                                         ifelse(category == "partyidDie Grünen", "Greens",
@@ -5155,12 +5080,12 @@ data_plot_match_inv <- export_match_inv %>%
                                         ifelse(category == "partyidAfD", "AfD",
                                         ifelse(category == "partyidKleinpartei", "Small party",
                                         ifelse(category == "partyidkeine Partei", "none",
-                                        ifelse(category == "partyid_degree", "Strength of Party ID",
+                                        ifelse(category == "partyid_degree", " ",
                                         ifelse(category == "inequalityhabe keine Meinung dazu", "no opinion",
                                         ifelse(category == "inequalitykeine Maßnahmen ergreifen", "don't take measures",
                                         ifelse(category == "immigrationweder erleichtern noch einschränken", "neither nor",
                                         ifelse(category == "immigrationeinschränken", "limit",
-                                        ifelse(category == "intercept", "Intercept",
+                                        ifelse(category == "intercept", " ",
                                         ifelse(category == "partyid_degree:partyidAfD", "AfD",
                                         ifelse(category == "partyid_degree:partyidDie Grünen", "Greens",
                                         ifelse(category == "partyid_degree:partyidDie Linke", "Left",
@@ -5176,21 +5101,21 @@ data_plot_match_inv <- export_match_inv %>%
                                         ifelse(category == "voteSPD", "SPD", category))))))))))))))))))))))))))))))))))))))) %>%
   mutate(interaction_cat_var = interaction(category, variable, sep = "&")) %>%
   mutate(interaction_cat_var = factor(interaction_cat_var,
-                                      levels = c("Intercept& ",
+                                      levels = c(" &Intercept",
                                                  "No vote&GLES-Vote (Ref.: CDU/CSU)", "Small party&GLES-Vote (Ref.: CDU/CSU)", "AfD&GLES-Vote (Ref.: CDU/CSU)", "Left&GLES-Vote (Ref.: CDU/CSU)", "FDP&GLES-Vote (Ref.: CDU/CSU)", "Greens&GLES-Vote (Ref.: CDU/CSU)", "SPD&GLES-Vote (Ref.: CDU/CSU)",
                                                  "limit&Att. Immigration (Ref.: facilitate)", "neither nor&Att. Immigration (Ref.: facilitate)",
                                                 "don't take measures&Att. Inequality (Ref.: take measures)", "no opinion&Att. Inequality (Ref.: take measures)",
                                                 "Small party&Party ID x Strength (Ref.: CDU/CSU)", "AfD&Party ID x Strength (Ref.: CDU/CSU)", "Left&Party ID x Strength (Ref.: CDU/CSU)", "FDP&Party ID x Strength (Ref.: CDU/CSU)", "Greens&Party ID x Strength (Ref.: CDU/CSU)", "SPD&Party ID x Strength (Ref.: CDU/CSU)",
-                                                 "Strength of Party ID& ",
+                                                 " &Strength of Party ID",
                                                  "none&Party ID (Ref.: CDU/CSU)", "Small party&Party ID (Ref.: CDU/CSU)", "AfD&Party ID (Ref.: CDU/CSU)", "Left&Party ID (Ref.: CDU/CSU)", "FDP&Party ID (Ref.: CDU/CSU)", "Greens&Party ID (Ref.: CDU/CSU)", "SPD&Party ID (Ref.: CDU/CSU)",
-                                                 "Ideology& ",
+                                                 " &Ideology",
                                                  "very&Religiosity (Ref.: not at all)", "somewhat&Religiosity (Ref.: not at all)", "not very&Religiosity (Ref.: not at all)",
                                                  "East Germany&Residence (Ref.: West Germany)",
                                                  "high&Income (Ref.: low)", "medium&Income (Ref.: low)",
                                                 "not working&Employment (Ref.: working)", "studying&Employment (Ref.: working)",
-                                                 "Education& ",
+                                                 " &Education",
                                                  "female&Gender (Ref.: male)",
-                                                 "Age& ")
+                                                 " &Age")
   ))
 
 plot_model_match_inv <- ggplot(drop_na(data_plot_match), 
