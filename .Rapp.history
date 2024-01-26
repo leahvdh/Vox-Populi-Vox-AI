@@ -1,0 +1,6 @@
+load("/Users/leah/Documents/GitHub/GPT-for-Public-Opinion/GPT_prompt_completion.RData")
+load("/Users/leah/Documents/GitHub/GPT-for-Public-Opinion/test_completions.RData")
+load("/Users/leah/Documents/GitHub/GPT-for-Public-Opinion/GLES2017.Rdata")
+load("/Users/leah/Documents/GitHub/GPT-for-Public-Opinion/test_completions.RData")
+load("/Users/leah/Documents/GitHub/GPT-for-Public-Opinion/GPT4PO_data_complete_2017.Rdata")
+load("/Users/leah/Documents/GitHub/GPT-for-Public-Opinion/GPT4PO_20230821.RData")
