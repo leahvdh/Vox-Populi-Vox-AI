@@ -2331,6 +2331,7 @@ data_sample_4 <- data_sample_4 %>%
                   mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
 data_sample_5 <- data_sample_5 %>%
                   mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
+data_sample_all <- bind_rows(data_sample_1, data_sample_2, data_sample_3, data_sample_4, data_sample_5)
 
 ## GLES
 
@@ -2365,14 +2366,14 @@ plot_recall_prediction_gles <- ggplot(data_recall_prediction_gles,
                       geom_text(aes(label = paste0(round(Freq*100,1),"%")),
                                 # TO DO: fix colors white/black
                                 position = position_fill(0.5), color = "white") +
-                      xlab("Vote Choice (GLES)") +
+                      xlab("GLES-Vote") +
                       ylab("") +
                       scale_x_discrete(limits = c("Overall", "CDU/CSU", 
                                                   "SPD", "Left", "Greens","AfD", "FDP", "Small party", "No vote", "Invalid vote")) + # reorder categories
                       scale_y_continuous(labels = scales::percent) +
                       scale_fill_manual(values = c("0" = "#012340", "1" = "#03A63C"), 
                                         labels = c("different", "match"),
-                                        name = "Model Prediction") +
+                                        name = "Model Prediction (GLES)") +
                       ggtitle("") +
                       theme_minimal() +
                       theme(panel.grid.minor = element_blank(),
@@ -2411,7 +2412,7 @@ plot_precision_prediction_gles <- ggplot(data_precision_prediction_gles,
                       geom_text(aes(label = paste0(round(Freq*100,1),"%")),
                                 # TO DO: fix colors white/black
                                 position = position_fill(0.5), color = "white") +
-                      xlab("Vote Choice (GLES)") +
+                      xlab("Model Prediction (GLES)") +
                       ylab("") +
                       scale_x_discrete(limits = c("Overall", "Greens", "Small party", "CDU/CSU", "SPD", "FDP", "AfD", "Left", "No vote", "Invalid vote")) + # reorder categories
                       scale_y_continuous(labels = scales::percent) +
@@ -2440,13 +2441,147 @@ data_f1_prediction_gles <- merge(data_precisionf1_prediction_gles, data_recallf1
 
 ### Subgroups?
 
-## GPT - Variance Estimation
+## GPT - Variance Estimation TO DO: ADD OVERALL!? CHECK SMALL PARTY ERROR
 
 ### Recall
 
+##### Calculate proportions and its variance for each iteration
+sample_proportions_recall_gpt <- data_sample_all %>%
+    group_by(sample_no, match_vote_prediction, vote) %>%
+    summarise(n = n(), .groups = "keep") %>%
+    ungroup(match_vote_prediction) %>%
+    mutate(prop_estimate = n / sum(n)) %>%
+    mutate(prop_variance = prop_estimate * (1 - prop_estimate) / sum(n))
+
+##### Calculate the between-iteration variance and total variance
+mean_proportions_recall_gpt <- sample_proportions_recall_gpt %>%
+    group_by(match_vote_prediction, vote) %>%
+    summarise(W = mean(prop_variance), # Within variance (mean)
+              mean_prop = mean(prop_estimate),
+              B = var(prop_estimate)) %>% # Between variance
+    mutate(m = 5,
+           T = W + (1 + 1/m) * B,
+           T_stderr= sqrt(T)) %>% # total variance (Rubin's rules)
+    arrange(desc(mean_prop))
+
+data_recall_gpt_varest <- mean_proportions_recall_gpt %>%
+                         select(vote, W, mean_prop, B, T_stderr, match_vote_prediction) %>%
+                         rename(recall = mean_prop,
+                                recall_W = W,
+                                recall_B = B,
+                                recall_totalse = T_stderr,
+                                party = vote)
+
+#### PLOT
+
+data_recall_gpt_varest <- data_recall_gpt_varest %>% mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
+                                         ifelse(party == "Die Linke", "Left",
+                                         ifelse(party == "Andere Partei", "Small party",
+                                         ifelse(party == "Ungültig gewählt", "Invalid vote",
+                                         ifelse(party == "Nicht gewählt", "No vote",
+                                         ifelse(party == "CDU/CSU", "CDU/CSU",
+                                         ifelse(party == "FDP", "FDP",
+                                         ifelse(party == "SPD", "SPD",
+                                         ifelse(party == "AfD", "AfD", 
+                                         ifelse(party == "Overall", "Overall", party)))))))))),
+                                         match_vote_prediction = as.factor(match_vote_prediction))
+
+plot_recall_prediction_gpt_varest <- ggplot(data_recall_gpt_varest,
+                       aes(x = party,
+                           y = recall,
+                           fill = match_vote_prediction)) +
+                      geom_bar(stat = "identity", position = "stack") +
+                      geom_text(aes(label = paste0(round(recall*100,1),"%")),
+                                # TO DO: fix colors white/black
+                                position = position_fill(0.5), color = "white") +
+                      xlab("GLES-Vote") +
+                      ylab("") +
+                      scale_x_discrete(limits = c("CDU/CSU", "Greens", "Left",
+                                                  "SPD",  "FDP", "AfD", "Small party", "No vote")) + # reorder categories
+                      scale_y_continuous(labels = scales::percent) +
+                      scale_fill_manual(values = c("0" = "#012340", "1" = "#03A63C"), 
+                                        labels = c("different", "match"),
+                                        name = "Model Prediction (GPT)") +
+                      ggtitle("") +
+                      theme_minimal() +
+                      theme(panel.grid.minor = element_blank(),
+                            panel.grid.major = element_blank())
+
+ggsave("recall_prediction_gpt.png", plot_recall_prediction_gpt_varest, height = 4, width = 8)
+
 ### Precision
 
+# Calculate proportions and its variance for each iteration
+sample_proportions_precision_gpt <- data_sample_all %>%
+    group_by(sample_no, match_vote_prediction, prediction) %>%
+    summarise(n = n(), .groups = "keep") %>%
+    ungroup(match_vote_prediction) %>%
+    mutate(prop_estimate = n / sum(n)) %>%
+    mutate(prop_variance = prop_estimate * (1 - prop_estimate) / sum(n))
+
+# Calculate the between-iteration variance and total variance
+mean_proportions_precision_gpt <- sample_proportions_precision_gpt %>%
+    group_by(match_vote_prediction, prediction) %>%
+    summarise(W = mean(prop_variance), # Within variance (mean)
+              mean_prop = mean(prop_estimate),
+              B = var(prop_estimate)) %>% # Between variance
+    mutate(m = 5,
+           T = W + (1 + 1/m) * B,
+           T_stderr= sqrt(T)) %>% # total variance (Rubin's rules)
+    arrange(desc(mean_prop))
+
+data_precision_gpt_varest <- mean_proportions_precision_gpt %>%
+                         select(match_vote_prediction, prediction, W, mean_prop, B, T_stderr) %>%
+                         rename(precision = mean_prop,
+                                precision_W = W,
+                                precision_B = B,
+                                precision_totalse = T_stderr,
+                                party = prediction)
+
+#### PLOT
+
+data_precision_gpt_varest <- data_precision_gpt_varest %>% mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
+                                         ifelse(party == "Die Linke", "Left",
+                                         ifelse(party == "Andere Partei", "Small party",
+                                         ifelse(party == "Ungültig gewählt", "Invalid vote",
+                                         ifelse(party == "Nicht gewählt", "No vote",
+                                         ifelse(party == "CDU/CSU", "CDU/CSU",
+                                         ifelse(party == "FDP", "FDP",
+                                         ifelse(party == "SPD", "SPD",
+                                         ifelse(party == "AfD", "AfD", 
+                                         ifelse(party == "Overall", "Overall", party)))))))))),
+                                         match_vote_prediction = as.factor(match_vote_prediction))
+
+plot_precision_prediction_gpt_varest <- ggplot(data_precision_gpt_varest,
+                       aes(x = party,
+                           y = precision,
+                           fill = match_vote_prediction)) +
+                      geom_bar(stat = "identity", position = "stack") +
+                      geom_text(aes(label = paste0(round(precision*100,1),"%")),
+                                # TO DO: fix colors white/black
+                                position = position_fill(0.5), color = "white") +
+                      xlab("Model Prediction (GPT)") +
+                      ylab("") +
+                      scale_x_discrete(limits = c("Small party", "CDU/CSU", "AfD", "FDP", "SPD", "Greens", "Left", "No vote")) + # reorder categories
+                      scale_y_continuous(labels = scales::percent) +
+                      scale_fill_manual(values = c("0" = "#012340", "1" = "#03A63C"), 
+                                        labels = c("different", "match"),
+                                        name = "GLES-Vote") +
+                      ggtitle("") +
+                      theme_minimal() +
+                      theme(panel.grid.minor = element_blank(),
+                            panel.grid.major = element_blank())
+
+ggsave("precision_prediction_gpt.png", plot_precision_prediction_gpt_varest, height = 4, width = 8)
+
+
 ### F1
+
+data_f1_gpt_varest <- merge(data_precision_gpt_varest, data_recall_gpt_varest, by = "party")
+
+data_f1_gpt_varest <- data_f1_gpt_varest %>%
+                  mutate(f1 = (2*precision*recall) / (precision + recall)) %>%
+                  select(!c(match_vote_prediction.x, match_vote_prediction.y))
 
 ### Subgroups?
 
