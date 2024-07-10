@@ -349,7 +349,7 @@ plot_matches_parties <- ggplot(data_matches_parties_all,
                       geom_text(aes(label = paste0(round(Freq*100,1),"%")),
                                 # TO DO: fix colors white/black
                                 position = position_fill(0.5), color = "white") +
-                      xlab("Vote Choice (GLES)") +
+                      xlab("GLES-Vote") +
                       ylab("") +
                       scale_x_discrete(limits = c("Overall", "Greens", "CDU/CSU", "Left",
                                                   "SPD", "FDP", "AfD", "Small party", "No vote",
@@ -425,7 +425,7 @@ plot_matches_gpt <- ggplot(data_matches_gpt_all,
                       geom_text(aes(label = paste0(round(Freq*100,1),"%")),
                                 # TO DO: fix colors white/black
                                 position = position_fill(0.5), color = "white") +
-                      xlab("Vote Choice (GPT)") +
+                      xlab("GPT Prediction") +
                       ylab("") +
                       scale_x_discrete(limits = c("Overall", "CDU/CSU", "Small party", "SPD",
                                                   "Greens", "AfD", "FDP", "Left",
@@ -2258,36 +2258,61 @@ data_plot_ame_compare <- bind_rows(ame_gles, ame_gpt_merge) %>%
                                                  "<b>Age<b>")
   ))
 
+# pivot_wider: mark overlapping estimates
+data_plot_ame_compare_wide <- data_plot_ame_compare %>%
+                              pivot_wider(names_from = model,
+                                          values_from  = c(estimate, p.value, conf.low, conf.high, std.error),
+                                          names_sep = "_",
+                                          names_glue = "{model}_{.value}") %>%
+                              mutate(sig_overlap = ifelse(abs(GLES_estimate)-abs(GPT_estimate) < 0.01 & GLES_p.value < 0.05 & GPT_p.value < 0.05, 1, 0),
+                                      sig_direction = ifelse((GLES_estimate > 0 & GPT_estimate > 0 | GLES_estimate < 0 & GPT_estimate < 0) & GLES_p.value < 0.05 & GPT_p.value < 0.05, 1, 0)
+                                     )
+
+# pivot_longer: for plotting
+data_plot_ame_compare_long <- data_plot_ame_compare_wide %>%
+                              pivot_longer(
+                                cols = c(GLES_estimate, GLES_p.value, GLES_conf.low, GLES_conf.high, GLES_std.error, GPT_estimate, GPT_p.value, GPT_conf.low, GPT_conf.high, GPT_std.error),
+                                           names_to = c("model", "statistic"),
+                                           names_sep = "_"
+                                           ) %>%
+                              pivot_wider(names_from = statistic,
+                                          values_from = value)
 
 # Plot
 
-plot_ame_compare <- ggplot(data_plot_ame_compare[data_plot_ame_compare$p.value < 0.05,],
+plot_ame_compare <- ggplot(data_plot_ame_compare_long[data_plot_ame_compare_long$p.value < 0.05,],
        aes(y = contrast,
            x = estimate,
            xmin = conf.low,
            xmax = conf.high,
+           #fill = factor(sig_overlap, labels = c("No", "Yes")),
+           fill = factor(sig_direction, labels = c("No", "Yes")),
            color = model # legend colored by model
            )) +
   geom_vline(xintercept = 0,
              linetype = "solid",
              linewidth = 0.2) +
- geom_pointrange(# error bars
+ geom_pointrange(# points + error bars
                  linewidth = 0.5,
-                 shape = 1#,
+                 shape = "circle filled"
                  ) +
-  #xlim(-20, 15) +
+  scale_fill_manual(values = c("No" = "white", "Yes" = "black"),
+                              labels = c("No", "Yes"),
+                              name = "Similar effect") +
   scale_color_manual(limits = c("GLES", "GPT"),
-                      values = c("GLES" = "#027333", "GPT" = "#FAA32B"),
-                     labels = c("GLES", "GPT-3.5")) +
+                     values = c("GLES" = "#027333", "GPT" = "#FAA32B"),
+                     labels = c("GLES", "GPT-3.5"),
+                     name = "Model") +
   facet_grid(.~party) +
   theme_minimal() +
   labs(
     x = "Average Marginal Effect - only variables with p < 0.05",
     y = "",
-    title = "Average Marginal Effects on Vote Choice According to GLES and GPT") +
+    title = "Average Marginal Effects on Vote Choice According to GLES and GPT"
+    #title = ""
+    ) +
   theme(
         legend.position = "top",
-        legend.title = element_blank(),
         plot.title.position = "plot",
         axis.text.y = ggtext::element_markdown()
         )
@@ -2295,43 +2320,17 @@ plot_ame_compare <- ggplot(data_plot_ame_compare[data_plot_ame_compare$p.value <
 ggsave("model_vote_ame.png", plot_ame_compare, height = 6, width = 12)
 ```
 
-## Predictive Performance of Model
+## Predictive Performance of GLES Model (vs. GPT Prediction)
 
 ```{r}
 # Predicted values (vote choices) for each voter based on GLES/GPT regression models
 data_onesample$prediction <- predict(model_vote_gles, newdata = data_onesample)
 
-## Create subsets explicitly
-data_sample_1 <- subset(data_final_numeric_noNA, sample_no == 1)
-data_sample_2 <- subset(data_final_numeric_noNA, sample_no == 2)
-data_sample_3 <- subset(data_final_numeric_noNA, sample_no == 3)
-data_sample_4 <- subset(data_final_numeric_noNA, sample_no == 4)
-data_sample_5 <- subset(data_final_numeric_noNA, sample_no == 5)
-
-data_sample_1$prediction <- predict(model_vote_gpt_1, newdata = data_sample_1)
-data_sample_2$prediction <- predict(model_vote_gpt_2, newdata = data_sample_2)
-
-### Manually adjust levels because "Ungültig gewählt" was not predicted (not in GPT predictions)
-data_sample_2$prediction <- factor(data_sample_2$prediction, levels = levels(data_sample_2$vote))
-
-data_sample_3$prediction <- predict(model_vote_gpt_3, newdata = data_sample_3)
-data_sample_4$prediction <- predict(model_vote_gpt_4, newdata = data_sample_4)
-data_sample_5$prediction <- predict(model_vote_gpt_5, newdata = data_sample_5)
 
 # Compare predicted values to GLES-reported values
 data_onesample <- data_onesample %>%
                   mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_1 <- data_sample_1 %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_2 <- data_sample_2 %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_3 <- data_sample_3 %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_4 <- data_sample_4 %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_5 <- data_sample_5 %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_all <- bind_rows(data_sample_1, data_sample_2, data_sample_3, data_sample_4, data_sample_5)
+
 
 ## GLES
 
@@ -2440,6 +2439,41 @@ data_f1_prediction_gles <- merge(data_precisionf1_prediction_gles, data_recallf1
            mutate(f1 = (2*precision*recall) / (precision + recall))
 
 ### Subgroups?
+
+```
+
+
+```{r, eval=FALSE}
+# OMITTED: GPT-Model Predictions
+## Create subsets explicitly
+data_sample_1 <- subset(data_final_numeric_noNA, sample_no == 1)
+data_sample_2 <- subset(data_final_numeric_noNA, sample_no == 2)
+data_sample_3 <- subset(data_final_numeric_noNA, sample_no == 3)
+data_sample_4 <- subset(data_final_numeric_noNA, sample_no == 4)
+data_sample_5 <- subset(data_final_numeric_noNA, sample_no == 5)
+
+data_sample_1$prediction <- predict(model_vote_gpt_1, newdata = data_sample_1)
+data_sample_2$prediction <- predict(model_vote_gpt_2, newdata = data_sample_2)
+
+### Manually adjust levels because "Ungültig gewählt" was not predicted (not in GPT predictions)
+data_sample_2$prediction <- factor(data_sample_2$prediction, levels = levels(data_sample_2$vote))
+
+data_sample_3$prediction <- predict(model_vote_gpt_3, newdata = data_sample_3)
+data_sample_4$prediction <- predict(model_vote_gpt_4, newdata = data_sample_4)
+data_sample_5$prediction <- predict(model_vote_gpt_5, newdata = data_sample_5)
+
+data_sample_1 <- data_sample_1 %>%
+                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
+data_sample_2 <- data_sample_2 %>%
+                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
+data_sample_3 <- data_sample_3 %>%
+                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
+data_sample_4 <- data_sample_4 %>%
+                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
+data_sample_5 <- data_sample_5 %>%
+                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
+data_sample_all <- bind_rows(data_sample_1, data_sample_2, data_sample_3, data_sample_4, data_sample_5)
+
 
 ## GPT - Variance Estimation TO DO: ADD OVERALL!? CHECK SMALL PARTY ERROR
 
@@ -2584,7 +2618,48 @@ data_f1_gpt_varest <- data_f1_gpt_varest %>%
                   select(!c(match_vote_prediction.x, match_vote_prediction.y))
 
 ### Subgroups?
+```
 
+## Overview of effects
+
+```{r}
+data_plot_effects_sig <- data_plot_vote_compare %>%
+                              pivot_wider(names_from = model,
+                                          values_from  = p_value,
+                                          names_sep = "_",
+                                          names_glue = "{model}_{.value}") %>%
+                              mutate(sig_effect = ifelse(GLES_p_value < 0.05 & GPT_p_value >= 0.05, "GLES",
+                                                  ifelse(GLES_p_value >= 0.05 & GPT_p_value < 0.05, "GPT",
+                                                  ifelse(GLES_p_value < 0.05 & GPT_p_value < 0.05, "both",
+                                                  ifelse(GLES_p_value >= 0.05 & GPT_p_value >= 0.05, "none", NA)))))
+
+plot_effects_sig <- ggplot(data_plot_effects_sig,
+                          aes(x = party,
+                          y = interaction_cat_var,
+                          fill = sig_effect)) +
+  geom_tile() +
+  xlab("Vote Choice (GLES)") +
+  ylab("") +
+  guides(y = guide_axis_nested(delim = "&")) + 
+  scale_x_discrete(limits = c("CDU/CSU", "SPD", "Greens", "FDP", "Left","AfD", "Small party", "No vote")) +
+  scale_fill_discrete(limits = c("GLES", "both", "GPT", "none"),
+                     values = c("GLES" = "#027333", "both" = "black", "GPT" = "#FAA32B", "none" = "white"),
+                     labels = c("GLES", "both", "GPT-3.5", "none"),
+                     name = "Significance") +
+  theme_minimal() +
+  theme(legend.position = "top",
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.background = element_rect(fill = "grey", color = NA)
+        )
+
+
+plot_vote_compare <- ggplot(data_plot_vote_compare[data_plot_vote_compare$sig == "Significant",], 
+       aes(y = interaction_cat_var,
+           x = coeff)) +
+  facet_grid(.~party) +
+  
+ggsave("effets_sig.png", plot_effects_sig, height = 9, width = 8)
 ```
 
 
@@ -2855,7 +2930,7 @@ plot_matches_parties_r <- ggplot(data_matches_parties_all_r,
                       geom_text(aes(label = paste0(round(Freq*100,1),"%")),
                                 # TO DO: fix colors white/black
                                 position = position_fill(0.5), color = "white") +
-                      xlab("Vote Choice (GLES)") +
+                      xlab("GLES-Vote") +
                       ylab("") +
                       scale_x_discrete(limits = c("Overall", "Greens", "CDU/CSU", "Left",
                                                   "SPD", "FDP", "AfD", "Small party", "No vote",
@@ -2909,7 +2984,7 @@ plot_matches_gpt_r <- ggplot(data_matches_gpt_all_r,
                       geom_text(aes(label = paste0(round(Freq*100,1),"%")),
                                 # TO DO: fix colors white/black
                                 position = position_fill(0.5), color = "white") +
-                      xlab("Vote Choice (GPT)") +
+                      xlab("GPT Prediction") +
                       ylab("") +
                       scale_x_discrete(limits = c("Overall", "CDU/CSU", "SPD","Small party",
                                                   "FDP", "Greens", "AfD", "Left",
