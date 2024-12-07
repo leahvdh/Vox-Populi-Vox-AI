@@ -16,6 +16,7 @@ library(ggtext)
 library(vtable)
 library(ggh4x)
 library(marginaleffects)
+library(yardstick)
 options(scipen = 999)
 
 #load("GPT4PO_data_complete_2017.Rdata")
@@ -208,7 +209,7 @@ data_final_numeric_noNA <- data_final_numeric %>%
 
 Can LLMs accurately emulate response distributions of population subgroups?
 
-## Aggregate: Shares of correct and incorrect matches overall
+## Aggregate: (Unweighted) shares of correct and incorrect matches overall
 
 ### Tables
 
@@ -288,8 +289,41 @@ mean_proportions_match <- sample_proportions_match %>%
 ```
 
 - There is very little variance across samples
-- In 54% of cases, the GPT prediction does not match the person's GLES vote
+- In 54% of cases, the GPT prediction does not match the person's GLES vote (unweighted)
 - No need to plot variance estimation as there is so little variance (see above)
+
+## Per-party F1 scores and macro F1 score across samples
+
+```{r}
+data_perf_gpt <- data_final_factors %>%
+                    select(id, sample_no, vote, vote_gpt) %>%
+                    # Transform NAs into "NA"s to avoid inflated F1 scores
+                    mutate(vote_gpt = as.character(vote_gpt),
+                           vote_gpt = ifelse(is.na(vote_gpt), "NA", vote_gpt),
+                           vote_gpt = factor(vote_gpt)
+                           ) %>%
+                     # Add row with vote = "NA" so factor levels are the same
+                    bind_rows(tibble(
+                              id = NA_real_,
+                              sample_no = NA_real_,
+                              vote = "NA",
+                              vote_gpt = NA_character_)) %>%
+                    mutate(across(-c(id, sample_no), as.factor)) %>%
+                    filter(vote != "NA") # remove row again but factor levels remain the same
+
+# Build a confusion matrix and calculate prediction measures
+performance_gpt <- caret::confusionMatrix(data = data_perf_gpt$vote_gpt,
+                                              reference = data_perf_gpt$vote,
+                                              mode = "everything")
+
+cm_gpt <- prop.table(performance_gpt$table, margin = 2)
+performance_gpt_overall <- round(performance_gpt$overall, digits = 2)
+performance_gpt_byparty <- round(performance_gpt$byClass, digits = 2)
+precision_gpt_byparty <- performance_gpt$byClass[, "Precision"]
+recall_gpt_byparty <- performance_gpt$byClass[, "Recall"]
+f1_gpt_byparty <- performance_gpt$byClass[, "F1"]
+macro_f1_gpt <- mean(f1_gpt_byparty, na.rm = TRUE)
+```
 
 ## Aggregate: Recall - Shares of correct and incorrect matches by GLES party vote
 
@@ -319,18 +353,13 @@ table_matches_parties_s_5 <- prop.table(table(mc_GLES2017_final$vote[mc_GLES2017
 ### Plot
 
 ```{r}
-data_matches_parties_s <- as.data.frame(table_matches_parties_s)
-data_matches_parties_s <- data_matches_parties_s %>%
-                            rename(match = Var2) %>%
-                            rename(party = Var1)
-
-data_matches_overall_parties_s <- data_matches_overall_s %>%
-                                  rename(party = sample) %>%
-                                  mutate(party = factor(party))
-
-
-data_matches_parties_all <- bind_rows(data_matches_overall_parties_s, data_matches_parties_s) %>%
-                            mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
+data_recall_gpt <- data.frame(keyName=names(recall_gpt_byparty),
+                              value=recall_gpt_byparty, row.names=NULL) %>%
+                   rename(party = keyName,
+                          recall = value) %>%
+                   filter(party != "Class: NA") %>%
+                   mutate(party = gsub("Class: ","",party)) %>%
+                   mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
                                          ifelse(party == "Die Linke", "Left",
                                          ifelse(party == "Andere Partei", "Small party",
                                          ifelse(party == "Ungültig gewählt", "Invalid vote",
@@ -339,36 +368,36 @@ data_matches_parties_all <- bind_rows(data_matches_overall_parties_s, data_match
                                          ifelse(party == "FDP", "FDP",
                                          ifelse(party == "SPD", "SPD",
                                          ifelse(party == "AfD", "AfD", 
-                                         ifelse(party == "Overall", "Overall", party)))))))))))
+                                         ifelse(party == "Overall", "Overall",
+                                         party)))))))))))
 
-plot_matches_parties <- ggplot(data_matches_parties_all,
-                       aes(x = party,
-                           y = Freq,
-                           fill = match)) +
-                      geom_bar(stat = "identity", position = "stack") +
-                      geom_text(aes(label = paste0(round(Freq*100,1),"%")),
-                                # TO DO: fix colors white/black
-                                position = position_fill(0.5), color = "white") +
-                      xlab("GLES-Vote") +
-                      ylab("") +
-                      scale_x_discrete(limits = c("Overall", "Greens", "CDU/CSU", "Left",
-                                                  "SPD", "FDP", "AfD", "Small party", "No vote",
-                                                  "Invalid vote")) + # reorder categories
-                      scale_y_continuous(labels = scales::percent) +
-                      scale_fill_manual(values = c("FALSE" = "#012340", "TRUE" = "#03A63C"), 
-                                        labels = c("different", "match"),
-                                        name = "GPT Prediction") +
-                      ggtitle("") +
-                      theme_minimal() +
-                      theme(panel.grid.minor = element_blank(),
-                            panel.grid.major = element_blank())
+plot_recall_gpt <- ggplot(data_recall_gpt,
+                              aes(x = party,
+                                  y = recall)
+                                ) +
+                        geom_bar(stat = "identity", position = "stack", fill = "#03A63C") +
+                        geom_text(aes(label = paste0(round(recall * 100, 1), "%"), 
+                                      y = recall + 0.02),
+                                  color = "#012340", size = 3.5) +
+                        xlab("GLES-Vote") +
+                        ylab("") +
+                        scale_x_discrete(limits = c("Greens", "CDU/CSU", "Left",
+                                                    "SPD", "FDP", "AfD",
+                                                    "Small party", "No vote", "Invalid vote")) +
+                        scale_y_continuous(labels = scales::percent,
+                                           name = "Matching GPT Predictions",
+                                           limits = c(0, 1)
+                                           ) +
+                        ggtitle("") +
+                        theme_minimal() +
+                        theme(panel.grid.minor = element_blank(),
+                              panel.grid.major = element_blank())
 
-ggsave("matches_parties.png", plot_matches_parties, height = 4, width = 8)
-
+ggsave("recall_gpt.png", plot_recall_gpt, height = 4, width = 8)
 ```
 
 ```{r}
-plot_matches_parties
+plot_recall_gpt
 ```
 
 - GPT and GLES match less for voters of parties that received fewer votes according to GLES! (Except Left)
@@ -400,13 +429,13 @@ table_matches_gpt_s_5 <- prop.table(table(mc_GLES2017_final$vote_gpt[mc_GLES2017
 ### Plot
 
 ```{r}
-data_matches_gpt_s <- as.data.frame(table_matches_gpt_s)
-data_matches_gpt_s <- data_matches_gpt_s %>%
-                            rename(match = Var2) %>%
-                            rename(party = Var1)
-
-data_matches_gpt_all <- bind_rows(data_matches_overall_parties_s, data_matches_gpt_s) %>%
-                            mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
+data_precision_gpt <- data.frame(keyName=names(precision_gpt_byparty),
+                              value=precision_gpt_byparty, row.names=NULL) %>%
+                   rename(party = keyName,
+                          precision = value) %>%
+                   filter(party != "Class: NA") %>%
+                   mutate(party = gsub("Class: ","",party)) %>%
+                   mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
                                          ifelse(party == "Die Linke", "Left",
                                          ifelse(party == "Andere Partei", "Small party",
                                          ifelse(party == "Ungültig gewählt", "Invalid vote",
@@ -415,61 +444,37 @@ data_matches_gpt_all <- bind_rows(data_matches_overall_parties_s, data_matches_g
                                          ifelse(party == "FDP", "FDP",
                                          ifelse(party == "SPD", "SPD",
                                          ifelse(party == "AfD", "AfD", 
-                                         ifelse(party == "Overall", "Overall", party)))))))))))
+                                         ifelse(party == "Overall", "Overall",
+                                         party)))))))))))
 
-plot_matches_gpt <- ggplot(data_matches_gpt_all,
-                       aes(x = party,
-                           y = Freq,
-                           fill = match)) +
-                      geom_bar(stat = "identity", position = "stack") +
-                      geom_text(aes(label = paste0(round(Freq*100,1),"%")),
-                                # TO DO: fix colors white/black
-                                position = position_fill(0.5), color = "white") +
-                      xlab("GPT Prediction") +
-                      ylab("") +
-                      scale_x_discrete(limits = c("Overall", "CDU/CSU", "Small party", "SPD",
-                                                  "Greens", "AfD", "FDP", "Left",
-                                                  "No vote", "Invalid vote")) + # reorder categories
-                      scale_y_continuous(labels = scales::percent) +
-                      scale_fill_manual(values = c("FALSE" = "#012340", "TRUE" = "#03A63C"), 
-                                        labels = c("different", "match"),
-                                        name = "GLES-Vote") +
-                      ggtitle("") +
-                      theme_minimal() +
-                      theme(panel.grid.minor = element_blank(),
-                            panel.grid.major = element_blank())
+plot_precision_gpt <- ggplot(data_precision_gpt,
+                              aes(x = party,
+                                  y = precision)
+                                ) +
+                        geom_bar(stat = "identity", position = "stack", fill = "#012340") +
+                        geom_text(aes(label = paste0(round(precision * 100, 1), "%"), 
+                                      y = precision + 0.02),
+                                  color = "#03A63C", size = 3.5) +
+                        xlab("GPT Prediction") +
+                        ylab("") +
+                        scale_x_discrete(limits = c("CDU/CSU", "Small party", "SPD",
+                                                    "Greens", "AfD", "FDP", "Left",
+                                                    "No vote", "Invalid vote")) +
+                        scale_y_continuous(labels = scales::percent,
+                                           name = "Matching GLES-Vote",
+                                           limits = c(0, 1)
+                                           ) +
+                        ggtitle("") +
+                        theme_minimal() +
+                        theme(panel.grid.minor = element_blank(),
+                              panel.grid.major = element_blank())
 
-ggsave("matches_gpt.png", plot_matches_gpt, height = 4, width = 8)
+ggsave("precision_gpt.png", plot_precision_gpt, height = 4, width = 8)
 ```
 
-```{r}
-plot_matches_gpt
-```
-
-## F1 Scores per party across samples
-
-Precision refers to the number of correct predictions for a given party (true positives) divided by the number of all predicted votes for that party (positives), measuring the share of predicted vote choices for a given party that were correct. --> matches_gpt
-
-Recall refers to the number of correct predictions for a given party (true positives) divided by the number of actual votes for that party, measuring the share of votes for a party that were correctly identified. --> matches_parties
-
-F1 = 2 * precision * recall / precision + recall
 
 ```{r}
-data_precision <- data_matches_gpt_all %>%
-                  filter(match == TRUE) %>%
-                  rename(precision = Freq) %>%
-                  select(precision, party)
-
-data_recall <- data_matches_parties_all %>%
-               filter(match == TRUE) %>%
-               rename(recall = Freq) %>%
-               select(recall, party)
-
-data_f1 <- merge(data_precision, data_recall, by = "party")
-
-data_f1 <- data_f1 %>%
-           mutate(f1 = (2*precision*recall) / (precision + recall))
-
+plot_precision_gpt
 ```
 
 ## Variance Estimation
@@ -2320,195 +2325,79 @@ plot_ame_compare <- ggplot(data_plot_ame_compare_long[data_plot_ame_compare_long
 ggsave("model_vote_ame.png", plot_ame_compare, height = 6, width = 12)
 ```
 
-## Predictive Performance of GLES Model (vs. GPT Prediction)
+### Differences in AMES by effect direction
 
 ```{r}
-# Predicted values (vote choices) for each voter based on GLES/GPT regression models
+data_plot_ame_diffs <- data_plot_ame_compare_wide %>%
+                       mutate(diff = GLES_estimate - GPT_estimate,
+                              sig = ifelse(GLES_p.value < 0.05 & GPT_p.value < 0.05, "both",
+                                           ifelse(GLES_p.value < 0.05 & GPT_p.value >= 0.05, "GLES",
+                                                  ifelse(GLES_p.value >= 0.05 & GPT_p.value < 0.05, "GPT", "neither"))),
+                              dir = ifelse((GLES_estimate > 0 & GPT_estimate > 0) | (GLES_estimate < 0 & GPT_estimate < 0) | (GLES_estimate == 0 & GPT_estimate == 0), "same", "different")
+                              )
+
+
+plot_ame_diffs <- ggplot(data_plot_ame_diffs,
+                           aes(y = contrast,
+                               x = diff,
+                               fill = dir
+                               #fill = sig
+                               )) +
+                     geom_bar(stat = "identity") + 
+                     #scale_fill_manual(limits = c("both", "GLES", "GPT", "neither"),
+                      #                   values = c("both" = "black", "GLES" = "#027333", "GPT" = "#FAA32B", "neither" = "grey"),
+                       #                  labels = c("Both", "GLES", "GPT-3.5", "Neither"),
+                        #                 name = "p < 0.05") +
+                    scale_fill_manual(limits = c("same", "different"),
+                                         values = c("same" = "grey", "different" = "black"),
+                                         labels = c("Same", "Different"),
+                                         name = "Effect Direction") +
+                     facet_grid(.~party) +
+                     theme_minimal() +
+                     labs(
+                        x = "AME(GLES) - AME(GPT)",
+                        y = "",
+                        #title = "Difference in Average Marginal Effects on Vote Choice Between GLES and GPT"
+                        title = ""
+                        ) +
+                      theme(
+                            legend.position = "top",
+                            plot.title.position = "plot",
+                            axis.text.y = ggtext::element_markdown()
+                            )
+
+ggsave("model_vote_ame_diffs.png", plot_ame_diffs, height = 6, width = 12)
+```
+
+## Predictive Performance of GLES Model
+
+```{r}
+# Predicted values (vote choices) for each voter based on GLES regression model
 data_onesample$prediction <- predict(model_vote_gles, newdata = data_onesample)
 
+performance_gles <- caret::confusionMatrix(data = data_onesample$prediction,
+                                              reference = data_onesample$vote,
+                                              mode = "everything")
 
-# Compare predicted values to GLES-reported values
-data_onesample <- data_onesample %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-
-
-## GLES
-
-### Recall
-data_recall_prediction_party_gles <- as.data.frame(prop.table(table(data_onesample$vote, data_onesample$match_vote_prediction), 1)) %>% #per party
-                                rename(match = Var2) %>%
-                                rename(party = Var1)
-
-data_recall_prediction_overall_gles <- as.data.frame(prop.table(table(data_onesample$match_vote_prediction))) %>% #overall
-                          mutate(party = "Overall") %>%
-                          mutate(party = factor(party)) %>%
-                          rename(match = Var1)
-
-
-data_recall_prediction_gles <- bind_rows(data_recall_prediction_overall_gles, data_recall_prediction_party_gles) %>%
-                            mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
-                                         ifelse(party == "Die Linke", "Left",
-                                         ifelse(party == "Andere Partei", "Small party",
-                                         ifelse(party == "Ungültig gewählt", "Invalid vote",
-                                         ifelse(party == "Nicht gewählt", "No vote",
-                                         ifelse(party == "CDU/CSU", "CDU/CSU",
-                                         ifelse(party == "FDP", "FDP",
-                                         ifelse(party == "SPD", "SPD",
-                                         ifelse(party == "AfD", "AfD", 
-                                         ifelse(party == "Overall", "Overall", party)))))))))))
-
-plot_recall_prediction_gles <- ggplot(data_recall_prediction_gles,
-                       aes(x = party,
-                           y = Freq,
-                           fill = match)) +
-                      geom_bar(stat = "identity", position = "stack") +
-                      geom_text(aes(label = paste0(round(Freq*100,1),"%")),
-                                # TO DO: fix colors white/black
-                                position = position_fill(0.5), color = "white") +
-                      xlab("GLES-Vote") +
-                      ylab("") +
-                      scale_x_discrete(limits = c("Overall", "CDU/CSU", 
-                                                  "SPD", "Left", "Greens","AfD", "FDP", "Small party", "No vote", "Invalid vote")) + # reorder categories
-                      scale_y_continuous(labels = scales::percent) +
-                      scale_fill_manual(values = c("0" = "#012340", "1" = "#03A63C"), 
-                                        labels = c("different", "match"),
-                                        name = "Model Prediction (GLES)") +
-                      ggtitle("") +
-                      theme_minimal() +
-                      theme(panel.grid.minor = element_blank(),
-                            panel.grid.major = element_blank())
-
-ggsave("recall_prediction_gles.png", plot_recall_prediction_gles, height = 4, width = 8)
-
-### Precision
-data_precision_prediction_party_gles <- as.data.frame(prop.table(table(data_onesample$prediction, data_onesample$match_vote_prediction), 1)) %>% #per party
-                                rename(match = Var2) %>%
-                                rename(party = Var1)
-
-data_precision_prediction_overall_gles <- as.data.frame(prop.table(table(data_onesample$match_vote_prediction))) %>% #overall
-                          mutate(party = "Overall") %>%
-                          mutate(party = factor(party)) %>%
-                          rename(match = Var1)
-
-
-data_precision_prediction_gles <- bind_rows(data_precision_prediction_overall_gles, data_precision_prediction_party_gles) %>%
-                            mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
-                                         ifelse(party == "Die Linke", "Left",
-                                         ifelse(party == "Andere Partei", "Small party",
-                                         ifelse(party == "Ungültig gewählt", "Invalid vote",
-                                         ifelse(party == "Nicht gewählt", "No vote",
-                                         ifelse(party == "CDU/CSU", "CDU/CSU",
-                                         ifelse(party == "FDP", "FDP",
-                                         ifelse(party == "SPD", "SPD",
-                                         ifelse(party == "AfD", "AfD", 
-                                         ifelse(party == "Overall", "Overall", party)))))))))))
-
-plot_precision_prediction_gles <- ggplot(data_precision_prediction_gles,
-                       aes(x = party,
-                           y = Freq,
-                           fill = match)) +
-                      geom_bar(stat = "identity", position = "stack") +
-                      geom_text(aes(label = paste0(round(Freq*100,1),"%")),
-                                # TO DO: fix colors white/black
-                                position = position_fill(0.5), color = "white") +
-                      xlab("Model Prediction (GLES)") +
-                      ylab("") +
-                      scale_x_discrete(limits = c("Overall", "Greens", "Small party", "CDU/CSU", "SPD", "FDP", "AfD", "Left", "No vote", "Invalid vote")) + # reorder categories
-                      scale_y_continuous(labels = scales::percent) +
-                      scale_fill_manual(values = c("0" = "#012340", "1" = "#03A63C"), 
-                                        labels = c("different", "match"),
-                                        name = "GLES-Vote") +
-                      ggtitle("") +
-                      theme_minimal() +
-                      theme(panel.grid.minor = element_blank(),
-                            panel.grid.major = element_blank())
-
-ggsave("precision_prediction_gles.png", plot_precision_prediction_gles, height = 4, width = 8)
-
-### F1
-
-data_precisionf1_prediction_gles <- data_precision_prediction_gles %>%
-                                  filter(match == 1) %>%
-                                  rename(precision = Freq) %>%
-                                  select(-(match))
-data_recallf1_prediction_gles <- data_recall_prediction_gles %>%
-                               filter(match == 1) %>%
-                               rename(recall = Freq) %>%
-                               select(-(match))
-data_f1_prediction_gles <- merge(data_precisionf1_prediction_gles, data_recallf1_prediction_gles, by = "party") %>%
-           mutate(f1 = (2*precision*recall) / (precision + recall))
-
-### Subgroups?
-
+cm_gles <- prop.table(performance_gles$table, margin = 2)
+performance_gles_overall <- round(performance_gles$overall, digits = 2)
+performance_gles_byparty <- round(performance_gles$byClass, digits = 2)
+precision_gles_byparty <- performance_gles$byClass[, "Precision"]
+recall_gles_byparty <- performance_gles$byClass[, "Recall"]
+f1_gles_byparty <- performance_gles$byClass[, "F1"]
+macro_f1_gles <- mean(f1_gles_byparty, na.rm = TRUE)
 ```
-
-
-```{r, eval=FALSE}
-# OMITTED: GPT-Model Predictions
-## Create subsets explicitly
-data_sample_1 <- subset(data_final_numeric_noNA, sample_no == 1)
-data_sample_2 <- subset(data_final_numeric_noNA, sample_no == 2)
-data_sample_3 <- subset(data_final_numeric_noNA, sample_no == 3)
-data_sample_4 <- subset(data_final_numeric_noNA, sample_no == 4)
-data_sample_5 <- subset(data_final_numeric_noNA, sample_no == 5)
-
-data_sample_1$prediction <- predict(model_vote_gpt_1, newdata = data_sample_1)
-data_sample_2$prediction <- predict(model_vote_gpt_2, newdata = data_sample_2)
-
-### Manually adjust levels because "Ungültig gewählt" was not predicted (not in GPT predictions)
-data_sample_2$prediction <- factor(data_sample_2$prediction, levels = levels(data_sample_2$vote))
-
-data_sample_3$prediction <- predict(model_vote_gpt_3, newdata = data_sample_3)
-data_sample_4$prediction <- predict(model_vote_gpt_4, newdata = data_sample_4)
-data_sample_5$prediction <- predict(model_vote_gpt_5, newdata = data_sample_5)
-
-data_sample_1 <- data_sample_1 %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_2 <- data_sample_2 %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_3 <- data_sample_3 %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_4 <- data_sample_4 %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_5 <- data_sample_5 %>%
-                  mutate(match_vote_prediction = ifelse(vote == prediction, 1, 0))
-data_sample_all <- bind_rows(data_sample_1, data_sample_2, data_sample_3, data_sample_4, data_sample_5)
-
-
-## GPT - Variance Estimation TO DO: ADD OVERALL!? CHECK SMALL PARTY ERROR
 
 ### Recall
 
-##### Calculate proportions and its variance for each iteration
-sample_proportions_recall_gpt <- data_sample_all %>%
-    group_by(sample_no, match_vote_prediction, vote) %>%
-    summarise(n = n(), .groups = "keep") %>%
-    ungroup(match_vote_prediction) %>%
-    mutate(prop_estimate = n / sum(n)) %>%
-    mutate(prop_variance = prop_estimate * (1 - prop_estimate) / sum(n))
-
-##### Calculate the between-iteration variance and total variance
-mean_proportions_recall_gpt <- sample_proportions_recall_gpt %>%
-    group_by(match_vote_prediction, vote) %>%
-    summarise(W = mean(prop_variance), # Within variance (mean)
-              mean_prop = mean(prop_estimate),
-              B = var(prop_estimate)) %>% # Between variance
-    mutate(m = 5,
-           T = W + (1 + 1/m) * B,
-           T_stderr= sqrt(T)) %>% # total variance (Rubin's rules)
-    arrange(desc(mean_prop))
-
-data_recall_gpt_varest <- mean_proportions_recall_gpt %>%
-                         select(vote, W, mean_prop, B, T_stderr, match_vote_prediction) %>%
-                         rename(recall = mean_prop,
-                                recall_W = W,
-                                recall_B = B,
-                                recall_totalse = T_stderr,
-                                party = vote)
-
-#### PLOT
-
-data_recall_gpt_varest <- data_recall_gpt_varest %>% mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
+```{r}
+data_recall_gles <- data.frame(keyName=names(recall_gles_byparty),
+                              value=recall_gles_byparty, row.names=NULL) %>%
+                   rename(party = keyName,
+                          recall = value) %>%
+                   filter(party != "Class: NA") %>%
+                   mutate(party = gsub("Class: ","",party)) %>%
+                   mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
                                          ifelse(party == "Die Linke", "Left",
                                          ifelse(party == "Andere Partei", "Small party",
                                          ifelse(party == "Ungültig gewählt", "Invalid vote",
@@ -2517,64 +2406,48 @@ data_recall_gpt_varest <- data_recall_gpt_varest %>% mutate(party = ifelse(party
                                          ifelse(party == "FDP", "FDP",
                                          ifelse(party == "SPD", "SPD",
                                          ifelse(party == "AfD", "AfD", 
-                                         ifelse(party == "Overall", "Overall", party)))))))))),
-                                         match_vote_prediction = as.factor(match_vote_prediction))
+                                         ifelse(party == "Overall", "Overall",
+                                         party)))))))))))
 
-plot_recall_prediction_gpt_varest <- ggplot(data_recall_gpt_varest,
-                       aes(x = party,
-                           y = recall,
-                           fill = match_vote_prediction)) +
-                      geom_bar(stat = "identity", position = "stack") +
-                      geom_text(aes(label = paste0(round(recall*100,1),"%")),
-                                # TO DO: fix colors white/black
-                                position = position_fill(0.5), color = "white") +
-                      xlab("GLES-Vote") +
-                      ylab("") +
-                      scale_x_discrete(limits = c("CDU/CSU", "Greens", "Left",
-                                                  "SPD",  "FDP", "AfD", "Small party", "No vote")) + # reorder categories
-                      scale_y_continuous(labels = scales::percent) +
-                      scale_fill_manual(values = c("0" = "#012340", "1" = "#03A63C"), 
-                                        labels = c("different", "match"),
-                                        name = "Model Prediction (GPT)") +
-                      ggtitle("") +
-                      theme_minimal() +
-                      theme(panel.grid.minor = element_blank(),
-                            panel.grid.major = element_blank())
+plot_recall_gles <- ggplot(data_recall_gles,
+                              aes(x = party,
+                                  y = recall)
+                                ) +
+                        geom_bar(stat = "identity", position = "stack", fill = "#03A63C") +
+                        geom_text(aes(label = paste0(round(recall * 100, 1), "%"), 
+                                      y = recall + 0.02),
+                                  color = "#012340", size = 3.5) +
+                        xlab("GLES-Vote") +
+                        ylab("") +
+                        scale_x_discrete(limits = c("CDU/CSU", "SPD", "Left", "Greens", 
+                                                    "AfD", "FDP", "Small party",
+                                                    "No vote", "Invalid vote")) +
+                        scale_y_continuous(labels = scales::percent,
+                                           name = "Matching Model Predictions",
+                                           limits = c(0, 1)
+                                           ) +
+                        ggtitle("") +
+                        theme_minimal() +
+                        theme(panel.grid.minor = element_blank(),
+                              panel.grid.major = element_blank())
 
-ggsave("recall_prediction_gpt.png", plot_recall_prediction_gpt_varest, height = 4, width = 8)
+ggsave("recall_gles.png", plot_recall_gles, height = 4, width = 8)
+```
+
+```{r}
+plot_recall_gles
+```
 
 ### Precision
 
-# Calculate proportions and its variance for each iteration
-sample_proportions_precision_gpt <- data_sample_all %>%
-    group_by(sample_no, match_vote_prediction, prediction) %>%
-    summarise(n = n(), .groups = "keep") %>%
-    ungroup(match_vote_prediction) %>%
-    mutate(prop_estimate = n / sum(n)) %>%
-    mutate(prop_variance = prop_estimate * (1 - prop_estimate) / sum(n))
-
-# Calculate the between-iteration variance and total variance
-mean_proportions_precision_gpt <- sample_proportions_precision_gpt %>%
-    group_by(match_vote_prediction, prediction) %>%
-    summarise(W = mean(prop_variance), # Within variance (mean)
-              mean_prop = mean(prop_estimate),
-              B = var(prop_estimate)) %>% # Between variance
-    mutate(m = 5,
-           T = W + (1 + 1/m) * B,
-           T_stderr= sqrt(T)) %>% # total variance (Rubin's rules)
-    arrange(desc(mean_prop))
-
-data_precision_gpt_varest <- mean_proportions_precision_gpt %>%
-                         select(match_vote_prediction, prediction, W, mean_prop, B, T_stderr) %>%
-                         rename(precision = mean_prop,
-                                precision_W = W,
-                                precision_B = B,
-                                precision_totalse = T_stderr,
-                                party = prediction)
-
-#### PLOT
-
-data_precision_gpt_varest <- data_precision_gpt_varest %>% mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
+```{r}
+data_precision_gles <- data.frame(keyName=names(precision_gles_byparty),
+                              value=precision_gles_byparty, row.names=NULL) %>%
+                   rename(party = keyName,
+                          precision = value) %>%
+                   filter(party != "Class: NA") %>%
+                   mutate(party = gsub("Class: ","",party)) %>%
+                   mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
                                          ifelse(party == "Die Linke", "Left",
                                          ifelse(party == "Andere Partei", "Small party",
                                          ifelse(party == "Ungültig gewählt", "Invalid vote",
@@ -2583,42 +2456,39 @@ data_precision_gpt_varest <- data_precision_gpt_varest %>% mutate(party = ifelse
                                          ifelse(party == "FDP", "FDP",
                                          ifelse(party == "SPD", "SPD",
                                          ifelse(party == "AfD", "AfD", 
-                                         ifelse(party == "Overall", "Overall", party)))))))))),
-                                         match_vote_prediction = as.factor(match_vote_prediction))
+                                         ifelse(party == "Overall", "Overall",
+                                         party)))))))))))
 
-plot_precision_prediction_gpt_varest <- ggplot(data_precision_gpt_varest,
-                       aes(x = party,
-                           y = precision,
-                           fill = match_vote_prediction)) +
-                      geom_bar(stat = "identity", position = "stack") +
-                      geom_text(aes(label = paste0(round(precision*100,1),"%")),
-                                # TO DO: fix colors white/black
-                                position = position_fill(0.5), color = "white") +
-                      xlab("Model Prediction (GPT)") +
-                      ylab("") +
-                      scale_x_discrete(limits = c("Small party", "CDU/CSU", "AfD", "FDP", "SPD", "Greens", "Left", "No vote")) + # reorder categories
-                      scale_y_continuous(labels = scales::percent) +
-                      scale_fill_manual(values = c("0" = "#012340", "1" = "#03A63C"), 
-                                        labels = c("different", "match"),
-                                        name = "GLES-Vote") +
-                      ggtitle("") +
-                      theme_minimal() +
-                      theme(panel.grid.minor = element_blank(),
-                            panel.grid.major = element_blank())
+plot_precision_gles <- ggplot(data_precision_gles,
+                              aes(x = party,
+                                  y = precision)
+                                ) +
+                        geom_bar(stat = "identity", position = "stack", fill = "#012340") +
+                        geom_text(aes(label = paste0(round(precision * 100, 1), "%"), 
+                                      y = precision + 0.02),
+                                  color = "#03A63C", size = 3.5) +
+                        xlab("Model Prediction (GLES)") +
+                        ylab("") +
+                        scale_x_discrete(limits = c("Greens", "Small party", "CDU/CSU", "SPD",
+                                                     "FDP", "AfD", "Left",
+                                                    "No vote", "Invalid vote")) +
+                        scale_y_continuous(labels = scales::percent,
+                                           name = "Matching GLES-Vote",
+                                           limits = c(0, 1)
+                                           ) +
+                        ggtitle("") +
+                        theme_minimal() +
+                        theme(panel.grid.minor = element_blank(),
+                              panel.grid.major = element_blank())
 
-ggsave("precision_prediction_gpt.png", plot_precision_prediction_gpt_varest, height = 4, width = 8)
-
-
-### F1
-
-data_f1_gpt_varest <- merge(data_precision_gpt_varest, data_recall_gpt_varest, by = "party")
-
-data_f1_gpt_varest <- data_f1_gpt_varest %>%
-                  mutate(f1 = (2*precision*recall) / (precision + recall)) %>%
-                  select(!c(match_vote_prediction.x, match_vote_prediction.y))
-
-### Subgroups?
+ggsave("precision_gles.png", plot_precision_gles, height = 4, width = 8)
 ```
+
+
+```{r}
+plot_precision_gles
+```
+
 
 ## Overview of effects
 
@@ -2670,6 +2540,9 @@ ggsave("effets_sig.png", plot_effects_sig, height = 9, width = 8)
 ### Data transformation
 
 ```{r}
+mc_GLES2017_complete <- mc_GLES2017_final %>%
+                        filter(imputed == 0)
+
 mc_GLES2017_robustness <- bind_rows(mc_GLES2017_complete, mc_GLES2017_final_nonimputed)
 
 mc_GLES2017_robustness <- mc_GLES2017_robustness %>%
@@ -2861,7 +2734,7 @@ More than twice as many NAs (2% instead of 0.9%) ! Resulting in only 1755 instea
 
 Can LLMs accurately emulate response distributions of population subgroups?
 
-#### Aggregate: Shares of correct and incorrect matches overall (Variance Estimation)
+#### Aggregate: (Unweighted) shares of correct and incorrect matches overall (Variance Estimation)
 
 ```{r}
 # Calculate proportions and its variance for each iteration
@@ -2886,32 +2759,52 @@ mean_proportions_match_r <- sample_proportions_match_r %>%
 
 - Average still at 0.46 match and variance still 0.0001 (stderr 0.01) - No difference
 
+#### Per-party F1 scores and macro F1 score across samples
+
+```{r}
+data_perf_gpt_robustness <- data_robustness_factors %>%
+                    select(id, sample_no, vote, vote_gpt) %>%
+                    # Transform NAs into "NA"s to avoid inflated F1 scores
+                    mutate(vote_gpt = as.character(vote_gpt),
+                           vote_gpt = ifelse(is.na(vote_gpt), "NA", vote_gpt),
+                           vote_gpt = factor(vote_gpt)
+                           ) %>%
+                     # Add row with vote = "NA" so factor levels are the same
+                    bind_rows(tibble(
+                              id = NA_real_,
+                              sample_no = NA_real_,
+                              vote = "NA",
+                              vote_gpt = NA_character_)) %>%
+                    mutate(across(-c(id, sample_no), as.factor)) %>%
+                    filter(vote != "NA") # remove row again but factor levels remain the same
+
+# Build a confusion matrix and calculate prediction measures
+performance_gpt_robustness <- caret::confusionMatrix(data = data_perf_gpt_robustness$vote_gpt,
+                                              reference = data_perf_gpt_robustness$vote,
+                                              mode = "everything")
+
+cm_gpt_robustness <- prop.table(performance_gpt_robustness$table, margin = 2)
+performance_gpt_overall_robustness <- round(performance_gpt_robustness$overall, digits = 2)
+performance_gpt_byparty_robustness <- round(performance_gpt_robustness$byClass, digits = 2)
+precision_gpt_byparty_robustness <- performance_gpt_robustness$byClass[, "Precision"]
+recall_gpt_byparty_robustness <- performance_gpt_robustness$byClass[, "Recall"]
+f1_gpt_byparty_robustness <- performance_gpt_robustness$byClass[, "F1"]
+macro_f1_gpt_robustness <- mean(f1_gpt_byparty_robustness, na.rm = TRUE)
+```
+
 #### Aggregate: Recall - Shares of correct and incorrect matches by GLES party vote
 
 ```{r}
 # Across samples
 table_matches_parties_s_r <- prop.table(table(mc_GLES2017_robustness$vote, mc_GLES2017_robustness$match_vote_outcome), 1)
 
-data_matches_parties_s_r <- as.data.frame(table_matches_parties_s_r)
-data_matches_parties_s_r <- data_matches_parties_s_r %>%
-                            rename(match = Var2) %>%
-                            rename(party = Var1)
-
-table_matches_overall_c_r <- table(mc_GLES2017_robustness$match_vote_outcome)
-table_matches_overall_s_r <- prop.table(table_matches_overall_c_r)
-
-data_matches_overall_s_r <- as.data.frame(table_matches_overall_s_r)
-data_matches_overall_s_r <- data_matches_overall_s_r %>%
-                          mutate(sample = "Overall") %>%
-                          rename(match = Var1)
-
-data_matches_overall_parties_s_r <- data_matches_overall_s_r %>%
-                                  rename(party = sample) %>%
-                                  mutate(party = factor(party))
-
-
-data_matches_parties_all_r <- bind_rows(data_matches_overall_parties_s_r, data_matches_parties_s_r) %>%
-                            mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
+data_recall_gpt_robustness <- data.frame(keyName=names(recall_gpt_byparty_robustness),
+                              value=recall_gpt_byparty_robustness, row.names=NULL) %>%
+                   rename(party = keyName,
+                          recall = value) %>%
+                   filter(party != "Class: NA") %>%
+                   mutate(party = gsub("Class: ","",party)) %>%
+                   mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
                                          ifelse(party == "Die Linke", "Left",
                                          ifelse(party == "Andere Partei", "Small party",
                                          ifelse(party == "Ungültig gewählt", "Invalid vote",
@@ -2920,36 +2813,37 @@ data_matches_parties_all_r <- bind_rows(data_matches_overall_parties_s_r, data_m
                                          ifelse(party == "FDP", "FDP",
                                          ifelse(party == "SPD", "SPD",
                                          ifelse(party == "AfD", "AfD", 
-                                         ifelse(party == "Overall", "Overall", party)))))))))))
+                                         ifelse(party == "Overall", "Overall",
+                                         party)))))))))))
 
-plot_matches_parties_r <- ggplot(data_matches_parties_all_r,
-                       aes(x = party,
-                           y = Freq,
-                           fill = match)) +
-                      geom_bar(stat = "identity", position = "stack") +
-                      geom_text(aes(label = paste0(round(Freq*100,1),"%")),
-                                # TO DO: fix colors white/black
-                                position = position_fill(0.5), color = "white") +
-                      xlab("GLES-Vote") +
-                      ylab("") +
-                      scale_x_discrete(limits = c("Overall", "Greens", "CDU/CSU", "Left",
-                                                  "SPD", "FDP", "AfD", "Small party", "No vote",
-                                                  "Invalid vote")) + # reorder categories
-                      scale_y_continuous(labels = scales::percent) +
-                      scale_fill_manual(values = c("FALSE" = "#012340", "TRUE" = "#03A63C"), 
-                                        labels = c("different", "match"),
-                                        name = "GPT Prediction") +
-                      ggtitle("") +
-                      theme_minimal() +
-                      theme(panel.grid.minor = element_blank(),
-                            panel.grid.major = element_blank())
+plot_recall_gpt_robustness <- ggplot(data_recall_gpt_robustness,
+                              aes(x = party,
+                                  y = recall)
+                                ) +
+                        geom_bar(stat = "identity", position = "stack", fill = "#03A63C") +
+                        geom_text(aes(label = paste0(round(recall * 100, 1), "%"), 
+                                      y = recall + 0.02),
+                                  color = "#012340", size = 3.5) +
+                        xlab("GLES-Vote") +
+                        ylab("") +
+                        scale_x_discrete(limits = c("Greens", "CDU/CSU", "Left",
+                                                    "SPD", "FDP", "AfD",
+                                                    "Small party", "No vote", "Invalid vote")) +
+                        scale_y_continuous(labels = scales::percent,
+                                           name = "Matching GPT Predictions",
+                                           limits = c(0, 1)
+                                           ) +
+                        ggtitle("") +
+                        theme_minimal() +
+                        theme(panel.grid.minor = element_blank(),
+                              panel.grid.major = element_blank())
 
-ggsave("matches_parties_r.png", plot_matches_parties_r, height = 4, width = 8)
+ggsave("recall_gpt_robustness.png", plot_recall_gpt_robustness, height = 4, width = 8)
 
 ```
 
 ```{r}
-plot_matches_parties_r
+plot_recall_gpt_robustness
 ```
 
 - Same order and similar magnitude - No difference
@@ -2957,15 +2851,16 @@ plot_matches_parties_r
 #### Aggregate: Precision: Share of correct and incorrect matches by GPT party vote
 
 ```{r}
+# Across samples
 table_matches_gpt_s_r <- prop.table(table(mc_GLES2017_robustness$vote_gpt, mc_GLES2017_robustness$match_vote_outcome), 1)
 
-data_matches_gpt_s_r <- as.data.frame(table_matches_gpt_s_r)
-data_matches_gpt_s_r <- data_matches_gpt_s_r %>%
-                            rename(match = Var2) %>%
-                            rename(party = Var1)
-
-data_matches_gpt_all_r <- bind_rows(data_matches_overall_parties_s_r, data_matches_gpt_s_r) %>%
-                            mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
+data_precision_gpt_robustness <- data.frame(keyName=names(precision_gpt_byparty_robustness),
+                              value=precision_gpt_byparty_robustness, row.names=NULL) %>%
+                   rename(party = keyName,
+                          precision = value) %>%
+                   filter(party != "Class: NA") %>%
+                   mutate(party = gsub("Class: ","",party)) %>%
+                   mutate(party = ifelse(party == "Bündnis 90/Die Grünen", "Greens",
                                          ifelse(party == "Die Linke", "Left",
                                          ifelse(party == "Andere Partei", "Small party",
                                          ifelse(party == "Ungültig gewählt", "Invalid vote",
@@ -2974,35 +2869,37 @@ data_matches_gpt_all_r <- bind_rows(data_matches_overall_parties_s_r, data_match
                                          ifelse(party == "FDP", "FDP",
                                          ifelse(party == "SPD", "SPD",
                                          ifelse(party == "AfD", "AfD", 
-                                         ifelse(party == "Overall", "Overall", party)))))))))))
+                                         ifelse(party == "Overall", "Overall",
+                                         party)))))))))))
 
-plot_matches_gpt_r <- ggplot(data_matches_gpt_all_r,
-                       aes(x = party,
-                           y = Freq,
-                           fill = match)) +
-                      geom_bar(stat = "identity", position = "stack") +
-                      geom_text(aes(label = paste0(round(Freq*100,1),"%")),
-                                # TO DO: fix colors white/black
-                                position = position_fill(0.5), color = "white") +
-                      xlab("GPT Prediction") +
-                      ylab("") +
-                      scale_x_discrete(limits = c("Overall", "CDU/CSU", "SPD","Small party",
-                                                  "FDP", "Greens", "AfD", "Left",
-                                                  "No vote", "Invalid vote")) + # reorder categories
-                      scale_y_continuous(labels = scales::percent) +
-                      scale_fill_manual(values = c("FALSE" = "#012340", "TRUE" = "#03A63C"), 
-                                        labels = c("different", "match"),
-                                        name = "GLES-Vote") +
-                      ggtitle("") +
-                      theme_minimal() +
-                      theme(panel.grid.minor = element_blank(),
-                            panel.grid.major = element_blank())
+plot_precision_gpt_robustness <- ggplot(data_precision_gpt_robustness,
+                              aes(x = party,
+                                  y = precision)
+                                ) +
+                        geom_bar(stat = "identity", position = "stack", fill = "#012340") +
+                        geom_text(aes(label = paste0(round(precision * 100, 1), "%"), 
+                                      y = precision + 0.02),
+                                  color = "#03A63C", size = 3.5) +
+                        xlab("GPT Prediction") +
+                        ylab("") +
+                        scale_x_discrete(limits = c("CDU/CSU", "Small party", "SPD",
+                                                    "Greens", "AfD", "FDP", "Left",
+                                                    "No vote", "Invalid vote")) +
+                        scale_y_continuous(labels = scales::percent,
+                                           name = "Matching GLES-Vote",
+                                           limits = c(0, 1)
+                                           ) +
+                        ggtitle("") +
+                        theme_minimal() +
+                        theme(panel.grid.minor = element_blank(),
+                              panel.grid.major = element_blank())
 
-ggsave("matches_gpt_r.png", plot_matches_gpt_r, height = 4, width = 8)
+ggsave("precision_gpt_robustness.png", plot_precision_gpt_robustness, height = 4, width = 8)
+
 ```
 
 ```{r}
-plot_matches_gpt_r
+plot_precision_gpt_robustness
 ```
 
 - Nearly same order (except SPD and Small party switching spots and FDP now ahead of Greens & AfD) and similar magnitude (despite switches in order) - Slightly better precision for SPD and FDP than with main sample
